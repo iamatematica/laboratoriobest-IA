@@ -1,0 +1,631 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>laboratoriobest-IA — Prof. Ariel Luciano Cardozo Delgado</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#FBF8F1; --paper-2:#FFFDF8; --paper-3:#FFFFFF;
+    --ink:#20201C; --ink-soft:#4C4942; --ink-faint:#8A857A;
+    --rule:#E7E0D1; --rule-2:#D7CDB9;
+    --blue:#2B5A93; --blue-soft:#5E7CA8; --blue-wash:#E8EFF6;
+    --amber:#C77A40; --amber-soft:#D89D52; --amber-wash:#F6EBD8;
+    --green:#45785A; --green-wash:#E7EFE7;
+    --rust:#BC5235; --rust-wash:#F5E5DD;
+    --grid:rgba(43,90,147,.05);
+    --serif:"Fraunces",Georgia,serif;
+    --sans:"Hanken Grotesk",system-ui,sans-serif;
+    --maxw:1120px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  /* leave room for the sticky header when scrolling to a target */
+  section.block{scroll-margin-top:84px}
+  #demostracion{scroll-margin-top:96px}
+  body{
+    margin:0; background:var(--paper); color:var(--ink);
+    font-family:var(--sans); font-size:17px; line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+    background-image:
+      linear-gradient(var(--grid) 1px,transparent 1px),
+      linear-gradient(90deg,var(--grid) 1px,transparent 1px);
+    background-size:30px 30px;
+  }
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 28px}
+  h1,h2,h3{font-family:var(--serif);font-weight:600;line-height:1.08;letter-spacing:-.01em;margin:0}
+  p{margin:0 0 1em}
+  a{color:inherit}
+  .eyebrow{font-family:var(--sans);font-weight:700;font-size:12.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--blue)}
+  .lead{font-size:19px;color:var(--ink-soft);max-width:62ch}
+
+  /* reveal */
+  .reveal{opacity:0;transform:translateY(22px);transition:opacity .8s cubic-bezier(.2,.7,.2,1),transform .8s cubic-bezier(.2,.7,.2,1)}
+  .reveal.in{opacity:1;transform:none}
+
+  /* ---------- top bar ---------- */
+  .topbar{position:sticky;top:0;z-index:30;backdrop-filter:blur(8px);
+    background:rgba(251,248,241,.8);border-bottom:1px solid var(--rule)}
+  .topbar .wrap{display:flex;align-items:center;justify-content:space-between;height:62px}
+  .brand{font-family:var(--serif);font-weight:600;font-size:19px;letter-spacing:-.01em;line-height:1.05}
+  .brand-name{display:flex;align-items:center}
+  .brand-by{font-family:var(--sans);font-weight:500;font-size:11.5px;letter-spacing:.01em;color:var(--ink-faint);margin-top:2px;padding-left:17px}
+  .brand .dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--amber);margin-right:9px;vertical-align:middle}
+  .nav{display:flex;gap:26px;font-size:14px;font-weight:600}
+  .nav button{font-family:var(--sans);font-size:14px;font-weight:600;color:var(--ink-soft);background:none;border:none;padding:0;cursor:pointer;text-decoration:none;transition:color .2s}
+  .nav button:hover{color:var(--blue)}
+  @media(max-width:760px){.nav{display:none}}
+
+  /* ---------- hero ---------- */
+  .hero{padding:88px 0 64px;position:relative;overflow:hidden}
+  .hero .kicker{font-size:13px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:22px}
+  .hero .kicker b{color:var(--amber)}
+  .hero h1{font-size:clamp(40px,7vw,76px);max-width:16ch;margin-bottom:8px}
+  .hero h1 .accent{font-style:italic;color:var(--amber);font-weight:500}
+  .hero .sub{font-size:20px;color:var(--ink-soft);max-width:60ch;margin-top:26px}
+  .pillars{display:flex;flex-wrap:wrap;gap:14px;margin-top:34px}
+  .pillar{display:flex;align-items:center;gap:11px;background:var(--paper-3);border:1px solid var(--rule);
+    padding:11px 16px;border-radius:999px;font-size:14px;font-weight:600}
+  .pillar .ic{width:9px;height:9px;border-radius:2px}
+  .pillar.human .ic{background:var(--amber)}
+  .pillar.ai .ic{background:var(--blue)}
+  .pillar .note{color:var(--ink-faint);font-weight:500}
+  .duo-line{margin-top:18px;font-size:15px;color:var(--ink-soft);max-width:54ch}
+  .duo-line b{color:var(--ink)}
+  .hero-deco{position:absolute;right:-80px;top:40px;width:360px;height:360px;border:1.5px solid var(--rule-2);border-radius:50%;opacity:.5;pointer-events:none}
+  .hero-deco:after{content:"";position:absolute;inset:40px;border:1.5px solid var(--rule-2);border-radius:50%}
+  @media(max-width:900px){.hero-deco{display:none}}
+
+  /* ---------- section frame ---------- */
+  section.block{padding:72px 0;border-top:1px solid var(--rule)}
+  .sec-head{margin-bottom:38px;max-width:64ch}
+  .sec-head h2{font-size:clamp(28px,4.4vw,44px);margin:14px 0 16px}
+
+  /* ---------- método / cycle ---------- */
+  .cycle{display:grid;grid-template-columns:repeat(5,1fr);gap:16px}
+  @media(max-width:980px){.cycle{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:520px){.cycle{grid-template-columns:1fr}}
+  .step{background:var(--paper-2);border:1px solid var(--rule);border-radius:14px;padding:20px 18px 18px;position:relative}
+  .step .num{font-family:var(--serif);font-size:15px;color:var(--blue);font-weight:600}
+  .step .num b{display:block;font-size:34px;line-height:1;margin-top:2px}
+  .step h3{font-size:20px;margin:14px 0 8px}
+  .step p{font-size:14.5px;color:var(--ink-soft);margin-bottom:14px}
+  .tag{display:block;font-size:12.5px;line-height:1.45;padding:7px 11px;border-radius:9px;margin-top:7px}
+  .tag .who{font-weight:700;letter-spacing:.04em;text-transform:uppercase;font-size:10.5px;display:block;margin-bottom:1px}
+  .tag.t-doc{background:var(--amber-wash);color:#7c4e1c}
+  .tag.t-doc .who{color:var(--amber)}
+  .tag.t-ai{background:var(--blue-wash);color:#1f3f68}
+  .tag.t-ai .who{color:var(--blue)}
+  .loopnote{margin-top:26px;display:inline-flex;align-items:center;gap:10px;font-size:14px;font-weight:600;color:var(--blue);background:var(--blue-wash);padding:10px 16px;border-radius:999px}
+
+  /* ---------- diferencial / chips ---------- */
+  .feat{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:30px 0 8px}
+  @media(max-width:860px){.feat{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:460px){.feat{grid-template-columns:1fr}}
+  .fchip{background:var(--paper-3);border:1px solid var(--rule);border-radius:12px;padding:16px}
+  .fchip .ft{font-family:var(--serif);font-size:17px;font-weight:600;margin-bottom:4px}
+  .fchip .fd{font-size:13.5px;color:var(--ink-soft)}
+
+  /* ---------- DEMO ---------- */
+  .demo-intro{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;margin:46px 0 6px}
+  .demo-intro h3{font-size:26px}
+  .demo-intro .badge{font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--green);background:var(--green-wash);padding:5px 11px;border-radius:999px}
+  .demo{background:var(--paper-3);border:1px solid var(--rule-2);border-radius:18px;overflow:hidden;margin-top:18px;
+    box-shadow:0 24px 50px -34px rgba(36,53,40,.5)}
+  .demo-top{padding:16px 22px;border-bottom:1px solid var(--rule);display:flex;justify-content:space-between;align-items:center;gap:14px;background:linear-gradient(180deg,#fff,var(--paper-3))}
+  .demo-top .fx{font-family:var(--serif);font-size:20px;font-style:italic}
+  .demo-top .fx b{font-style:normal;color:var(--blue)}
+  .demo-top .role{font-size:12.5px;color:var(--ink-faint);font-weight:600}
+  .demo-grid{display:grid;grid-template-columns:minmax(0,420px) 1fr}
+  @media(max-width:840px){.demo-grid{grid-template-columns:1fr}}
+  .graph-pane{padding:18px;border-right:1px solid var(--rule);background:
+    linear-gradient(rgba(43,90,147,.045) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(43,90,147,.045) 1px,transparent 1px);background-size:24px 24px}
+  @media(max-width:840px){.graph-pane{border-right:none;border-bottom:1px solid var(--rule)}}
+  .graph-pane svg{width:100%;height:auto;display:block}
+  .legend{display:flex;flex-wrap:wrap;gap:13px;margin-top:10px;font-size:12px;color:var(--ink-soft)}
+  .legend span{display:inline-flex;align-items:center;gap:6px}
+  .legend i{width:10px;height:10px;border-radius:50%;display:inline-block}
+
+  .q-pane{padding:22px}
+  .progress{display:flex;gap:7px;margin-bottom:18px}
+  .progress .p{flex:1;height:5px;border-radius:3px;background:var(--rule)}
+  .progress .p.done{background:var(--green)}
+  .progress .p.active{background:var(--blue)}
+  .q-step-label{font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--blue);margin-bottom:6px}
+  .q-prompt{font-family:var(--serif);font-size:20px;line-height:1.25;margin-bottom:16px}
+  .opts{display:flex;flex-direction:column;gap:10px}
+  .opt{text-align:left;font-family:var(--sans);font-size:14.5px;line-height:1.4;color:var(--ink);
+    background:#fff;border:1.5px solid var(--rule-2);border-radius:11px;padding:13px 15px;cursor:pointer;
+    transition:border-color .18s,background .18s,transform .12s}
+  .opt:hover{border-color:var(--blue-soft);background:#fff}
+  .opt:active{transform:scale(.995)}
+  .opt code{font-family:var(--serif);font-style:italic;background:transparent}
+  .opt.is-correct{border-color:var(--green);background:var(--green-wash)}
+  .opt.is-wrong{border-color:var(--rust);background:var(--rust-wash)}
+  .opt[disabled]{cursor:default;opacity:.85}
+
+  .feedback{margin-top:16px;border-radius:13px;padding:16px 17px;font-size:14.5px;display:none}
+  .feedback.show{display:block;animation:pop .35s ease}
+  @keyframes pop{from{opacity:0;transform:translateY(7px)}to{opacity:1;transform:none}}
+  .feedback.ok{background:var(--green-wash);border:1px solid #bcd4c2}
+  .feedback.err{background:var(--rust-wash);border:1px solid #e0c1b6}
+  .feedback .ft{font-weight:700;display:flex;align-items:center;gap:8px;margin-bottom:5px}
+  .feedback.ok .ft{color:var(--green)}
+  .feedback.err .ft{color:var(--rust)}
+  .feedback .concept{font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--rust);margin:10px 0 3px}
+  .routes{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+  .route{font-family:var(--sans);font-size:12.5px;font-weight:600;border-radius:999px;padding:7px 13px;cursor:pointer;border:1px solid transparent;transition:transform .12s}
+  .route:active{transform:scale(.96)}
+  .route.r-practice{background:var(--amber-wash);color:#7c4e1c;border-color:#e3c896}
+  .route.r-theory{background:var(--blue-wash);color:#1f3f68;border-color:#bcccdf}
+  .route.r-formal{background:#ece6dc;color:#5a5446;border-color:#d8cdb8}
+  .route-note{font-size:13px;color:var(--ink-soft);margin-top:11px;padding-left:13px;border-left:2px solid var(--rule-2);display:none}
+  .route-note.show{display:block}
+  .btn{font-family:var(--sans);font-weight:600;font-size:14.5px;border:none;border-radius:10px;padding:12px 22px;cursor:pointer;margin-top:16px;transition:transform .12s,filter .18s}
+  .btn:active{transform:scale(.97)}
+  .btn-primary{background:var(--blue);color:#fff}
+  .btn-primary:hover{filter:brightness(1.08)}
+  .btn-ghost{background:transparent;color:var(--blue);padding:12px 6px}
+  .retry{font-size:13.5px;color:var(--rust);font-weight:600;cursor:pointer;margin-top:12px;display:inline-block;text-decoration:underline;text-underline-offset:3px}
+
+  .final{text-align:left}
+  .final h3{font-size:25px;margin-bottom:8px}
+  .final .syn{background:var(--paper-2);border:1px solid var(--rule);border-radius:12px;padding:16px;margin-top:14px}
+  .final .syn .st{font-weight:700;font-size:13px;letter-spacing:.05em;text-transform:uppercase;color:var(--blue);margin-bottom:8px}
+  .final .flag{font-size:14px;padding:8px 0;border-bottom:1px dashed var(--rule);display:flex;gap:10px}
+  .final .flag:last-child{border-bottom:none}
+  .final .flag .dotm{flex:none;width:7px;height:7px;border-radius:50%;background:var(--rust);margin-top:8px}
+  .final .perfect{color:var(--green);font-weight:600}
+
+  .demo-cap{font-size:13.5px;color:var(--ink-faint);margin-top:14px;max-width:70ch}
+
+  /* ---------- formatos ---------- */
+  .cards2{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:8px}
+  @media(max-width:720px){.cards2{grid-template-columns:1fr}}
+  .card{background:var(--paper-2);border:1px solid var(--rule);border-radius:14px;padding:24px}
+  .card .ct{font-family:var(--serif);font-size:23px;font-weight:600;margin-bottom:4px}
+  .card .ck{font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--amber);margin-bottom:10px}
+  .card.ai .ck{color:var(--blue)}
+  .card p{font-size:14.5px;color:var(--ink-soft);margin:0}
+  .fmt-note{margin-top:18px;font-size:15px;color:var(--ink-soft);max-width:60ch}
+
+  /* ---------- comisiones ---------- */
+  .cards3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:8px}
+  @media(max-width:820px){.cards3{grid-template-columns:1fr}}
+  .ccard{background:var(--paper-3);border:1px solid var(--rule);border-radius:13px;padding:20px;position:relative}
+  .ccard .cn{font-family:var(--serif);font-size:19px;font-weight:600;margin-bottom:6px}
+  .ccard .focus{font-size:11.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--blue);margin-bottom:8px}
+  .ccard p{font-size:14px;color:var(--ink-soft);margin:0}
+  .editable{font-size:12px;color:var(--ink-faint);font-style:italic;margin-top:18px}
+
+  /* ---------- cierre ---------- */
+  .closing{background:var(--ink);color:#efe9da;border-radius:20px;padding:54px 44px;position:relative;overflow:hidden}
+  .closing:before{content:"";position:absolute;inset:0;background-image:
+    linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px);background-size:30px 30px}
+  .closing .eyebrow{color:var(--amber-soft);position:relative}
+  .closing h2{color:#fff;font-size:clamp(28px,4.4vw,42px);margin:14px 0 18px;position:relative;max-width:18ch}
+  .closing p{color:#d8d1c1;font-size:17px;max-width:60ch;position:relative}
+  .closing .cta{position:relative;margin-top:26px;display:inline-block;font-family:var(--serif);font-style:italic;font-size:21px;color:#fff;border-bottom:2px solid var(--amber);padding-bottom:3px}
+
+  footer{padding:40px 0 60px;color:var(--ink-faint);font-size:13.5px;border-top:1px solid var(--rule);text-align:center}
+  footer .ph{display:inline-block;border:1px dashed var(--rule-2);border-radius:8px;padding:3px 10px;margin:0 3px;color:var(--ink-soft)}
+
+  .ph-inline{background:var(--amber-wash);border-radius:5px;padding:0 5px;color:#7c4e1c;font-style:normal}
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="wrap">
+    <div class="brand"><div class="brand-name"><span class="dot"></span>laboratorio<span style="color:var(--amber)">best</span><span style="color:var(--blue)">-IA</span></div><div class="brand-by">Prof. Ariel L. Cardozo Delgado</div></div>
+    <nav class="nav">
+      <button type="button" data-target="metodo">El método</button>
+      <button type="button" data-target="diferencial">El diferencial</button>
+      <button type="button" data-target="demostracion">Demostración</button>
+      <button type="button" data-target="formatos">Formatos</button>
+      <button type="button" data-target="avanzar">Avanzar</button>
+    </nav>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="wrap">
+    <div class="hero-deco"></div>
+    <div class="kicker reveal"><b>laboratoriobest-IA</b> &nbsp;·&nbsp; Material didáctico interactivo con diagnóstico</div>
+    <h1 class="reveal" style="transition-delay:.05s">El material no entrega contenido y se va. <span class="accent">Acompaña.</span></h1>
+    <p class="sub reveal" style="transition-delay:.12s">Cómo pensamos, diseñamos y llevamos al aula materiales que diagnostican al estudiante, le devuelven según dónde se trabó y lo guían al próximo paso —teoría, práctica o formalización—.</p>
+    <div class="pillars reveal" style="transition-delay:.2s">
+      <span class="pillar human"><span class="ic"></span>Criterio pedagógico humano</span>
+      <span class="pillar ai"><span class="ic"></span>IA aplicada al desarrollo</span>
+    </div>
+    <p class="duo-line reveal" style="transition-delay:.26s">Cada pieza nace de un trabajo en equipo entre el docente y la inteligencia artificial. <b>El criterio es nuestro;</b> la IA acelera, amplifica y sostiene la escala. Nada llega al aula sin pasar por el juicio docente y la prueba real.</p>
+  </div>
+</section>
+
+<!-- MÉTODO -->
+<section class="block" id="metodo">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="eyebrow">El método</div>
+      <h2>Un ciclo, no una línea recta</h2>
+      <p class="lead">Ningún material queda “terminado”. Se piensa, se construye, se prueba en el aula y se ajusta con lo que devuelve cada comisión. En cada etapa, el docente aporta criterio y la IA aporta velocidad y alcance.</p>
+    </div>
+    <div class="cycle">
+      <div class="step reveal"><div class="num">Etapa<b>01</b></div><h3>Pensar</h3><p>Definir qué concepto cuesta, qué errores son típicos y qué recorrido necesita el estudiante.</p>
+        <span class="tag t-doc"><span class="who">Docente</span>Detecta la dificultad real del aula.</span>
+        <span class="tag t-ai"><span class="who">IA</span>Aporta variantes, casos y antecedentes.</span></div>
+      <div class="step reveal" style="transition-delay:.06s"><div class="num">Etapa<b>02</b></div><h3>Diseñar</h3><p>Estructurar la actividad: niveles, diagnóstico, devoluciones y rutas posibles.</p>
+        <span class="tag t-doc"><span class="who">Docente</span>Define el criterio y la secuencia.</span>
+        <span class="tag t-ai"><span class="who">IA</span>Prototipa y propone alternativas.</span></div>
+      <div class="step reveal" style="transition-delay:.12s"><div class="num">Etapa<b>03</b></div><h3>Producir</h3><p>Convertirlo en material concreto: de archivo o interactivo.</p>
+        <span class="tag t-doc"><span class="who">Docente</span>Valida cada decisión pedagógica.</span>
+        <span class="tag t-ai"><span class="who">IA</span>Construye, programa y diseña.</span></div>
+      <div class="step reveal" style="transition-delay:.18s"><div class="num">Etapa<b>04</b></div><h3>Implementar</h3><p>Llevarlo al aula, en distintos cursos y comisiones.</p>
+        <span class="tag t-doc"><span class="who">Docente</span>Lo pone en juego con sus estudiantes.</span>
+        <span class="tag t-ai"><span class="who">IA</span>Lo distribuye y lo adapta a cada formato.</span></div>
+      <div class="step reveal" style="transition-delay:.24s"><div class="num">Etapa<b>05</b></div><h3>Devolución y ajuste</h3><p>Observar qué funcionó y qué no, y volver a empezar mejor.</p>
+        <span class="tag t-doc"><span class="who">Docente</span>Lee la evidencia del aula.</span>
+        <span class="tag t-ai"><span class="who">IA</span>Sistematiza patrones y reescribe.</span></div>
+    </div>
+    <div class="reveal"><span class="loopnote">↻ &nbsp;La etapa 05 vuelve al inicio: el material está vivo, no es una receta cerrada.</span></div>
+  </div>
+</section>
+
+<!-- DIFERENCIAL + DEMO -->
+<section class="block" id="diferencial">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="eyebrow">El diferencial</div>
+      <h2>Material que sabe dónde te trabaste</h2>
+      <p class="lead">La diferencia no está en “tener” actividades, sino en lo que hacen: evalúan con criterio pedagógico, evidencian la dificultad concreta, la diagnostican y sugieren el camino. No corrigen un resultado: leen un proceso.</p>
+    </div>
+    <div class="feat">
+      <div class="fchip reveal"><div class="ft">Diagnóstico por concepto</div><div class="fd">Identifica qué idea falló, no solo si el resultado está mal.</div></div>
+      <div class="fchip reveal" style="transition-delay:.06s"><div class="ft">Devolución según el proceso</div><div class="fd">Responde a cómo resolvió y dónde se complicó, paso a paso.</div></div>
+      <div class="fchip reveal" style="transition-delay:.12s"><div class="ft">Niveles de ejercitación</div><div class="fd">Sube o baja la exigencia según lo que el estudiante necesita.</div></div>
+      <div class="fchip reveal" style="transition-delay:.18s"><div class="ft">Rutas a teoría, práctica y formalización</div><div class="fd">Lo lleva al lugar exacto donde reforzar.</div></div>
+    </div>
+
+    <div class="demo-intro reveal" id="demostracion">
+      <h3>Probalo. Sos el estudiante.</h3>
+      <span class="badge">Demostración · caso real</span>
+    </div>
+
+    <div class="demo reveal" id="demo">
+      <div class="demo-top">
+        <div class="fx">Estudio de la función &nbsp;<b>f(x) = x³ − 3x</b></div>
+        <div class="role">Modo demostración — elegí la respuesta del “alumno”</div>
+      </div>
+      <div class="demo-grid">
+        <div class="graph-pane">
+          <svg id="graph" viewBox="0 0 460 380" role="img" aria-label="Gráfico de f(x) = x cubo menos 3x"></svg>
+          <div class="legend">
+            <span><i style="background:var(--green)"></i>Máximo</span>
+            <span><i style="background:var(--blue)"></i>Mínimo</span>
+            <span><i style="background:var(--amber)"></i>Inflexión</span>
+            <span><i style="background:var(--ink-faint)"></i>Raíces</span>
+          </div>
+        </div>
+        <div class="q-pane" id="qpane"><!-- JS --></div>
+      </div>
+    </div>
+    <p class="demo-cap">Esta es una demostración con un caso real de estudio de funciones. El mismo motor de diagnóstico se aplica a cualquier tema; <strong>integrales</strong> sería el segundo ejemplo natural, para mostrar que el método generaliza.</p>
+  </div>
+</section>
+
+<!-- FORMATOS -->
+<section class="block" id="formatos">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="eyebrow">Formatos</div>
+      <h2>Dos formas, una misma intención</h2>
+    </div>
+    <div class="cards2">
+      <div class="card reveal">
+        <div class="ck">Material de archivo</div>
+        <div class="ct">PDF, guías y documentos</div>
+        <p>Para imprimir, distribuir y trabajar sin pantalla. Ideal cuando importa la portabilidad, el trabajo en papel o una consigna estable que el estudiante pueda llevarse.</p>
+      </div>
+      <div class="card ai reveal" style="transition-delay:.08s">
+        <div class="ck">Página interactiva · SPA</div>
+        <div class="ct">Diagnóstico en tiempo real</div>
+        <p>Para que el material reaccione a lo que hace el estudiante y lo guíe paso a paso, con devolución inmediata y rutas según el error —exactamente como la demostración de arriba.</p>
+      </div>
+    </div>
+    <p class="fmt-note">Cada contenido se produce en el formato que mejor lo presenta —y muchas veces, en ambos.</p>
+  </div>
+</section>
+
+<!-- COMISIONES -->
+<section class="block" id="comisiones">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="eyebrow">Cursos y comisiones</div>
+      <h2>El mismo método, distinto en cada grupo</h2>
+      <p class="lead">No es un catálogo cerrado. Es un criterio que se adapta: la misma intención pedagógica cambia de ritmo, de ejemplos y de profundidad según el curso, la comisión y lo que ese grupo necesita.</p>
+    </div>
+    <div class="cards3">
+      <div class="ccard reveal"><div class="focus">Foco: sostener</div><div class="cn">Ingreso / Nivelación</div><p>Más diagnóstico y más práctica de nivel 1: no perder a nadie en el camino.</p></div>
+      <div class="ccard reveal" style="transition-delay:.07s"><div class="focus">Foco: ritmo</div><div class="cn">Cursada intensiva</div><p>Rutas más cortas y devoluciones al hueso, para avanzar sin perder profundidad.</p></div>
+      <div class="ccard reveal" style="transition-delay:.14s"><div class="focus">Foco: rigor</div><div class="cn">Curso avanzado</div><p>Más peso en la formalización: definiciones, demostración y precisión del lenguaje.</p></div>
+    </div>
+    <p class="editable">↳ Ejemplos editables — los reemplazamos por tus cursos y comisiones reales.</p>
+  </div>
+</section>
+
+<!-- CIERRE -->
+<section class="block" id="avanzar">
+  <div class="wrap reveal">
+    <div class="closing">
+      <div class="eyebrow">Para avanzar</div>
+      <h2>Cómo se implementa</h2>
+      <p>Este enfoque puede sumarse a una cátedra o institución de forma gradual: empezar por un tema crítico, producir el material en equipo docente–IA, probarlo en una comisión y escalar con la evidencia. No reemplaza al docente: le da herramientas para acompañar a más estudiantes, mejor.</p>
+      <span class="cta">Conversemos cómo aplicarlo en <span style="color:var(--amber-soft)">su cátedra o institución</span>.</span>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <a href="https://github.com/iamatematica/laboratoriobest-IA" target="_blank" rel="noopener" style="color:var(--blue);font-weight:600;text-decoration:none">laboratoriobest-IA</a> &nbsp;·&nbsp; Prof. Ariel L. Cardozo Delgado &nbsp;·&nbsp; Material didáctico interactivo con diagnóstico
+  </div>
+</footer>
+
+<script>
+/* ---------------- GRÁFICO f(x)=x^3-3x ---------------- */
+(function(){
+  const svg=document.getElementById('graph');
+  const W=460,H=380,pad=30;
+  const xmin=-2.1,xmax=2.1,ymin=-3.3,ymax=3.3;
+  const sx=x=>pad+(x-xmin)/(xmax-xmin)*(W-2*pad);
+  const sy=y=>H-pad-(y-ymin)/(ymax-ymin)*(H-2*pad);
+  const f=x=>x*x*x-3*x;
+  const NS='http://www.w3.org/2000/svg';
+  const mk=(t,a)=>{const e=document.createElementNS(NS,t);for(const k in a)e.setAttribute(k,a[k]);return e;};
+
+  // grid
+  for(let i=Math.ceil(xmin);i<=Math.floor(xmax);i++){
+    svg.appendChild(mk('line',{x1:sx(i),y1:pad,x2:sx(i),y2:H-pad,stroke:'rgba(43,90,147,.08)','stroke-width':1}));
+  }
+  for(let j=Math.ceil(ymin);j<=Math.floor(ymax);j++){
+    svg.appendChild(mk('line',{x1:pad,y1:sy(j),x2:W-pad,y2:sy(j),stroke:'rgba(43,90,147,.08)','stroke-width':1}));
+  }
+  // axes
+  svg.appendChild(mk('line',{x1:pad,y1:sy(0),x2:W-pad,y2:sy(0),stroke:'#9a958a','stroke-width':1.4}));
+  svg.appendChild(mk('line',{x1:sx(0),y1:pad,x2:sx(0),y2:H-pad,stroke:'#9a958a','stroke-width':1.4}));
+  svg.appendChild(mk('text',{x:W-pad+2,y:sy(0)+4,'font-size':12,fill:'#9a958a','font-family':'Fraunces,serif','font-style':'italic'})).textContent='x';
+  svg.appendChild(mk('text',{x:sx(0)+6,y:pad+2,'font-size':12,fill:'#9a958a','font-family':'Fraunces,serif','font-style':'italic'})).textContent='y';
+
+  // curve
+  let d='';
+  for(let i=0;i<=200;i++){const x=xmin+(xmax-xmin)*i/200;const px=sx(x),py=sy(f(x));d+=(i===0?'M':'L')+px.toFixed(1)+' '+py.toFixed(1)+' ';}
+  const path=mk('path',{d:d,fill:'none',stroke:'#2B5A93','stroke-width':2.6,'stroke-linecap':'round'});
+  const len=600;
+  path.style.strokeDasharray=len;path.style.strokeDashoffset=len;
+  path.style.transition='stroke-dashoffset 1.4s ease';
+  svg.appendChild(path);
+
+  // points (hidden until revealed)
+  const pts={};
+  function makePoint(id,x,y,color,label,labelDy){
+    const g=mk('g',{opacity:0});
+    g.style.transition='opacity .5s ease';
+    const halo=mk('circle',{cx:sx(x),cy:sy(y),r:9,fill:color,opacity:.16});
+    const c=mk('circle',{cx:sx(x),cy:sy(y),r:5,fill:color,stroke:'#fff','stroke-width':2});
+    const t=mk('text',{x:sx(x),y:sy(y)+(labelDy||-13),'text-anchor':'middle','font-size':11.5,'font-weight':700,fill:color,'font-family':'Hanken Grotesk,sans-serif'});
+    t.textContent=label;
+    g.appendChild(halo);g.appendChild(c);g.appendChild(t);
+    svg.appendChild(g);
+    pts[id]={g,c,halo,t,color,label};
+  }
+  makePoint('max',-1,2,'#45785A','máx (−1, 2)',-14);
+  makePoint('min',1,-2,'#2B5A93','mín (1, −2)',24);
+  makePoint('infl',0,0,'#C77A40','inflexión',-13);
+  makePoint('r1',-1.732,0,'#8A857A','',0);
+  makePoint('r2',1.732,0,'#8A857A','',0);
+
+  window.__graph={
+    drawCurve(){path.style.strokeDashoffset=0;},
+    reveal(id){if(pts[id])pts[id].g.setAttribute('opacity',1);},
+    asCritical(id){ // show as hollow neutral critical marker
+      if(!pts[id])return;pts[id].g.setAttribute('opacity',1);
+      pts[id].c.setAttribute('fill','#fff');pts[id].c.setAttribute('stroke','#8A857A');pts[id].c.setAttribute('stroke-width','2.4');
+      pts[id].halo.setAttribute('opacity','0');pts[id].t.textContent='crítico';pts[id].t.setAttribute('fill','#8A857A');
+    },
+    asMax(){this.reveal('max');},
+    asMin(){this.reveal('min');},
+    reset(){
+      path.style.strokeDashoffset=0; // keep curve drawn
+      for(const id in pts){
+        const p=pts[id];
+        p.g.setAttribute('opacity',0);
+        p.c.setAttribute('fill',p.color);
+        p.c.setAttribute('stroke','#fff');
+        p.c.setAttribute('stroke-width','2');
+        p.halo.setAttribute('opacity','.16');
+        p.t.textContent=p.label;
+        p.t.setAttribute('fill',p.color);
+      }
+    },
+  };
+})();
+
+/* ---------------- DEMO: máquina de estados ---------------- */
+const STEPS=[
+  {
+    label:'Paso 1 de 3 · Primera derivada',
+    prompt:'Para arrancar el estudio, ¿cuál es f′(x) y dónde se anula?',
+    options:[
+      {t:'<code>f′(x) = 3x² − 3</code>, se anula en x = −1 y x = 1.',correct:true,
+       ok:'Bien. Los puntos críticos son x = −1 y x = 1. Quedan marcados en el gráfico para clasificarlos.'},
+      {t:'<code>f′(x) = 3x² − 3x</code>, se anula en x = 0 y x = 1.',
+       concept:'Regla de derivación de un polinomio',
+       dev:'Derivaste mal el término −3x: su derivada es −3, no −3x. La derivada de x³ está bien (3x²); el problema está en el término lineal.',
+       routes:[{c:'r-theory',t:'Repasar teoría · reglas de derivación',n:'En el material, abre la ficha de derivada de potencias y de la función lineal.'},
+               {c:'r-practice',t:'Rehacer práctica · Nivel 1',n:'Lleva a una tanda corta de derivadas de polinomios simples antes de seguir.'}]},
+      {t:'<code>f′(x) = 3x² − 3</code> ✓, y se anula en x = 3.',
+       concept:'Resolución de la ecuación f′(x) = 0',
+       dev:'La derivada está perfecta, pero al despejar 3x² − 3 = 0 quedó x = 3. Hay que dividir por 3 y luego sacar raíz: x² = 1 → x = ±1 (¡son dos soluciones!).',
+       routes:[{c:'r-practice',t:'Rehacer práctica · Nivel 1',n:'Lleva a ejercicios de ecuaciones cuadráticas incompletas (x² = k).'}]}
+    ],
+    onCorrect:()=>{window.__graph.asCritical('max');window.__graph.asCritical('min');}
+  },
+  {
+    label:'Paso 2 de 3 · Clasificación de extremos',
+    prompt:'Ya tenés los críticos en x = ±1. Clasificalos.',
+    options:[
+      {t:'x = −1 es <b>máximo</b> local (f = 2) y x = 1 es <b>mínimo</b> local (f = −2).',correct:true,
+       ok:'Exacto. Antes de −1 la función crece y después decrece → máximo; en x = 1 ocurre al revés → mínimo. El gráfico lo confirma.'},
+      {t:'x = −1 es mínimo y x = 1 es máximo.',
+       concept:'Criterio de la primera derivada (análisis de signo)',
+       dev:'Invertiste el análisis de signo de f′. Donde f′ pasa de + a − hay máximo, y de − a + hay mínimo. Acá f′ es positiva antes de −1: la función venía creciendo, así que −1 es máximo.',
+       routes:[{c:'r-theory',t:'Repasar teoría · criterio de la 1ª derivada',n:'Abre la explicación de cómo el signo de f′ define crecimiento y extremos.'},
+               {c:'r-practice',t:'Rehacer práctica · Nivel 1',n:'Lleva a ejercicios de tabla de signos de f′ paso a paso.'}]},
+      {t:'Los dos son mínimos, porque f(−1) y f(1) son los valores más chicos de la función.',
+       concept:'Confunde el valor de la función con el criterio del extremo',
+       dev:'Estás mirando el valor de f en lugar de aplicar el criterio. Un extremo local no es “el valor más chico de todos”, sino un punto donde la función cambia de crecer a decrecer (o viceversa) en su entorno. De hecho f no tiene mínimo absoluto: cae a −∞.',
+       routes:[{c:'r-formal',t:'Repasar formalización · definición de extremo local',n:'Abre la definición formal de máximo y mínimo local (entorno).'},
+               {c:'r-theory',t:'Repasar teoría · criterio de la 1ª derivada',n:'Vuelve a la diferencia entre extremo local y valor de la función.'}]}
+    ],
+    onCorrect:()=>{window.__graph.asMax();window.__graph.asMin();}
+  },
+  {
+    label:'Paso 3 de 3 · Concavidad e inflexión',
+    prompt:'Último paso: concavidad. Calculás f″(x) = 6x. ¿Qué concluís?',
+    options:[
+      {t:'Inflexión en x = 0; cóncava hacia abajo en (−∞, 0) y hacia arriba en (0, ∞).',correct:true,
+       ok:'¡Perfecto! f″ cambia de signo en x = 0 → punto de inflexión. Estudio completo.'},
+      {t:'La función es cóncava hacia arriba donde crece, así que es cóncava arriba en los tramos crecientes.',
+       concept:'Confunde concavidad (f″) con crecimiento (f′)',
+       dev:'Mezclaste f′ con f″. El crecimiento lo decide f′; la concavidad la decide f″. Una función puede crecer siendo cóncava hacia abajo. La concavidad sale del signo de f″ = 6x, no de dónde crece.',
+       routes:[{c:'r-theory',t:'Repasar teoría · qué dice f″ vs f′',n:'Abre la comparación entre lo que informan la primera y la segunda derivada.'},
+               {c:'r-practice',t:'Rehacer práctica · Nivel 1',n:'Lleva a ejercicios de concavidad con el signo de f″.'}]},
+      {t:'f″(x) = 6x², que es siempre positiva, así que la función es siempre cóncava hacia arriba.',
+       concept:'Cálculo de la segunda derivada',
+       dev:'La segunda derivada está mal: si f′ = 3x² − 3, entonces f″ = 6x (no 6x²). Como 6x cambia de signo, la concavidad cambia y aparece un punto de inflexión.',
+       routes:[{c:'r-practice',t:'Rehacer práctica · Nivel 1',n:'Lleva a derivar dos veces polinomios, controlando cada paso.'},
+               {c:'r-theory',t:'Repasar teoría · derivadas sucesivas',n:'Abre la ficha de cómo obtener f″ a partir de f′.'}]}
+    ],
+    onCorrect:()=>{window.__graph.reveal('infl');window.__graph.reveal('r1');window.__graph.reveal('r2');}
+  }
+];
+
+let cur=0;
+const flagged=[]; // {step, concept}
+const qpane=document.getElementById('qpane');
+
+function progressHTML(){
+  let h='<div class="progress">';
+  for(let i=0;i<STEPS.length;i++){
+    const cls=i<cur?'done':(i===cur?'active':'');
+    h+='<div class="p '+cls+'"></div>';
+  }
+  return h+'</div>';
+}
+
+function renderStep(){
+  const s=STEPS[cur];
+  let h=progressHTML();
+  h+='<div class="q-step-label">'+s.label+'</div>';
+  h+='<div class="q-prompt">'+s.prompt+'</div>';
+  h+='<div class="opts">';
+  s.options.forEach((o,i)=>{h+='<button class="opt" data-i="'+i+'">'+o.t+'</button>';});
+  h+='</div>';
+  h+='<div class="feedback" id="fb"></div>';
+  qpane.innerHTML=h;
+  qpane.querySelectorAll('.opt').forEach(b=>b.addEventListener('click',()=>choose(parseInt(b.dataset.i))));
+}
+
+function choose(i){
+  const s=STEPS[cur];
+  const o=s.options[i];
+  const opts=qpane.querySelectorAll('.opt');
+  const fb=qpane.querySelector('#fb');
+  const btn=opts[i];
+  if(o.correct){
+    opts.forEach(b=>b.setAttribute('disabled','true'));
+    btn.classList.add('is-correct');
+    fb.className='feedback ok show';
+    fb.innerHTML='<div class="ft">✓ Correcto</div><div>'+o.ok+'</div>'+
+      (cur<STEPS.length-1?'<button class="btn btn-primary" id="next">Continuar →</button>'
+                         :'<button class="btn btn-primary" id="finish">Ver devolución del recorrido →</button>');
+    if(s.onCorrect)s.onCorrect();
+    const nx=qpane.querySelector('#next'); if(nx)nx.addEventListener('click',()=>{cur++;renderStep();});
+    const fn=qpane.querySelector('#finish'); if(fn)fn.addEventListener('click',renderFinal);
+  } else {
+    btn.classList.add('is-wrong');
+    btn.setAttribute('disabled','true');
+    if(!flagged.some(f=>f.step===cur&&f.concept===o.concept))flagged.push({step:cur,concept:o.concept,dev:o.dev});
+    let rh='';
+    if(o.routes){rh='<div class="routes">';o.routes.forEach((r,ri)=>{rh+='<button class="route '+r.c+'" data-note="'+encodeURIComponent(r.n)+'">'+r.t+'</button>';});rh+='</div><div class="route-note" id="rnote"></div>';}
+    fb.className='feedback err show';
+    fb.innerHTML='<div class="ft">✗ Ahí hay una dificultad</div>'+
+      '<div class="concept">Concepto a reforzar: '+o.concept+'</div>'+
+      '<div>'+o.dev+'</div>'+rh+
+      '<span class="retry" id="retry">↻ Volver a intentar este paso</span>';
+    fb.querySelectorAll('.route').forEach(r=>r.addEventListener('click',()=>{
+      const note=qpane.querySelector('#rnote');
+      note.textContent='→ '+decodeURIComponent(r.dataset.note);
+      note.classList.add('show');
+    }));
+    qpane.querySelector('#retry').addEventListener('click',()=>{
+      renderStep(); // re-render the current step from scratch, fully reset
+    });
+  }
+}
+
+function renderFinal(){
+  let h='<div class="final">';
+  h+='<div class="q-step-label" style="color:var(--green)">Estudio completo</div>';
+  h+='<h3>Devolución del recorrido</h3>';
+  if(flagged.length===0){
+    h+='<p class="perfect">Recorrido impecable: clasificaste extremos y concavidad sin tropiezos. El material te propondría <b>subir a Nivel 2</b>: una función racional con asíntotas.</p>';
+  } else {
+    h+='<p style="font-size:14.5px;color:var(--ink-soft)">No miramos solo el resultado final, sino todo el proceso. En el camino aparecieron estos puntos a reforzar:</p>';
+    h+='<div class="syn"><div class="st">Conceptos detectados</div>';
+    flagged.forEach(f=>{h+='<div class="flag"><span class="dotm"></span><div><b>'+f.concept+'</b></div></div>';});
+    h+='</div>';
+    h+='<p style="font-size:14.5px;color:var(--ink-soft);margin-top:14px">Antes de avanzar, el material sugiere ese repaso puntual —no rehacer todo desde cero, solo lo que falló.</p>';
+  }
+  h+='<button class="btn btn-ghost" id="restart">↻ Reiniciar la demostración</button>';
+  h+='</div>';
+  qpane.innerHTML=h;
+  qpane.querySelector('#restart').addEventListener('click',()=>{
+    cur=0;
+    flagged.length=0;
+    window.__graph.reset();
+    renderStep();
+    const intro=document.getElementById('demostracion');
+    if(intro)intro.scrollIntoView({behavior:'smooth',block:'start'});
+  });
+}
+
+renderStep();
+
+/* ---------------- nav: smooth scroll via buttons (no anchors, no external-link dialog) ---------------- */
+document.querySelectorAll('.nav button[data-target]').forEach(b=>{
+  b.addEventListener('click',()=>{
+    const target=document.getElementById(b.dataset.target);
+    if(target)target.scrollIntoView({behavior:'smooth',block:'start'});
+  });
+});
+
+/* ---------------- reveal on scroll + graph draw ---------------- */
+const io=new IntersectionObserver((es)=>{
+  es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});
+},{threshold:.12});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+const demoIO=new IntersectionObserver((es)=>{
+  es.forEach(e=>{if(e.isIntersecting){window.__graph.drawCurve();demoIO.disconnect();}});
+},{threshold:.25});
+demoIO.observe(document.getElementById('demo'));
+</script>
+</body>
+</html>
