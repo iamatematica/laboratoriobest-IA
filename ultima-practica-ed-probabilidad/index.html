@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Última práctica antes de la evaluación · Ecuaciones diferenciales y probabilidad</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,700;1,9..144,400&family=Hanken+Grotesk:wght@400;500;600;700&family=Fira+Code:wght@400;500&family=STIX+Two+Text:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
+<style>
+:root{--lab-terra:#b57d4c;--lab-blue:#415a8e;--lab-dark:#20201c;--lab-cream:#faf8f1;--lab-gray:#6579a1;--navy:#0f2244;--paper:#FBF8F1;--ink:#20201c;--muted:#5f5b53;
+--blue:#2B5A93;--amber:#C77A40;--green:#45785A;--rust:#BC5235;--violet:#6E4EAA;--teal:#2E6F72;--blue-bg:#eef3f9;--amber-bg:#fbf3e8;--green-bg:#edf4ef;--rust-bg:#faeeea;--line:#e2ddd2;--f-body:'Hanken Grotesk',sans-serif;--f-math:'STIX Two Text','STIXGeneral','Times New Roman',serif}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;font-family:var(--f-body);font-size:16px;line-height:1.6;color:var(--ink);background-color:var(--paper);background-image:linear-gradient(rgba(43,90,147,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(43,90,147,.07) 1px,transparent 1px);background-size:28px 28px}
+h1,h2,h3{font-family:'Fraunces',Georgia,serif;font-weight:400;line-height:1.2;margin:0 0 .5em}h2{font-size:1.75rem;color:var(--navy)}h3{font-size:1.2rem;color:var(--navy);margin-top:1.2em}p{margin:.6em 0}
+/* chrome */
+.topbar{background:linear-gradient(135deg,var(--navy) 0%,#1a3a6e 100%);color:#e0f2fe;padding:14px 0;box-shadow:0 2px 8px rgba(0,0,0,.15)}
+.topbar-inner{max-width:1080px;margin:0 auto;padding:0 20px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.brand-inspt{font-size:12px;color:#7dd3fc;letter-spacing:.1em;font-weight:700}.brand-title{font-family:'Fraunces',serif;font-size:18px;color:#fff;font-weight:700}.brand-sub{font-size:12px;color:#bfdbfe}
+.lab-logo,.footer-lab{background:var(--lab-cream);padding:8px 18px 7px;border-radius:12px;text-align:left;box-shadow:0 2px 6px rgba(0,0,0,.15)}
+.lab-name{display:flex;align-items:center;font-family:'Fraunces',Georgia,serif;font-size:16px;font-weight:700;letter-spacing:-0.01em;line-height:1.2}
+.lab-name .bullet,.ej-lab .bullet{width:8px;height:8px;border-radius:50%;background:var(--lab-terra);flex-shrink:0;margin-right:7px}
+.lab{color:var(--lab-dark)}.best{color:var(--lab-terra)}.ia{color:var(--lab-blue)}
+.lab-sub{color:var(--lab-gray);font-size:11px;font-weight:500;margin-top:1px;padding-left:15px}
+.ej-lab{font-family:'Fraunces',Georgia,serif;font-size:12.5px;font-weight:700;display:flex;align-items:center}.ej-lab .bullet{width:6px;height:6px;margin-right:5px}.ej-lab .lab{opacity:.75}
+.site-footer{background:var(--navy);color:#cbd5e1;padding:30px 0 24px;margin-top:40px}.footer-inner{max-width:1080px;margin:0 auto;padding:0 20px;text-align:center}
+.footer-quote{font-family:'Fraunces',serif;font-style:italic;font-size:1.1rem;color:#e0f2fe;margin-bottom:16px}.footer-lab{display:inline-block;padding:10px 22px 9px}.footer-lab .lab-name{font-size:17px}.footer-lab .lab-sub{font-size:12px}
+/* matemática */
+.mi,.calc,.opt .tex,.frin{font-family:var(--f-math);font-style:normal;font-size:1.08em}
+.mi i,.calc i{font-style:italic}.ro{font-style:normal}.tx{font-family:var(--f-body);font-size:.82em;color:var(--muted);font-style:normal}
+.fr{display:inline-flex;flex-direction:column;text-align:center;margin:0 .14em;vertical-align:middle;line-height:1.15}
+.fr .fn{padding:0 .35em .12em;display:block}.fr .fd{padding:.14em .35em 0;border-top:1.5px solid currentColor;display:block}
+sub,sup{font-size:.72em;line-height:0;vertical-align:baseline;position:relative}sub{top:.34em}sup{top:-.48em}
+sup .fr{font-size:.95em}sup .fr .fn,sup .fr .fd{padding-left:.2em;padding-right:.2em}
+.at{display:inline-block;white-space:nowrap}
+.par{display:inline-flex;align-items:stretch;vertical-align:middle}.par-w{position:relative;flex-shrink:0;align-self:stretch;width:.42em;min-width:6px}.par-w>svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}.par-c{display:inline-flex;align-items:center;padding:.08em .04em;white-space:nowrap}
+.os{margin:0 .26em}.ob{margin:0 .15em}.ou{margin-right:.02em}.pc{margin-right:.22em}.psc{margin:0 .2em}.gap{display:inline-block;width:1.5em}.int{font-size:1.35em;margin:0 .08em 0 .05em;vertical-align:-.12em}.bar{margin:0 .08em}
+.mi{white-space:nowrap}.nw{white-space:nowrap;display:inline-block}
+.calc{margin:6px 0;padding:6px 12px;background:#fff;border-left:4px solid var(--ej-border,#c8d6e8);border-radius:0 8px 8px 0;line-height:2;display:flex;flex-wrap:wrap;align-items:center;gap:2px 16px;overflow-x:auto;overflow-y:hidden}
+.calc.ctr{display:block;text-align:center;border:0;background:none;font-size:1.2em;padding:6px 0;margin:8px 0}
+.calc .cm{min-width:0}.regla{font-family:var(--f-body);font-size:.8rem;color:var(--muted);margin-left:auto;line-height:1.4;text-align:right}.regla .mi{font-size:1em}
+/* layout */
+main{max-width:860px;margin:0 auto;padding:24px 20px 40px}.vista{display:none}.vista.on{display:block}
+.lead{font-size:1.05rem;color:var(--muted);max-width:700px}
+.hero{padding:18px 0 4px}.hero .sub{font:500 .75rem 'Fira Code',monospace;letter-spacing:.25em;text-transform:uppercase;color:var(--blue);margin-bottom:10px}.hero h1{font-size:clamp(2rem,6vw,3.2rem);font-weight:700;color:var(--navy);line-height:1.05}
+.def{background:var(--blue-bg);border-left:5px solid var(--blue);border-radius:0 12px 12px 0;padding:14px 20px;margin:18px 0}.def .tt,.tt{font:500 .7rem 'Fira Code',monospace;letter-spacing:.15em;text-transform:uppercase;color:var(--blue);margin-bottom:4px}
+.def ul{margin:.3em 0 0;padding-left:1.2em}.def li{margin:.25em 0}
+.btn{background:var(--blue);color:#fff;border:0;border-radius:9px;padding:10px 18px;font:600 .95rem var(--f-body);cursor:pointer}.btn:hover{background:#234a7a}
+.btn.sec{background:#fff;color:var(--blue);border:1px solid var(--blue)}.btn.sec:hover{background:var(--blue-bg)}.btn.small{padding:7px 12px;font-size:.85rem}
+.btn.ghost{background:none;color:var(--muted);border:1px solid var(--line)}.btn.ghost:hover{background:#fff;color:var(--navy)}.btn.green{background:var(--green)}.btn.green:hover{background:#365f47}.btn.rust{background:var(--rust)}
+.acciones{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px;align-items:center}.acciones.pie{margin-top:16px;padding-top:12px;border-top:1px dashed var(--line)}
+.barra{position:sticky;top:0;z-index:20;background:rgba(251,248,241,.97);border-bottom:1px solid var(--line);padding:8px 0}
+.barra-inner{max-width:860px;margin:0 auto;padding:0 20px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}.barra .prog{font:500 .75rem 'Fira Code',monospace;color:var(--muted)}
+.barra .track{flex:1 1 120px;height:8px;background:#e9e4d8;border-radius:99px;overflow:hidden}.barra .fill{height:100%;background:var(--green);width:0;transition:width .3s}
+h2.bloque{margin-top:1.6em;scroll-margin-top:64px;border-bottom:2px solid var(--line);padding-bottom:6px}
+/* tarjetas */
+.ej{background:#fff;border:1px solid var(--line);border-top:5px solid var(--ej);border-radius:14px;margin:18px 0;overflow:hidden;scroll-margin-top:64px;--ej:#2B5A93;--ej-soft:#eef3f9;--ej-border:#c8d6e8}
+.ej.b-new{--ej:#6E4EAA;--ej-soft:#f2eef8;--ej-border:#d9cdea}.ej.b-bol{--ej:#45785A;--ej-soft:#edf4ef;--ej-border:#bcd4c4}.ej.b-suc{--ej:#2E6F72;--ej-soft:#eaf3f3;--ej-border:#bcd6d7}.ej.b-tri{--ej:#BC5235;--ej-soft:#faeeea;--ej-border:#e6c2b6}
+.ej-head{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:10px 18px;border-bottom:1px solid var(--line);background:#fcfbf8;flex-wrap:wrap}
+.ej-num{font:500 .75rem 'Fira Code',monospace;letter-spacing:.12em;text-transform:uppercase;color:var(--ej);display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.chip{font:600 .68rem var(--f-body);letter-spacing:0;text-transform:none;border-radius:99px;padding:2px 9px;background:#eee9dd;color:var(--muted);text-decoration:none}
+.chip.ok{background:var(--green-bg);color:#274a35}.chip.rev{background:var(--amber-bg);color:#6b4310}.chip.visto{background:var(--blue-bg);color:#1e3f66}
+.ej-body{padding:14px 18px 16px}.titulo{font-family:'Fraunces',Georgia,serif;font-size:1.15rem;color:var(--navy);margin:0 0 8px}
+.enun{background:var(--ej-soft);border:1px solid var(--ej-border);border-radius:10px;padding:10px 14px}
+.preg{font-weight:600;color:var(--navy);margin:14px 0 8px}.consigna{font-size:.9rem;color:var(--muted);margin:8px 0}
+.antes,.ctrl{border:1px dashed var(--ej-border);border-radius:12px;padding:10px 14px 12px;margin:12px 0;background:#fffdf9}.antes .tt,.ctrl .tt,.ia-box .tt{color:var(--ej)}
+.dec{margin:8px 0}.dec+.dec{border-top:1px solid var(--line);padding-top:8px}.dq{font-weight:600;margin-bottom:6px}.dec.hecha .dq{font-weight:500;color:var(--muted)}.dr{color:#274a35}.dfb{color:var(--muted);font-size:.92rem}
+.opts{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:8px 0}.opts2{display:grid;grid-template-columns:1fr;gap:6px}
+@media (max-width:640px){.opts{grid-template-columns:1fr}}
+.opt{display:flex;align-items:center;gap:10px;border:1px solid var(--line);border-radius:10px;padding:9px 12px;cursor:pointer;background:#fff;min-width:0;text-align:left;font:inherit;color:inherit;width:100%}
+.opt:hover:not(:disabled){border-color:var(--ej);background:var(--ej-soft)}.opt .let{font:600 .75rem 'Fira Code',monospace;color:#fff;background:var(--ej);border-radius:6px;padding:1px 7px;flex-shrink:0}
+.opt .tex{min-width:0}.opts2 .opt .tex{font-family:var(--f-body);font-size:.95rem}.opt:disabled{cursor:default}
+.opt.mal{background:var(--rust-bg);border-color:#e6c2b6;color:#8a5a4d}.opt.mal .let{background:var(--rust)}.opt.bien{background:var(--green-bg);border-color:var(--green);outline:2px solid var(--green)}.opt.bien .let{background:var(--green)}
+.fb{margin-top:10px;padding:10px 14px;border-radius:10px;font-size:.96rem;display:none}.fb.show{display:block}
+.fb.good{background:var(--green-bg);border:1px solid #bcd4c4;color:#274a35}.fb.bad{background:var(--rust-bg);border:1px solid #e6c2b6;color:#6e2c1c}.fb.mid{background:var(--amber-bg);border:1px solid #e8cfa8;color:#5a3a14}.fb.info{background:var(--blue-bg);border:1px solid #c8d6e8;color:#1e3f66}
+.pistas{margin-top:12px}.pista{background:var(--blue-bg);border-left:4px solid var(--blue);border-radius:0 10px 10px 0;padding:8px 14px;margin:6px 0}.pn{font:500 .68rem 'Fira Code',monospace;letter-spacing:.12em;text-transform:uppercase;color:var(--blue);display:block}
+.reso{border:1px solid #bcd4c4;border-radius:10px;margin:14px 0 0;background:var(--green-bg)}.reso>button{width:100%;text-align:left;background:none;border:0;padding:10px 14px;font:600 .95rem var(--f-body);color:var(--navy);cursor:pointer;display:flex;gap:10px;align-items:center}
+.reso .ttl{font-family:'Fraunces',Georgia,serif;font-weight:400;font-size:1.05rem}.reso .chev{margin-left:auto;transition:transform .2s;color:var(--muted)}.reso.open>button .chev{transform:rotate(90deg)}
+.reso>.cont{display:none;padding:4px 14px 14px;background:#fff;border-top:1px dashed var(--line);border-radius:0 0 10px 10px}.reso.open>.cont{display:block}
+.paso-t{font-family:'Fraunces',Georgia,serif;color:var(--navy);margin:12px 0 4px;display:flex;gap:8px;align-items:center}.paso-t .num,.ia-paso .num{font:500 .68rem 'Fira Code',monospace;color:#fff;background:var(--ej);border-radius:6px;padding:2px 7px;white-space:nowrap}
+.bolsa{display:flex;flex-wrap:wrap;gap:5px;margin:10px 0 2px;padding:10px;background:#fff;border:1px solid var(--ej-border);border-radius:18px 18px 26px 26px;max-width:330px}
+.bol{width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font:700 .72rem var(--f-body);color:#fff}.bR{background:#c0392b}.bV{background:#3d8b57}.bN{background:#2a2a2a}
+.dosb{display:flex;gap:14px;flex-wrap:wrap}.rot{font:500 .68rem 'Fira Code',monospace;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.tabla-w{margin:10px 0}table.tdoble{border-collapse:collapse;background:#fff;font-size:.92rem;width:100%;max-width:460px}
+.tdoble th,.tdoble td{border:1px solid var(--ej-border);padding:6px 8px;text-align:center}.tdoble th{background:var(--ej-soft);font-weight:600}.tdoble tr:last-child td,.tdoble td:last-child{font-weight:600;background:#fcfbf8}
+.ia-box{border:1px solid var(--ej-border);border-radius:12px;padding:10px 12px;margin:12px 0;background:#fffdf9}
+.ia-paso{display:flex;gap:10px;align-items:flex-start;width:100%;text-align:left;border:1px solid var(--line);border-radius:10px;background:#fff;padding:9px 12px;margin:6px 0;font:inherit;color:inherit;cursor:pointer}
+.ia-paso:hover:not(:disabled){border-color:var(--ej);background:var(--ej-soft)}.ia-paso:disabled{cursor:default}.ia-paso.err{background:var(--rust-bg);border-color:var(--rust);outline:2px solid var(--rust)}.ia-paso.visto{color:var(--muted)}.ia-paso .num{margin-top:4px}.ia-paso .tex{min-width:0}
+.escr{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:8px 0}.escr .lab{color:var(--ink)}.escr .o{color:var(--muted);font-size:.9rem}
+.frin{display:inline-flex;flex-direction:column;align-items:center;gap:3px}.frin input,.decin{font:400 1.05rem var(--f-math);padding:6px 8px;border:1px solid var(--line);border-radius:8px;text-align:center;background:#fff}
+.frin input{width:84px}.frbar{width:96px;height:2px;background:var(--ink)}.decin{width:130px}.frin input:focus,.decin:focus{outline:2px solid var(--blue);border-color:var(--blue)}
+/* mapa */
+#mapa{scroll-margin-top:64px}.card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px 20px;margin:16px 0}
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}@media (max-width:640px){.kpis{grid-template-columns:1fr 1fr}}
+.kpis>div{background:#fcfbf8;border:1px solid var(--line);border-radius:10px;padding:8px 10px}.kpis b{font-family:'Fraunces',serif;font-size:1.6rem;color:var(--navy);display:block;line-height:1.1}.kpis span{font-size:.8rem;color:var(--muted)}
+.chips{display:flex;gap:6px;flex-wrap:wrap;margin:12px 0}.chips .chip{font-size:.8rem;padding:4px 11px}
+.err-row{border:1px solid var(--line);border-left:5px solid var(--rust);border-radius:0 12px 12px 0;padding:10px 14px;margin:10px 0}.err-h{display:flex;justify-content:space-between;gap:10px;align-items:baseline;flex-wrap:wrap}
+.err-n{font-weight:700;color:var(--navy)}.veces{font:500 .75rem 'Fira Code',monospace;color:var(--rust);white-space:nowrap}.err-b{font:500 .68rem 'Fira Code',monospace;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}.err-r{margin-top:4px}
+.arbol{margin:6px 0 10px}.arbol svg{width:100%;max-width:420px;height:auto;display:block}.arbol .af{font:13px var(--f-math);text-anchor:middle;fill:#20201c}.arbol .al{font:600 12px var(--f-body);text-anchor:middle;fill:#20201c}.arbol .ack{font:700 14px var(--f-body);fill:#45785A}.arbol .ano{font:700 14px var(--f-body);fill:#BC5235}.arb-n{font-size:.82rem;color:var(--muted);margin-top:4px}
+.modal-bg{position:fixed;inset:0;background:rgba(15,34,68,.45);display:none;align-items:center;justify-content:center;z-index:50;padding:20px}.modal-bg.show{display:flex}.modal{background:#fff;border-radius:14px;padding:20px 22px;max-width:440px;width:100%}
+#testPanel{position:fixed;right:10px;bottom:10px;z-index:99;background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px 14px;font:12px 'Fira Code',monospace;max-width:90vw}#testPanel .ok{color:var(--green)}#testPanel .fail{color:var(--rust);font-weight:700}
+@media (max-width:640px){body{font-size:15.5px}h2{font-size:1.45rem}main{padding:18px 14px 32px}.ej-body{padding:12px 13px 14px}.ej-head{padding:9px 13px}.regla{margin-left:0;text-align:left;flex-basis:100%}.calc{padding:6px 10px}}
+</style>
+</head>
+<body>
+<header class="topbar"><div class="topbar-inner">
+  <div><div class="brand-inspt">Escuela Philips</div><div class="brand-title">Última práctica antes de la evaluación</div><div class="brand-sub">Matemática · 5.º año</div></div>
+  <div class="lab-logo"><div class="lab-name"><span class="bullet"></span><span class="lab">laboratorio</span><span class="best">best</span><span class="ia">-IA</span></div><div class="lab-sub">Prof. Ariel L. Cardozo Delgado</div></div>
+</div></header>
+<div class="barra"><div class="barra-inner"><div class="track"><div class="fill" id="bFill"></div></div><span class="prog" id="bProg"></span><button class="btn small sec" type="button" data-act="mapa">Qué repasar</button><button class="btn small ghost" type="button" data-act="reiniciar">Reiniciar</button></div></div>
+<main>
+<section id="vRecorrido" class="vista on">
+  <div class="hero"><div class="sub">Ecuaciones diferenciales y probabilidad</div><h1>Última práctica antes de la evaluación</h1>
+  <p class="lead">Diez ejercicios y dos resoluciones para revisar, con los mismos temas de la evaluación: ecuaciones de variables separables, ley de enfriamiento de Newton y probabilidad con bolsas, cartas y sucesos. No se entrega y no lleva nota: es para que veas qué te sale y qué te conviene repasar.</p></div>
+  <div class="def" data-x><div class="tt">Cómo se usa</div><ul>
+    <li><b>Resolvé cada ejercicio en la hoja</b> antes de mirar las respuestas. Cuando termines, tocá «Ya lo resolví en la hoja» y elegí tu resultado.</li>
+    <li>Si tu resultado no es el correcto, la página te dice qué pudo haber pasado y podés volver a intentar las veces que quieras.</li>
+    <li>Si te trabás, <b>pedí una pista</b>: hay tres por ejercicio, de menor a mayor ayuda.</li>
+    <li>Con <b>«Otra versión»</b> el mismo ejercicio cambia de números. Con <b>«Quiero practicar más esto»</b> aparecen ejercicios nuevos del tema que te costó.</li>
+    <li>Al final, <b>«Qué repasar»</b> te muestra los errores que más se repitieron. El avance queda guardado en este dispositivo.</li></ul></div>
+  <div class="acciones"><button class="btn" type="button" data-act="empezar">Empezar</button></div>
+  <div id="lista"></div>
+  <section id="mapa"><h2 class="bloque">Qué repasar</h2><div class="card" id="mapaCont"></div></section>
+</section>
+<section id="vPractica" class="vista">
+  <div class="acciones"><button class="btn ghost small" type="button" data-act="volver">← Volver al recorrido</button></div>
+  <div class="hero"><div class="sub">Práctica extra</div><h2 id="prTema"></h2><p class="lead">Ejercicios nuevos sobre este tema, todos los que quieras. Acá la respuesta se escribe, como en la evaluación.</p></div>
+  <article class="ej" id="prCard"></article>
+</section>
+</main>
+<div class="modal-bg" id="modal"><div class="modal"><h3 style="margin-top:0">¿Reiniciar la práctica?</h3><p>Se borra el avance y te tocan doce ejercicios nuevos.</p><div class="acciones"><button class="btn rust" type="button" data-act="siReset">Sí, reiniciar</button><button class="btn ghost" type="button" data-act="noReset">Cancelar</button></div></div></div>
+<footer class="site-footer"><div class="footer-inner"><div class="footer-quote">"La matemática no exige genios, exige constancia."</div>
+  <div class="footer-lab"><div class="lab-name"><span class="bullet"></span><span class="lab">laboratorio</span><span class="best">best</span><span class="ia">-IA</span></div><div class="lab-sub">Prof. Ariel L. Cardozo Delgado</div></div></div></footer>
+<script>
+/* ===== Banco parametrizado · Última práctica antes de la evaluación ===== */
+const gcd=(a,b)=>{a=Math.abs(a);b=Math.abs(b);while(b){[a,b]=[b,a%b];}return a||1;};
+function Q(n,d){ if(d===undefined)d=1; if(d<0){n=-n;d=-d;} const g=gcd(n,d); return {n:n/g,d:d/g}; }
+const qmul=(a,b)=>Q(a.n*b.n,a.d*b.d), qadd=(a,b)=>Q(a.n*b.d+b.n*a.d,a.d*b.d), qsub=(a,b)=>Q(a.n*b.d-b.n*a.d,a.d*b.d), qval=a=>a.n/a.d;
+const qpow=(a,k)=>Q(a.n**k,a.d**k), UNO=Q(1,1);
+const qtex=a=>a.d===1?String(a.n):(a.n<0?'-':'')+'\\f{'+Math.abs(a.n)+'}{'+a.d+'}';
+function dec(x,k){ if(k===undefined)k=2; let s=(Math.round(x*10**k)/10**k).toFixed(k); if(s.indexOf('.')>=0) s=s.replace(/0+$/,'').replace(/\.$/,''); if(s==='-0')s='0'; return s.replace('.',','); }
+const exacto=(x,k)=>Math.abs(x*10**k-Math.round(x*10**k))<1e-9;
+const num2=x=>(exacto(x,2)?'= ':'≈ ')+dec(x,2);
+const pct=q=>{const x=100*q.n/q.d; return (exacto(x,1)?'= ':'≈ ')+dec(x,1)+' %';};
+const pctL=(q,lhs)=>[lhs+' = '+qtex(q)+(exacto(q.n/q.d,4)?' = ':' ≈ ')+dec(q.n/q.d,4)+' = '+dec(100*Math.round(1e4*q.n/q.d)/1e4,2)+' %','dividimos; por 100 para el porcentaje'];
+const pick=a=>a[Math.floor(Math.random()*a.length)];
+function shuffle(a){ a=a.slice(); for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]];} return a; }
+const cf=k=>k===1?'':(k===-1?'-':String(k));
+const pw=(x,n)=>n===1?x:x+'^{'+n+'}';
+const fr=(a,b)=>'\\f{'+a+'}{'+b+'}';
+function prodChain(fs){ const nn=fs.map(f=>f[0]), dd=fs.map(f=>f[1]); const N=nn.reduce((a,b)=>a*b,1), D=dd.reduce((a,b)=>a*b,1), q=Q(N,D), g=N/q.n;
+  let tex=fs.map(f=>fr(f[0],f[1])).join(' · ')+' = '+fr(nn.join(' · '),dd.join(' · '))+' = '+fr(N,D); if(g>1) tex+=' = '+qtex(q);
+  return {tex,q,g,N,D}; }
+const simp=g=>g>1?' (simplificamos por '+g+')':'';
+function compChain(q){ return '1 - '+qtex(q)+' = '+fr(q.d,q.d)+' - '+qtex(q)+' = '+fr(q.d+' - '+q.n,q.d)+' = '+fr(q.d-q.n,q.d); }
+const O=(m,v,err,fb)=>({m,v,err,fb,ok:!err});
+const OQ=(q,err,fb)=>O(qtex(q),qval(q),err,fb);
+
+/* ---------- catálogo de errores ---------- */
+const ERR={
+ 'S-suma':{b:'Ecuaciones separables',n:'La constante queda sumando en vez de multiplicar',rep:'Cuando queda $ln|y| = F(x) + C$ y aplicás $e$, la constante pasa a ser un factor: $y = A e^{F(x)}$.'},
+ 'S-coef':{b:'Ecuaciones separables',n:'Falta dividir por el exponente que baja al integrar',rep:'$∫x^{n} dx = \\f{x^{n+1}}{n+1}$: el número de adelante se divide por el exponente nuevo.'},
+ 'S-noint':{b:'Ecuaciones separables',n:'Un lado quedó sin integrar',rep:'Después de separar se integran los dos lados, cada uno respecto de su variable.'},
+ 'S-log':{b:'Ecuaciones separables',n:'Logaritmo donde va potencia, o potencia donde va logaritmo',rep:'Solo $∫\\f{dy}{y}$ da logaritmo. Cualquier otra potencia de $y$ se integra sumando 1 al exponente.'},
+ 'S-dato':{b:'Ecuaciones separables',n:'La condición inicial mal reemplazada',rep:'El punto dado se reemplaza en la solución general, en $x$ y en $y$ a la vez, y de ahí se despeja la constante.'},
+ 'S-sinK':{b:'Ecuaciones separables',n:'Falta la constante de integración',rep:'Sin constante hay una sola curva. La solución general es toda la familia.'},
+ 'N-A':{b:'Ley de Newton',n:'$A$ igual a la temperatura inicial',rep:'En $t = 0$ queda $T_{a} + A = T(0)$: $A$ es la diferencia inicial con el ambiente.'},
+ 'N-coc':{b:'Ley de Newton',n:'Cuentas con temperaturas y no con diferencias con el ambiente',rep:'Lo que decae como exponencial es $T - T_{a}$. Los cocientes se arman con diferencias con el ambiente.'},
+ 'N-tiempo':{b:'Ley de Newton',n:'El tiempo mal despejado en el exponente',rep:'De $K · t_{1} = ln(…)$ el tiempo pasa dividiendo. Y $e^{2 K t_{1}}$ es $e^{K t_{1}}$ al cuadrado.'},
+ 'N-recta':{b:'Ley de Newton',n:'Modelo lineal: lo mismo en cada intervalo',rep:'La temperatura cambia cada vez más despacio: en tiempos iguales la diferencia con el ambiente se multiplica por el mismo número.'},
+ 'N-signo':{b:'Ley de Newton',n:'$K$ con el signo cambiado',rep:'Si la temperatura se acerca al ambiente, $e^{K t}$ tiene que achicarse: $K$ es negativo.'},
+ 'P-total':{b:'Bolsas y cartas',n:'Sin reposición, pero sin descontar bien lo que salió',rep:'Después de cada extracción cambia el total, y también cambia la cantidad del tipo que salió.'},
+ 'P-orden':{b:'Bolsas y cartas',n:'Caminos del árbol mal contados',rep:'Antes de calcular, anotá todos los caminos que cumplen lo pedido. Cada camino es un producto y los caminos se suman.'},
+ 'P-suma':{b:'Bolsas, cartas y sucesos',n:'Suma donde va producto, o «al menos uno» mal armado',rep:'«Y» a lo largo de un camino: se multiplica. «Al menos uno»: $1 - P(\\o{ninguno})$.'},
+ 'P-inter':{b:'Sucesos',n:'La unión sin restar bien la intersección',rep:'$P(A ∪ B) = P(A) + P(B) - P(A ∩ B)$: lo que cumple las dos cosas se contó dos veces.'},
+ 'P-exclu':{b:'Sucesos',n:'Excluyentes confundidos con independientes',rep:'Excluyentes: no pueden ocurrir juntos, $P(A ∩ B) = 0$. Independientes: uno no cambia al otro, $P(A ∩ B) = P(A) · P(B)$.'},
+ 'P-cond':{b:'Sucesos',n:'La condicional contada sobre el total equivocado',rep:'En $P(A | B)$ se cuenta solo dentro de $B$: el denominador es lo que cumple la condición.'}
+};
+const PRACT={ 'S-suma':['S1','S1b','S3'],'S-coef':['S1','S2','S3'],'S-noint':['S1','S2'],'S-log':['S4','S1b','S2'],'S-dato':['S2','S3','S4'],'S-sinK':['S1','S2'],
+ 'N-A':['N1','N2'],'N-coc':['N1','N2'],'N-tiempo':['N1','N2'],'N-recta':['N2'],'N-signo':['N1'],
+ 'P-total':['P1','P3','P3t'],'P-orden':['P1','P3','P4'],'P-suma':['P2','P3','P6'],'P-inter':['P5'],'P-exclu':['P6','P5'],'P-cond':['P7'] };
+
+const SEP='lo que tiene $y$ con $dy$; lo que tiene $x$ con $dx$';
+const T={};
+
+/* ================= SEPARABLES ================= */
+T.S1={bloque:'sep',titulo:'Solución general',
+ all(){const r=[];for(const n of[1,2,3])for(const a of[-3,-2,-1,1,2,3])r.push({n,a});return r;},
+ make(p){const {n,a}=p,k=a*(n+1),xn=pw('x',n),x1=pw('x',n+1),ex=cf(a)+x1,rhs=cf(k)+xn+' y';
+  return {enun:'Resolvé la ecuación diferencial $$y\' = '+rhs+'$$',preg:'¿Cuál es la solución general?',
+  opts:[O('y = A e^{'+ex+'}',null,null,'Bien: $ln|y| = '+ex+' + C$, y al aplicar $e$ la constante pasa a multiplicar.'),
+   O('y = e^{'+ex+'} + C',null,'S-suma','Llegaste bien a $ln|y| = '+ex+' + C$, pero al aplicar $e$ la constante no queda sumando afuera. ¿Cuánto vale $e^{'+ex+' + C}$ si lo escribís como producto de dos potencias?'),
+   O('y = A e^{'+cf(k)+x1+'}',null,'S-coef','El exponente tiene el mismo número que la ecuación. ¿Cuánto da $∫'+cf(k)+xn+' dx$? Fijate qué pasa con el '+Math.abs(k)+' cuando sube el exponente de $x$.'),
+   O('y = A e^{'+cf(k)+xn+'}',null,'S-noint','En el exponente quedó el lado derecho tal como estaba. Después de separar, ¿qué hay que hacer con $'+cf(k)+xn+' dx$?'),
+   O('y = '+ex+' + C',null,'S-log','Integraste el lado de $x$, pero del lado de $y$ quedó $y$ sola. ¿Cuánto da $∫\\f{dy}{y}$?'),
+   O('y = e^{'+ex+'}',null,'S-sinK','Esa función cumple la ecuación, pero es una sola curva. ¿Dónde quedó la constante que aparece al integrar?')],
+  pistas:['Del lado derecho hay un factor con $x$ y un factor con $y$. Llevá la $y$ con $dy$ y la $x$ con $dx$.','Queda $\\f{dy}{y} = '+cf(k)+xn+' dx$. Integrá cada lado: el de $y$ da un logaritmo.','Te tiene que quedar $ln|y| = '+ex+' + C$. Aplicá $e$ a los dos lados y mirá dónde termina la constante.'],
+  control:{q:'¿Por qué la constante quedó multiplicando?',o:[['Porque $e^{'+ex+' + C} = e^{C} · e^{'+ex+'}$, y $e^{C}$ es un número fijo: lo llamamos $A$.',1,''],
+   ['Porque al integrar, la constante siempre aparece multiplicando.',0,'Al integrar, la constante aparece sumando: $ln|y| = '+ex+' + C$. Cambia de lugar recién cuando se aplica $e$.'],
+   ['Porque $C$ pasa dividiendo al otro lado.',0,'No se pasa nada de lado: se aplica $e$ a toda la igualdad, y una suma en el exponente es un producto de potencias.'],
+   ['Porque $A$ y $C$ son la misma constante con otro nombre.',0,'No son la misma: $A = ±e^{C}$. Una suma y la otra multiplica, y no da lo mismo.']]},
+  reso:[{t:'Separar',l:[['\\f{dy}{dx} = '+rhs+'  ⇒  \\f{dy}{y} = '+cf(k)+xn+' dx',SEP]]},
+   {t:'Integrar cada lado',l:[['∫\\f{dy}{y} = ∫'+cf(k)+xn+' dx','una integral de cada lado'],['ln|y| = '+k+' · \\f{'+x1+'}{'+(n+1)+'} + C = '+ex+' + C','$∫\\f{dy}{y} = ln|y|$;  $∫x^{n} dx = \\f{x^{n+1}}{n+1}$']]},
+   {t:'Despejar',l:[['|y| = e^{'+ex+' + C} = e^{C} · e^{'+ex+'}','aplicamos $e$ a los dos lados;  $e^{p+q} = e^{p} · e^{q}$'],['y = A e^{'+ex+'}','$A = ±e^{C}$']]},
+   {t:'Comprobar',l:[['y\' = A e^{'+ex+'} · ('+k+xn+') = '+cf(k)+xn+' · A e^{'+ex+'} = '+rhs+'  ✓','regla de la cadena;  $A e^{'+ex+'} = y$']]}]};}};
+
+T.S1b={bloque:'sep',titulo:'Solución general con dos logaritmos',soloPractica:true,
+ all(){return [-3,-2,-1,2,3,4].map(k=>({k}));},
+ make(p){const k=p.k,ak=Math.abs(k),pot=k>0?'A '+pw('x',k):'\\f{A}{'+pw('x',ak)+'}',rhs=(k<0?'-':'')+fr((ak===1?'':ak)+'y','x');
+  return {enun:'Resolvé, para $x > 0$, la ecuación diferencial $$y\' = '+rhs+'$$',preg:'¿Cuál es la solución general?',
+  opts:[O('y = '+pot,null,null,'Bien: $ln|y| = '+cf(k)+'ln x + C$, y al aplicar $e$ queda una potencia de $x$ por la constante.'),
+   O('y = '+cf(k)+'ln x + C',null,'S-log','Integraste el lado de $x$, pero del lado de $y$ quedó $y$ sola. ¿Cuánto da $∫\\f{dy}{y}$?'),
+   O('y = '+pw('x',k)+' + C',null,'S-suma','Al aplicar $e$, la constante no queda sumando. ¿Cuánto vale $e^{'+cf(k)+'ln x + C}$ escrito como producto?'),
+   O('y = A e^{'+cf(k)+'x}',null,'S-log','Integraste $\\f{1}{x}$ como si diera $x$. ¿Qué función tiene por derivada a $\\f{1}{x}$?'),
+   O('y = '+(k>0?'\\f{A}{'+pw('x',ak)+'}':'A '+pw('x',ak)),null,'S-log','El exponente quedó con el signo cambiado. Revisá el paso $k · ln x = ln\\p{x^{k}}$: ¿qué signo tiene $k$?'),
+   O('y = '+(k>0?pw('x',k):'\\f{1}{'+pw('x',ak)+'}'),null,'S-sinK','Es una sola curva. ¿Dónde quedó la constante de integración?')],
+  pistas:['Llevá la $y$ con $dy$ y la $x$ con $dx$: quedan dos fracciones.','Queda $\\f{dy}{y} = '+cf(k)+'\\f{dx}{x}$. Los dos lados dan logaritmo.','$ln|y| = '+cf(k)+'ln x + C$. Usá que $'+cf(k)+'ln x = ln\\p{x^{'+k+'}}$ y aplicá $e$.'],
+  reso:[{t:'Separar',l:[['\\f{dy}{y} = '+cf(k)+'\\f{dx}{x}',SEP]]},{t:'Integrar cada lado',l:[['ln|y| = '+cf(k)+'ln x + C','$∫\\f{dx}{x} = ln x$ para $x > 0$']]},
+   {t:'Despejar',l:[['|y| = e^{'+cf(k)+'ln x + C} = e^{C} · e^{'+cf(k)+'ln x}','aplicamos $e$;  $e^{p+q} = e^{p} · e^{q}$'],['e^{'+cf(k)+'ln x} = e^{ln\\p{x^{'+k+'}}} = x^{'+k+'}'+(k<0?' = \\f{1}{'+pw('x',ak)+'}':''),'$k · ln x = ln\\p{x^{k}}$;  $e^{ln u} = u$'],['y = '+pot,'$A = ±e^{C}$']]}]};}};
+
+T.S2={bloque:'sep',titulo:'Con condición inicial',
+ all(){const r=[];for(const m of[1,2,3])for(const n of[1,2,3])for(const b of[1,2,3,4,5,6])for(const y0 of[2,3]){ if(n!==m&&(b*(n+1))%(m+1)===0) r.push({m,n,b,y0}); } return r;},
+ make(p){const {m,n,b,y0}=p,c=b*(n+1)/(m+1),K=y0**(m+1),xn=pw('x',n),x1=pw('x',n+1),ym=pw('y',m),y1=pw('y',m+1),rhs=fr(cf(c)+xn,ym);
+  return {enun:'Resolvé la ecuación diferencial con la condición inicial dada: $$y\' = '+rhs+',   y(0) = '+y0+'$$',preg:'¿Cuál es la solución particular?',
+  opts:[O(y1+' = '+cf(b)+x1+' + '+K,null,null,'Bien: la general es $'+y1+' = '+cf(b)+x1+' + K$, y el punto $(0 ; '+y0+')$ da $K = '+K+'$.'),
+   O(y1+' = '+cf(b)+x1+' + '+y0,null,'S-dato','La constante quedó igual al dato. Reemplazá $x = 0$ e $y = '+y0+'$ en $'+y1+' = '+cf(b)+x1+' + K$: ¿cuánto queda del lado izquierdo?'),
+   O(y1+' = '+cf(c)+x1+' + '+K,null,'S-coef','El coeficiente de $'+x1+'$ es el mismo número que traía la ecuación. ¿Cuánto da $∫'+cf(c)+xn+' dx$, y por cuánto multiplicaste después toda la igualdad?'),
+   O(y1+' = '+cf(b)+x1,null,'S-sinK','Probá el dato: con $x = 0$, ¿tu fórmula da $y = '+y0+'$? Falta la constante.'),
+   O('y = '+y0+' e^{'+(Q(b,m+1).d===1?cf(Q(b,m+1).n):qtex(Q(b,m+1)))+x1+'}',null,'S-log','Integraste el lado de $y$ como un logaritmo. Acá $'+ym+'$ pasa multiplicando a $dy$: ¿cuánto da $∫'+ym+' dy$?'),
+   O(y1+' = '+cf(c)+xn+' + '+K,null,'S-noint','El lado de $x$ quedó como estaba en la ecuación. ¿Lo integraste?')],
+  pistas:['$'+ym+'$ está dividiendo: pasala multiplicando a $dy$ y dejá la $x$ con $dx$.','Queda $'+ym+' dy = '+cf(c)+xn+' dx$. Integrá cada lado y después multiplicá toda la igualdad por '+(m+1)+' para dejar $'+y1+'$ sola.','La general es $'+y1+' = '+cf(b)+x1+' + K$. Reemplazá $x = 0$, $y = '+y0+'$ y despejá $K$.'],
+  control:{q:'¿Por qué la constante vale '+K+' y no '+y0+'?',o:[['Porque el dato se reemplaza en $'+y1+' = '+cf(b)+x1+' + K$, y del lado izquierdo queda $'+y0+'^{'+(m+1)+'} = '+K+'$.',1,''],
+   ['Porque la constante siempre es el dato inicial multiplicado por '+(m+1)+'.',0,'No hay una regla fija: sale de reemplazar el punto. Acá del lado izquierdo está $'+y1+'$, y $'+y0+'^{'+(m+1)+'} = '+K+'$.'+(y0*(m+1)===K?' Que $'+y0+' · '+(m+1)+'$ también dé '+K+' es una coincidencia de estos números.':'')],
+   ['Porque al integrar, la constante se eleva junto con $y$.',0,'La constante no se eleva: lo que se eleva es el valor de $y$ cuando reemplazás el punto en $'+y1+'$.'],
+   ['Porque '+K+' es el valor de $y$ cuando $x = 0$.',0,'Cuando $x = 0$, $y$ vale '+y0+' (es el dato). '+K+' es el valor de $'+y1+'$ en ese punto.']]},
+  reso:[{t:'Separar',l:[['\\f{dy}{dx} = '+rhs+'  ⇒  '+ym+' dy = '+cf(c)+xn+' dx',SEP]]},
+   {t:'Integrar cada lado',l:[['∫'+ym+' dy = ∫'+cf(c)+xn+' dx','una integral de cada lado'],['\\f{'+y1+'}{'+(m+1)+'} = '+c+' · \\f{'+x1+'}{'+(n+1)+'} + C','$∫x^{n} dx = \\f{x^{n+1}}{n+1}$']]},
+   {t:'Dejar sola la potencia de y',l:[[y1+' = \\f{'+c+' · '+(m+1)+'}{'+(n+1)+'} '+x1+' + '+(m+1)+'C','multiplicamos todo por '+(m+1)],['\\f{'+c+' · '+(m+1)+'}{'+(n+1)+'} = \\f{'+(c*(m+1))+'}{'+(n+1)+'} = '+b,'el coeficiente'],[y1+' = '+cf(b)+x1+' + K','$K = '+(m+1)+'C$: sigue sumando']]},
+   {t:'Usar la condición inicial',l:[[y0+'^{'+(m+1)+'} = '+b+' · 0^{'+(n+1)+'} + K = 0 + K','reemplazamos $x = 0$, $y = '+y0+'$'],['K = '+y0+'^{'+(m+1)+'} = '+K,'potencia']]},
+   {t:'Solución particular',l:[[y1+' = '+cf(b)+x1+' + '+K,'la general con $K = '+K+'$']]}]};}};
+
+T.S3={bloque:'sep',titulo:'Condición inicial y evaluar',soloPractica:true,
+ all(){const r=[];for(const k of[-4,-2,2,4])for(const y0 of[2,3,4,5,6])r.push({k,y0});return r;},
+ make(p){const {k,y0}=p,a=k/2,ex=cf(a)+'x^{2}',v=y0*Math.exp(a);
+  return {enun:'Resolvé la ecuación diferencial con la condición inicial dada: $$y\' = '+cf(k)+'x y,   y(0) = '+y0+'$$',preg:'¿Cuánto vale $y(1)$?',pregNum:'Calculá $y(1)$ y escribila con dos decimales.',
+  num:{v,tol:0.006,label:'y(1) ='},
+  opts:[O(dec(v,2),v,null,'Bien: $y = '+y0+' e^{'+ex+'}$ y $y(1) = '+y0+' e^{'+a+'} ≈ '+dec(v,2)+'$.'),
+   O(dec(y0*Math.exp(k),2),y0*Math.exp(k),'S-coef','Ese valor sale con el exponente $'+cf(k)+'x^{2}$. ¿Cuánto da $∫'+cf(k)+'x dx$?'),
+   O(dec(Math.exp(a)+y0-1,2),Math.exp(a)+y0-1,'S-suma','Ese valor sale de $y = e^{'+ex+'} + '+(y0-1)+'$: la constante sumando. ¿Dónde queda la constante cuando aplicás $e$?'),
+   O(dec(Math.exp(a),2),Math.exp(a),'S-dato','Ese valor es $e^{'+a+'}$: falta la constante. ¿Qué te da el dato $y(0) = '+y0+'$?'),
+   O(dec(y0*Math.exp(-a),2),y0*Math.exp(-a),'S-coef','El exponente quedó con el signo cambiado. Revisá el signo de $'+cf(k)+'x$ al integrar.'),
+   O(dec(a+y0,2),a+y0,'S-log','Ese valor sale de $y = '+ex+' + '+y0+'$: del lado de $y$ falta el logaritmo.')],
+  pistas:['Primero la solución general: separá y llegá a $ln|y| = … + C$.','La general es $y = A e^{'+ex+'}$. Usá $y(0) = '+y0+'$ para hallar $A$.','$A = '+y0+'$, así que $y = '+y0+' e^{'+ex+'}$. Reemplazá $x = 1$.'],
+  reso:[{t:'Solución general',l:[['\\f{dy}{y} = '+cf(k)+'x dx',SEP],['ln|y| = '+k+' · \\f{x^{2}}{2} + C = '+ex+' + C','$∫x dx = \\f{x^{2}}{2}$'],['|y| = e^{'+ex+' + C} = e^{C} · e^{'+ex+'}','aplicamos $e$;  $e^{p+q} = e^{p} · e^{q}$'],['y = A e^{'+ex+'}','$A = ±e^{C}$']]},
+   {t:'Usar la condición inicial',l:[['y(0) = A e^{'+a+' · 0^{2}} = A e^{0} = A · 1 = A','reemplazamos $x = 0$'],['A = '+y0,'porque $y(0) = '+y0+'$']]},
+   {t:'Evaluar en x = 1',l:[['y(1) = '+y0+' e^{'+a+' · 1^{2}} = '+y0+' e^{'+a+'} ≈ '+y0+' · '+dec(Math.exp(a),4)+' ≈ '+dec(v,2),'calculadora']]}]};}};
+
+T.S4={bloque:'sep',titulo:'Con y al cuadrado',soloPractica:true,
+ all(){const r=[];for(const k of[1,2,3,4])for(const y0 of[1,2])for(const xd of[10,8,5,4]){const d=Q(xd-k*y0,xd); if(d.n>0){const v=Q(y0*d.d,d.n); if(v.d<=2) r.push({k,y0,xd});}} return r;},
+ make(p){const {k,y0,xd}=p,v=Q(y0*xd,xd-k*y0),x1=fr(1,xd),kx=Q(k,xd),den=Q(xd-k*y0,xd*y0);
+  return {enun:'Resolvé la ecuación diferencial con la condición inicial dada: $$y\' = '+cf(k)+'y^{2},   y(0) = '+y0+'$$',preg:'¿Cuánto vale $y\\p{'+x1+'}$?',pregNum:'Calculá $y\\p{'+x1+'}$.',
+  num:{v:qval(v),q:v,tol:0.006,label:'y ='},
+  opts:[OQ(v,null,'Bien: $-\\f{1}{y} = '+cf(k)+'x - '+qtex(Q(1,y0))+'$ y en $x = '+x1+'$ da $y = '+qtex(v)+'$.'),
+   O(dec(y0*Math.exp(k/xd),2),y0*Math.exp(k/xd),'S-log','Ese valor sale de $y = '+cf(y0)+'e^{'+cf(k)+'x}$: integraste $\\f{dy}{y^{2}}$ como un logaritmo. ¿Cuánto da $∫y^{-2} dy$?'),
+   OQ(Q(y0*xd,xd+k*y0),'S-log','De $∫y^{-2} dy$ sale $-\\f{1}{y}$. ¿Te quedó el signo menos del lado izquierdo?'),
+   OQ(qadd(Q(y0),kx),'S-noint','Ese valor sale de $y = '+y0+' + '+cf(k)+'x$: integraste como si $y^{2}$ no estuviera. Hay que separar: $\\f{dy}{y^{2}} = '+cf(k)+'dx$.'),
+   OQ(Q(xd,xd-k),'S-dato','Ese valor sale con constante igual a $-1$. Reemplazá $x = 0$, $y = '+y0+'$ en $-\\f{1}{y} = '+cf(k)+'x + C$.'),
+   OQ(Q(-xd,k),'S-sinK','Ese valor sale de $y = -\\f{1}{'+cf(k)+'x}$, sin constante. ¿Qué te da el dato inicial?')].filter((o,i,a)=>a.findIndex(z=>Math.abs(z.v-o.v)<1e-9)===i),
+  pistas:['Pasá $y^{2}$ dividiendo a $dy$: queda $\\f{dy}{y^{2}} = '+cf(k)+'dx$.','$∫y^{-2} dy = -\\f{1}{y}$. Queda $-\\f{1}{y} = '+cf(k)+'x + C$.','Con $y(0) = '+y0+'$: $C = -'+qtex(Q(1,y0))+'$. Reemplazá $x = '+x1+'$ y despejá $y$.'],
+  reso:[{t:'Separar e integrar',l:[['\\f{dy}{y^{2}} = '+cf(k)+'dx',SEP],['-\\f{1}{y} = '+cf(k)+'x + C','$∫y^{-2} dy = \\f{y^{-1}}{-1} = -\\f{1}{y}$']]},
+   {t:'Usar la condición inicial',l:[['-'+qtex(Q(1,y0))+' = '+k+' · 0 + C = 0 + C  ⇒  C = -'+qtex(Q(1,y0)),'reemplazamos $x = 0$, $y = '+y0+'$']]},
+   {t:'Evaluar',l:[['-\\f{1}{y} = '+k+' · '+x1+' - '+qtex(Q(1,y0))+' = '+fr(k,xd)+' - '+qtex(Q(1,y0)),'reemplazamos $x = '+x1+'$'],(L=>['= '+fr(k*L/xd,L)+' - '+fr(L/y0,L)+' = '+fr((k*L/xd)+' - '+(L/y0),L)+' = '+(k*L/xd-L/y0<0?'-':'')+fr(Math.abs(k*L/xd-L/y0),L)+(qsub(kx,Q(1,y0)).d!==L?' = '+qtex(qsub(kx,Q(1,y0))):''),'denominador común '+L])(xd*y0/gcd(xd,y0)),['\\f{1}{y} = '+qtex(den)+'  ⇒  y = '+qtex(v),'cambiamos el signo e invertimos']]}]};}};
+
+/* ================= NEWTON ================= */
+const NCTX=[['Una pieza de acero recién soldada','un taller'],['Una placa recién salida del horno de soldadura','un laboratorio'],['Un motor recién apagado','un galpón'],['Una pieza recién salida de la impresora 3D','un aula'],['Una barra de aluminio recién fundida','un depósito']];
+const HCTX=[['Una pieza de acero','un horno'],['Una bandeja de aluminio','un horno de secado'],['Una matriz metálica','una estufa industrial']];
+const LEY='$\\f{dT}{dt} = K(T - T_{a})$, donde $T_{a}$ es la temperatura del ambiente y $t$ se mide en minutos';
+function nAll(heat){const r=[];const Tas=heat?[150,180,200]:[15,20,25,30],Ds=heat?[-120,-150,-180]:[60,90,120];
+ for(const Ta of Tas)for(const D of Ds)for(const rr of[[1,2],[1,3],[2,3],[3,4]])for(const t1 of[4,5,6,10]){ const T0=Ta+D; if(heat&&(T0<10||T0>60))continue; if((D*rr[0])%rr[1]!==0)continue; r.push({Ta,D,rn:rr[0],rd:rr[1],t1,heat:heat?1:0,c:0}); } return r;}
+function nDat(p){const r=Q(p.rn,p.rd),T0=p.Ta+p.D,T1=p.Ta+p.D*p.rn/p.rd,ctx=(p.heat?HCTX:NCTX)[p.c%(p.heat?HCTX:NCTX).length];
+ const enun=p.heat? ctx[0]+' está a '+T0+' °C y se mete en '+ctx[1]+' cuya temperatura se mantiene constante en '+p.Ta+' °C. A los '+p.t1+' minutos está a '+T1+' °C. Su temperatura $T(t)$ cumple la ley de Newton, '+LEY+'.'
+   : ctx[0]+' está a '+T0+' °C y se deja enfriar en '+ctx[1]+' cuya temperatura se mantiene constante en '+p.Ta+' °C. A los '+p.t1+' minutos está a '+T1+' °C. Su temperatura $T(t)$ cumple la ley de Newton, '+LEY+'.';
+ return {r,T0,T1,enun,lnr:'ln\\p{'+qtex(r)+'}',lugar:ctx[1]};}
+const nDecTa=(p,d)=>({q:'¿Cuál es la temperatura del ambiente, $T_{a}$?',o:shuffle([[p.Ta+' °C',1,'Sí: es la única temperatura que no cambia durante todo el proceso.'],[d.T0+' °C',0,'Esa es la temperatura del cuerpo cuando empieza: es $T(0)$, y después cambia. Buscá la que se mantiene constante.'],[d.T1+' °C',0,'Esa es una medición a los '+p.t1+' minutos: es $T('+p.t1+')$. Buscá la que se mantiene constante.']])});
+function nGeneral(p){const Ta=p.Ta; return {t:'Solución general',l:[['\\f{dT}{dt} = K(T - '+Ta+')  ⇒  \\f{dT}{T - '+Ta+'} = K dt','el ambiente es $T_{a} = '+Ta+'$; separamos'],['ln|T - '+Ta+'| = K t + C','$∫\\f{dT}{T - T_{a}} = ln|T - T_{a}|$'],['|T - '+Ta+'| = e^{K t + C} = e^{C} · e^{K t}','aplicamos $e$;  $e^{p+q} = e^{p} · e^{q}$'],['T - '+Ta+' = A e^{K t}  ⇒  T(t) = '+Ta+' + A e^{K t}','$A = ±e^{C}$']]};}
+function nA(p,d){return {t:'Hallar A con t = 0',l:[['T(0) = '+p.Ta+' + A e^{K · 0} = '+p.Ta+' + A · 1 = '+p.Ta+' + A','$e^{0} = 1$'],[p.Ta+' + A = '+d.T0+'  ⇒  A = '+d.T0+' - '+p.Ta+' = '+p.D,'dato: $T(0) = '+d.T0+'$']]};}
+function nE(p,d){const dif=d.T1-p.Ta; return {t:'Hallar el factor con t = '+p.t1,l:[['T('+p.t1+') = '+p.Ta+' '+(p.D<0?'- '+(-p.D):'+ '+p.D)+' e^{'+p.t1+'K} = '+d.T1,'dato: $T('+p.t1+') = '+d.T1+'$'],[p.D+' e^{'+p.t1+'K} = '+d.T1+' - '+p.Ta+' = '+dif,'restamos '+p.Ta],['e^{'+p.t1+'K} = \\f{'+dif+'}{'+p.D+'} = '+qtex(d.r),'dividimos por '+(p.D<0?'('+p.D+')':p.D)]]};}
+
+T.N1={bloque:'new',titulo:'Hallar las constantes',
+ all(){return nAll(0).filter(p=>{const o=T.N1.make(p).opts;return o.slice(1).every(x=>dec(x.v,2)!==dec(o[0].v,2));});},
+ make(p){const d=nDat(p),{r,T0,T1,lnr}=d,Ta=p.Ta,D=p.D,t1=p.t1,K=Math.log(qval(r))/t1,rA=Q(T1-Ta,T0),rT=Q(T1,T0),ri=Q(r.d,r.n);
+  const kx=(q,t)=>fr('ln\\p{'+qtex(q)+'}',t), par=(A,k)=>'A = '+A+',   K = '+k;
+  return {enun:d.enun,preg:'¿Cuánto valen $A$ y $K$ en $T(t) = T_{a} + A e^{K t}$?',pregNum:'Hallá $K$ y escribila con dos decimales.',num:{v:K,tol:0.006,label:'K ='},
+  dec:[nDecTa(p,d),{q:'La solución general es $T(t) = T_{a} + A e^{K t}$. ¿Con qué dato sale cada constante?',o:shuffle([['$A$ con el dato de $t = 0$; después $K$ con el de $t = '+t1+'$.',1,'Sí: en $t = 0$ el factor $e^{K · 0}$ vale 1 y queda una ecuación con $A$ sola.'],['$K$ con el dato de $t = 0$; después $A$ con el de $t = '+t1+'$.',0,'En $t = 0$, $e^{K · 0} = 1$: la $K$ desaparece de la ecuación. Ese dato solo puede dar $A$.'],['Las dos con el dato de $t = '+t1+'$.',0,'Un solo dato da una sola ecuación, y hay dos incógnitas. Hacen falta los dos datos, y conviene empezar por el que deja una sola incógnita.']])}],
+  opts:[O(par(D,kx(r,t1)),K,null,'Bien: $A = '+T0+' - '+Ta+' = '+D+'$ y $e^{'+t1+'K} = '+qtex(r)+'$, así que $K ≈ '+dec(K,2)+'$.'),
+   O(par(T0,kx(rA,t1)),Math.log(qval(rA))/t1,'N-A','Tomaste $A = '+T0+'$. Probá en $t = 0$: ¿cuánto da $'+Ta+' + '+T0+' · e^{0}$? ¿Coincide con la temperatura inicial?'),
+   O(par(D,kx(rT,t1)),Math.log(qval(rT))/t1,'N-coc','El cociente $'+qtex(rT)+'$ está armado con las temperaturas. Después de restar '+Ta+' de los dos lados, ¿qué número queda dividido por '+D+'?'),
+   O(par(D,t1+' · '+lnr),t1*Math.log(qval(r)),'N-tiempo','En $'+t1+'K = '+lnr+'$ el '+t1+' está multiplicando a $K$. ¿Cómo pasa al otro lado?'),
+   O(par(D,ri.d===1?fr('ln\\p{'+ri.n+'}',t1):kx(ri,t1)),-K,'N-signo','Con ese $K$ positivo, $e^{K t}$ crece y la temperatura se aleja de '+Ta+' °C. ¿Qué fracción tiene que quedar adentro del logaritmo?'),
+   O(par(D,qtex(Q(T1-T0,t1))),(T1-T0)/t1,'N-recta','Ese $K$ es «grados por minuto», como la pendiente de una recta. En la ley de Newton $K$ está en el exponente: ¿qué operación despeja un exponente?')],
+  pistas:['La solución general es $T(t) = T_{a} + A e^{K t}$. De las tres temperaturas del enunciado, una sola es constante: esa es $T_{a}$.','En $t = 0$ queda $'+Ta+' + A = '+T0+'$. De ahí sale $A$.','En $t = '+t1+'$: $'+Ta+' + '+D+' e^{'+t1+'K} = '+T1+'$. Despejá $e^{'+t1+'K}$, aplicá $ln$ y dividí por '+t1+'.'],
+  control:{q:'¿Por qué $A$ vale '+D+' y no '+T0+'?',o:[['Porque en $t = 0$ queda $'+Ta+' + A = '+T0+'$: $A$ es lo que hay que sumarle al ambiente para llegar a la temperatura inicial.',1,''],
+   ['Porque $A$ es la temperatura inicial menos la medición de los '+t1+' minutos.',0,'Eso daría $'+T0+' - '+T1+' = '+(T0-T1)+'$. $A$ sale del dato de $t = 0$ y del ambiente: $'+T0+' - '+Ta+'$.'],
+   ['Porque $A$ es la temperatura inicial y después $K$ la corrige.',0,'$K$ no corrige a $A$. Si $A$ fuera '+T0+', en $t = 0$ la fórmula daría $'+Ta+' + '+T0+' = '+(Ta+T0)+'$, que no es la temperatura inicial.'],
+   ['Porque a la temperatura inicial siempre se le resta 20 o 30.',0,'Se le resta la temperatura del ambiente de este problema, que es '+Ta+' °C, y por una razón: en $t = 0$ queda $'+Ta+' + A = '+T0+'$.']]},
+  reso:[nGeneral(p),nA(p,d),nE(p,d),{t:'Despejar K',l:[[t1+'K = '+lnr,'aplicamos $ln$: $ln\\p{e^{u}} = u$'],['K = '+fr(lnr,t1)+' ≈ \\f{'+dec(Math.log(qval(r)),4)+'}{'+t1+'} ≈ '+dec(K,2),'dividimos por '+t1]]},
+   {t:'Control',l:[['K < 0','la temperatura se acerca al ambiente']]}]};}};
+
+T.N2={bloque:'new',titulo:'Predecir una temperatura',
+ all(){const r=[];for(const h of[0,1])for(const p of nAll(h))for(const m of[2,3])r.push(Object.assign({m},p));return r.filter(p=>T.N2.valid(p));},
+ valid(p){const o=T.N2.make(p).opts.map(x=>x.v); for(let i=0;i<o.length;i++)for(let j=i+1;j<o.length;j++) if(Math.abs(o[i]-o[j])<0.3) return false; const d=nDat(p),v=o[0]; return exacto(v,2)||exacto(v*3,0)||exacto(v*9,0);},
+ make(p){const d=nDat(p),{r,T0,T1}=d,Ta=p.Ta,D=p.D,t1=p.t1,m=p.m,tm=m*t1,rm=qpow(r,m),v=Ta+D*qval(rm),dT=Math.abs(T0-T1),pal=m===2?'al cuadrado':'al cubo',verbo=p.heat?'subió':'bajó';
+  const g=x=>O(dec(x,2)+' °C',x), base=g(v), sg=D<0?'- '+(-D):'+ '+D;
+  const mk=(x,err,fb)=>{const o=g(x);o.err=err;o.fb=fb;o.ok=false;return o;};
+  base.ok=true;base.err=null;base.fb='Bien: $e^{'+t1+'K} = '+qtex(r)+'$, así que $e^{'+tm+'K} = '+qtex(rm)+'$ y $T('+tm+') = '+Ta+' '+sg+' · '+qtex(rm)+' '+num2(v)+'$.';
+  const decs=[nDecTa(p,d),{q:'En los primeros '+t1+' minutos la temperatura '+verbo+' '+dT+' °C. ¿Qué pasa en los '+t1+' minutos siguientes?',o:shuffle([['Cambia menos de '+dT+' °C, porque la diferencia con el ambiente ya es menor.',1,'Sí: la velocidad de cambio es proporcional a la diferencia con el ambiente, y esa diferencia se achicó.'],['Cambia otros '+dT+' °C: lo mismo en cada tramo.',0,'Eso pasaría si la gráfica fuera una recta. La ley dice que la velocidad depende de $T - T_{a}$, que ahora es menor.'],['Cambia más de '+dT+' °C, porque el proceso se acelera.',0,'Es al revés: cuanto más cerca del ambiente, más lento cambia.']])}];
+  if(p.heat) decs.push({q:'El cuerpo arranca más frío que el ambiente. ¿Qué signo tiene $A$?',o:shuffle([['Negativo.',1,'Sí: $A = '+T0+' - '+Ta+' = '+D+'$.'],['Positivo.',0,'$A$ es la temperatura inicial menos la del ambiente: $'+T0+' - '+Ta+'$. ¿Cuál es mayor?'],['Depende de $K$.',0,'$A$ sale solo del dato de $t = 0$: en ese instante $K$ no interviene.']])});
+  return {enun:d.enun,preg:'¿Qué temperatura tiene a los '+tm+' minutos?',pregNum:'Calculá la temperatura a los '+tm+' minutos, en °C'+(exacto(v,2)?'':' (con dos decimales)')+'.',num:{v,tol:0.06,label:'T('+tm+') ='},dec:decs,
+  opts:[base,
+   mk(T0-m*(T0-T1),'N-recta','Restaste (o sumaste) '+dT+' °C por cada tramo de '+t1+' minutos, como en una recta. ¿La temperatura cambia lo mismo cuando está más cerca del ambiente?'),
+   mk(Ta+T0*qval(rm),'N-A','Usaste $A = '+T0+'$. Con ese valor, ¿cuánto da tu fórmula en $t = 0$? Tiene que dar '+T0+'.'),
+   mk(Ta+D*qval(r)/m,'N-tiempo','Dividiste el factor $'+qtex(r)+'$ por '+m+'. Pero $e^{'+tm+'K} = \\p{e^{'+t1+'K}}^{'+m+'}$: ¿qué operación corresponde?'),
+   mk(D*qval(rm),'N-coc','Ese valor es la diferencia con el ambiente a los '+tm+' minutos. ¿Qué falta para tener la temperatura?'),
+   (p.heat?mk(Ta+D*qval(qpow(qsub(UNO,r),m)),'N-coc','Usaste el factor $'+qtex(qsub(UNO,r))+'$, que es la parte de la diferencia que ya se recorrió. ¿Qué fracción de la diferencia con el ambiente queda a los '+t1+' minutos?'):mk(Ta+D*qval(qpow(Q(T1,T0),m)),'N-coc','El factor $'+qtex(Q(T1,T0))+'$ está armado con las temperaturas. ¿Cuánto vale el cociente de las diferencias con el ambiente?'))],
+  pistas:['La solución es $T(t) = '+Ta+' + A e^{K t}$. Hallá $A$ con $t = 0$.','$A = '+D+'$. Con el dato de $t = '+t1+'$ sale $e^{'+t1+'K} = '+qtex(r)+'$: no hace falta calcular $K$.','$e^{'+tm+'K} = \\p{e^{'+t1+'K}}^{'+m+'} = '+qtex(rm)+'$. Reemplazá en $T('+tm+') = '+Ta+' '+sg+' e^{'+tm+'K}$.'],
+  control:{q:'¿Por qué no hizo falta calcular $K$?',o:[['Porque $e^{'+tm+'K} = \\p{e^{'+t1+'K}}^{'+m+'}$, y $e^{'+t1+'K}$ ya se conoce por el dato.',1,''],
+   ['Porque a los '+tm+' minutos la temperatura cambia '+m+' veces lo que cambió a los '+t1+'.',0,'Eso sería un modelo lineal. Lo que se repite en cada tramo es el factor que multiplica a la diferencia con el ambiente, no los grados.'],
+   ['Porque $K$ se cancela al restar la temperatura del ambiente.',0,'$K$ no se cancela: está en el exponente. Lo que pasa es que $'+tm+' = '+m+' · '+t1+'$, y eso permite usar el factor ya conocido '+pal+'.'],
+   ['Porque $K$ vale lo mismo en todos los problemas de enfriamiento.',0,'$K$ depende del cuerpo y del ambiente: cambia de un problema a otro. Acá se evitó porque $'+tm+'$ es múltiplo de '+t1+'.']]},
+  reso:[nGeneral(p),nA(p,d),nE(p,d),{t:'Evaluar en t = '+tm,l:[['e^{'+tm+'K} = \\p{e^{'+t1+'K}}^{'+m+'} = \\p{'+qtex(r)+'}^{'+m+'} = '+qtex(rm),'$e^{'+m+'u} = \\p{e^{u}}^{'+m+'}$'],['T('+tm+') = '+Ta+' '+sg+' · '+qtex(rm)+' = '+Ta+' '+(D<0?'- ':'+ ')+fr(Math.abs(D)+' · '+rm.n,rm.d)+' = '+Ta+' '+(D<0?'- ':'+ ')+fr(Math.abs(D)*rm.n,rm.d),'reemplazamos en $T(t) = '+Ta+' + A e^{K t}$'],['T('+tm+') '+(exacto(Math.abs(D)*rm.n/rm.d,2)?'= ':'≈ ')+Ta+' '+(D<0?'- ':'+ ')+dec(Math.abs(D)*rm.n/rm.d,2)+' = '+dec(v,2),'dividimos y '+(D<0?'restamos':'sumamos')]]}]};}};
+
+/* ================= BOLSAS Y CARTAS ================= */
+const cnt=(n,a,b)=>n+' '+(n===1?a:b);
+function bolsaHTML(c){let h='<div class="bolsa" role="img" aria-label="Bolsa con '+cnt(c.R,'roja','rojas')+', '+cnt(c.V,'verde','verdes')+(c.N?' y '+cnt(c.N,'negra','negras'):'')+'">';for(const k of['R','V','N'])for(let i=0;i<(c[k]||0);i++)h+='<span class="bol b'+k+'">'+k+'</span>';return h+'</div>';}
+function bolsaTxt(c){return 'En una bolsa hay '+c.R+' bolitas rojas'+(c.N?', '+c.V+' verdes y '+c.N+' negras':' y '+c.V+' verdes')+' ('+(c.R+c.V+c.N)+' en total).';}
+function bAll(){const r=[];for(let R=2;R<=6;R++)for(let V=2;V<=6;V++)for(const N of[0,2,3,4]){const t=R+V+N;if(t>=8&&t<=12)r.push({R,V,N});}return r;}
+const nd=(lab,n,d,kids,ok)=>({lab,n,d,kids:kids||null,ok:ok||0});
+function arbAlMenos(si,no,a,t,k){ const nr=t-a; const f=i=>[nd(si,a,t-i,null,1),nd(no,nr-i,t-i,i<k-1?f(i+1):null,i<k-1?0:2)]; return f(0); }
+const okProb=o=>o.every(x=>x.v>0&&x.v<1)&&o.every((x,i)=>o.findIndex(z=>Math.abs(z.v-x.v)<1e-9)===i);
+const decRepo={q:'Después de sacar la primera bolita, ¿vuelve a la bolsa?',o:[['No: la segunda se saca con una bolita menos.',1,'Sí, eso dice «sin reposición»: cambia el total, y también la cantidad del color que salió.'],['Sí: la bolsa queda igual para la segunda.',0,'El enunciado dice «sin reposición»: la bolita que salió no vuelve. ¿Cuántas quedan para la segunda extracción?']]};
+
+T.P1={bloque:'bol',titulo:'Dos extracciones de una bolsa',
+ all(){const r=[];for(const c of bAll())for(const s of['RR','RV'])r.push(Object.assign({s},c));return r.filter(p=>okProb(T.P1.make(p).opts));},
+ make(p){const {R,V,N,s}=p,t=R+V+N,e=bolsaTxt(p)+' Se sacan dos bolitas, una después de la otra, sin reposición.'+bolsaHTML(p);
+  if(s==='RR'){const ch=prodChain([[R,t],[R-1,t-1]]);
+   return {enun:e,preg:'¿Cuál es la probabilidad de que las dos sean rojas?',pregNum:'Calculá la probabilidad de que las dos sean rojas.',num:{v:qval(ch.q),q:ch.q,tol:0.006,label:'P ='},
+   dec:[decRepo,{q:'En el árbol, ¿cuántos caminos terminan en «dos rojas»?',o:[['Uno solo: roja y después roja.',1,'Sí: hay un único camino, y su probabilidad es un producto.'],['Dos, porque hay dos extracciones.',0,'Dos extracciones forman un camino de dos ramas. Para «dos rojas», ¿cuántos caminos distintos hay?'],['Cuatro.',0,'Contaste más caminos de los que cumplen. ¿Cuántos tienen roja en la primera rama y roja en la segunda?']]}],
+   opts:[OQ(ch.q,null,'Bien: $'+fr(R,t)+' · '+fr(R-1,t-1)+' = '+qtex(ch.q)+'$.'),
+    OQ(Q(R*R,t*t),'P-total','Usaste '+R+' rojas sobre '+t+' en las dos extracciones, como si la primera volviera a la bolsa. ¿Cuántas bolitas quedan, y cuántas rojas, después de sacar una roja?'),
+    OQ(Q(R*(R-1),t*t),'P-total','Descontaste la roja que salió, pero el total sigue en '+t+'. ¿Cuántas bolitas quedan en la bolsa para la segunda extracción?'),
+    OQ(Q(R*R,t*(t-1)),'P-total','Descontaste el total, pero no las rojas. Si la primera fue roja, ¿cuántas rojas quedan?'),
+    OQ(qadd(Q(R,t),Q(R-1,t-1)),'P-suma','Sumaste las dos fracciones. Las dos cosas tienen que pasar una después de la otra: a lo largo de un camino del árbol, ¿se suma o se multiplica?'),
+    OQ(Q(R-1,t-1),'P-orden','Esa es la probabilidad de la segunda roja cuando ya salió una roja. ¿Y la probabilidad de que la primera sea roja?')],
+   pistas:['Armá el árbol de dos etapas y marcá el camino roja, roja.','Primera roja: $'+fr(R,t)+'$. Para la segunda quedan '+(t-1)+' bolitas, y '+(R-1===1?'1 es roja':(R-1)+' son rojas')+'.','Multiplicá las dos ramas del camino: $'+fr(R,t)+' · '+fr(R-1,t-1)+'$, y simplificá.'],
+   control:{q:'¿Por qué el denominador de la segunda fracción es '+(t-1)+'?',o:[['Porque la primera bolita no vuelve y en la bolsa quedan '+(t-1)+'.',1,''],['Porque en la bolsa hay '+(t-1)+' bolitas que no son rojas.',0,'Las que no son rojas son '+(t-R)+'. El denominador es el total de bolitas que quedan en la bolsa: $'+t+' - 1 = '+(t-1)+'$.'],['Porque se descuenta una bolita por cada color.',0,'Se descuenta solo la bolita que salió: una. Quedan $'+t+' - 1 = '+(t-1)+'$.'],['Porque el denominador siempre es uno menos que el numerador de la primera fracción.',0,'El denominador es el total de bolitas que quedan: $'+t+' - 1 = '+(t-1)+'$. No depende del numerador.']]},
+   arbol:[nd('R',R,t,[nd('R',R-1,t-1,null,1),nd('no R',t-R,t-1)]),nd('no R',t-R,t)],
+   reso:[{t:'Nombrar los sucesos',l:[['R_{1}: \\t{«la primera es roja»}   R_{2}: \\t{«la segunda es roja»}','un suceso por extracción']]},
+    {t:'Probabilidad de cada rama',l:[['P(R_{1}) = '+fr(R,t),R+' rojas sobre '+t],['P(R_{2} | R_{1}) = '+fr(R+' - 1',t+' - 1')+' = '+fr(R-1,t-1),'salió una roja: queda una roja menos y una bolita menos']]},
+    {t:'Multiplicar a lo largo del camino',l:[['P(R_{1} ∩ R_{2}) = P(R_{1}) · P(R_{2} | R_{1})','regla del producto'],['= '+ch.tex,'producto de fracciones'+simp(ch.g)],pctL(ch.q,'P')]}]};}
+  const c1=prodChain([[R,t],[V,t-1]]),c2=prodChain([[V,t],[R,t-1]]),q=qadd(c1.q,c2.q);
+  return {enun:e,preg:'¿Cuál es la probabilidad de que salga una roja y una verde, en cualquier orden?',pregNum:'Calculá la probabilidad de que salga una roja y una verde, en cualquier orden.',num:{v:qval(q),q,tol:0.006,label:'P ='},
+  dec:[decRepo,{q:'En el árbol, ¿cuántos caminos dan «una roja y una verde»?',o:[['Dos: roja y verde, o verde y roja.',1,'Sí: los dos órdenes sirven, y sus probabilidades se suman.'],['Uno solo: roja y después verde.',0,'El enunciado dice «en cualquier orden». ¿Qué pasa si sale primero la verde?'],['Cuatro.',0,'Contaste más caminos de los que cumplen. ¿Cuáles tienen exactamente una roja y una verde?']]}],
+  opts:[OQ(q,null,'Bien: los dos caminos valen $'+qtex(c1.q)+'$ cada uno y se suman.'),
+   OQ(c1.q,'P-orden','Calculaste roja y después verde. El enunciado dice «en cualquier orden»: ¿qué otro camino del árbol sirve?'),
+   OQ(Q(2*R*V,t*t),'P-total','Contaste los dos órdenes, pero con '+t+' bolitas en las dos extracciones. ¿Cuántas quedan para la segunda?'),
+   OQ(Q(R*V,t*t),'P-total','Usaste '+t+' bolitas en las dos extracciones y un solo orden. ¿Cuántas bolitas quedan para la segunda? ¿Y si sale primero la verde?'),
+   OQ(qadd(Q(R,t),Q(V,t-1)),'P-suma','Sumaste las dos ramas de un mismo camino. A lo largo de un camino se multiplica; se suman los caminos distintos.'),
+   OQ(qadd(Q(R*(R-1),t*(t-1)),Q(V*(V-1),t*(t-1))),'P-orden','Ese valor corresponde a los caminos roja, roja y verde, verde: dos del mismo color. ¿Qué caminos dan una de cada color?')],
+  pistas:['Armá el árbol y marcá todos los caminos que tienen una roja y una verde.','Sirven dos caminos: roja y verde, o verde y roja. Cada uno es un producto de dos ramas.','$'+fr(R,t)+' · '+fr(V,t-1)+' + '+fr(V,t)+' · '+fr(R,t-1)+'$. Calculá cada producto y sumá.'],
+  control:{q:'¿Por qué se suman dos productos?',o:[['Porque hay dos caminos distintos que cumplen lo pedido, y no pueden ocurrir a la vez.',1,''],['Porque hay dos extracciones.',0,'Las dos extracciones forman un solo camino, y ahí se multiplica. Se suma porque hay dos caminos que sirven: roja y verde, y verde y roja.'],['Porque hay dos colores en la bolsa.',0,'La cantidad de colores no decide eso. Se suma porque el pedido se cumple por dos caminos distintos.'],['Porque sin reposición las probabilidades siempre se suman.',0,'Sin reposición cambia cada rama, pero a lo largo de un camino se sigue multiplicando. Se suman los caminos distintos.']]},
+  arbol:[nd('R',R,t,[nd('V',V,t-1,null,1),nd('otra',t-1-V,t-1)]),nd('V',V,t,[nd('R',R,t-1,null,1),nd('otra',t-1-R,t-1)])].concat(N?[nd('N',N,t)]:[]),
+  reso:[{t:'Caminos que sirven',l:[['R_{1} ∩ V_{2}   \\t{o}   V_{1} ∩ R_{2}','roja y verde, o verde y roja']]},
+   {t:'Primer camino',l:[['P(R_{1} ∩ V_{2}) = P(R_{1}) · P(V_{2} | R_{1})','regla del producto'],['= '+c1.tex,'quedan '+(t-1)+' bolitas y las '+V+' verdes'+simp(c1.g)]]},
+   {t:'Segundo camino',l:[['P(V_{1} ∩ R_{2}) = P(V_{1}) · P(R_{2} | V_{1})','regla del producto'],['= '+c2.tex,'quedan '+(t-1)+' bolitas y las '+R+' rojas'+simp(c2.g)]]},
+   {t:'Sumar los caminos',l:[['P = '+qtex(c1.q)+' + '+qtex(c2.q)+' = '+fr(c1.q.n+' + '+c2.q.n,c1.q.d)+' = '+fr(2*c1.q.n,c1.q.d)+(q.d!==c1.q.d?' = '+qtex(q):''),'caminos excluyentes: se suman'],pctL(q,'P')]}]};}};
+
+T.P2={bloque:'bol',titulo:'Al menos una',
+ all(){const r=[];for(const c of bAll())for(const k of[2,3])r.push(Object.assign({k},c));return r.filter(p=>okProb(T.P2.make(p).opts));},
+ make(p){const {R,V,N,k}=p,t=R+V+N,nr=t-R,fs=[];for(let i=0;i<k;i++)fs.push([nr-i,t-i]);const ch=prodChain(fs),q=qsub(UNO,ch.q),pal=k===2?'dos':'tres';
+  let una=Q(R,t);for(let i=0;i<k-1;i++)una=qmul(una,Q(nr-i,t-1-i)); let todas=UNO;for(let i=0;i<k;i++)todas=qmul(todas,Q(R-i,t-i));
+  return {enun:bolsaTxt(p)+' Se sacan '+pal+' bolitas, una después de la otra, sin reposición.'+bolsaHTML(p),preg:'¿Cuál es la probabilidad de que salga al menos una roja?',pregNum:'Calculá la probabilidad de que salga al menos una roja.',num:{v:qval(q),q,tol:0.006,label:'P ='},
+  dec:[decRepo,{q:'«Al menos una roja» se cumple por varios caminos. ¿Qué conviene calcular primero?',o:[['La probabilidad de que no salga ninguna roja.',1,'Sí: es el único caso que no sirve, un solo camino. Lo pedido es 1 menos ese valor.'],['La probabilidad de que salga exactamente una roja.',0,'Eso deja afuera los caminos con más de una roja, que también cumplen «al menos una».'],['La probabilidad de que todas sean rojas.',0,'Ese es solo uno de los caminos que sirven. ¿Cuál es el único caso que no cumple «al menos una roja»?']]}],
+  opts:[OQ(q,null,'Bien: ninguna roja vale $'+qtex(ch.q)+'$, y $1 - '+qtex(ch.q)+' = '+qtex(q)+'$.'),
+   OQ(ch.q,'P-suma','Esa es la probabilidad de que no salga ninguna roja. ¿Qué relación tiene con «al menos una»?'),
+   OQ(qsub(UNO,qpow(Q(nr,t),k)),'P-total','Usaste '+nr+' sobre '+t+' en todas las extracciones, como si las bolitas volvieran a la bolsa. ¿Cómo cambian las cantidades sin reposición?'),
+   OQ(Q(k*R,t),'P-suma','Sumaste $'+fr(R,t)+'$ una vez por cada extracción. Así se cuentan dos veces los casos con más de una roja. Probá con el complemento.'),
+   OQ(una,'P-orden','Calculaste un solo camino: roja primero y ninguna roja después. ¿Qué otros caminos tienen al menos una roja?'),
+   OQ(todas,'P-orden','Calculaste que todas sean rojas. «Al menos una» incluye también los caminos con una sola roja.')],
+  pistas:['Lo contrario de «al menos una roja» es «ninguna roja».','Ninguna roja: en cada extracción sale una de las '+nr+' que no son rojas, y cada vez queda una menos.','$P(\\o{ninguna}) = '+fs.map(f=>fr(f[0],f[1])).join(' · ')+'$. Calculalo y restalo de 1.'],
+  control:{q:'¿Por qué conviene calcular «ninguna roja»?',o:[['Porque es el único caso que no sirve y es un solo camino: lo pedido es 1 menos ese valor.',1,''],['Porque «ninguna roja» y «al menos una roja» tienen la misma probabilidad.',0,'No valen lo mismo: son sucesos contrarios, y sus probabilidades suman 1.'],['Porque así no hace falta descontar bolitas.',0,'Hay que descontar igual: en «ninguna roja» cada extracción deja una bolita menos.'],['Porque «al menos una» significa «exactamente una».',0,'«Al menos una» es una o más. Por eso son varios caminos, y conviene el complemento.']]},
+  arbol:arbAlMenos('R','no R',R,t,k),arbolNota:'En rojo, el único camino que no cumple: ninguna roja. Todos los demás tienen al menos una.',
+  reso:[{t:'Suceso contrario',l:[['P(\\o{al menos una roja}) = 1 - P(\\o{ninguna roja})','complemento: $P(A) = 1 - P(A^{c})$']]},
+   {t:'Ninguna roja',l:[['P(\\o{ninguna roja}) = '+ch.tex,'hay '+nr+' que no son rojas; cada vez queda una menos'+simp(ch.g)]]},
+   {t:'Restar de 1',l:[['P = '+compChain(ch.q)+(Q(ch.q.d-ch.q.n,ch.q.d).d!==ch.q.d?' = '+qtex(q):''),'$1 = '+fr(ch.q.d,ch.q.d)+'$'],pctL(q,'P')]}]};}};
+
+const PALOS=['oro','copa','espada','basto'];
+const MAZO={40:{pp:10,txt:'una baraja española de 40 cartas: 10 de cada palo (oro, copa, espada y basto), y en cada palo hay 3 figuras (sota, caballo y rey)'},48:{pp:12,txt:'una baraja española de 48 cartas: 12 de cada palo (oro, copa, espada y basto), numeradas del 1 al 12; las figuras son el 10, el 11 y el 12 de cada palo'}};
+T.P3={bloque:'bol',titulo:'Cartas de la baraja',
+ all(){const r=[];for(const Tt of[40,48])for(const s of['dosPalo','paloPalo','dosFig','alMenosFig'])for(let a=0;a<4;a++)for(let b=0;b<4;b++){ if(s==='paloPalo'?a!==b:(s==='dosPalo'?b===0:(a===0&&b===0))) r.push({T:Tt,s,a,b}); } return r.filter(p=>okProb(T.P3.make(p).opts));},
+ make(p){const t=p.T,pp=MAZO[t].pp,X=PALOS[p.a],Y=PALOS[p.b],s=p.s,e='Se usa '+MAZO[t].txt+'. Se sacan dos cartas, una después de la otra, sin reposición.';
+  const dMazo={q:'Después de sacar la primera carta, ¿cuántas quedan en el mazo?',o:[[(t-1)+' cartas.',1,'Sí: la carta que salió no vuelve.'],[t+' cartas.',0,'El enunciado dice «sin reposición»: la primera carta no vuelve al mazo.'],[(t-pp)+' cartas.',0,'Sale una sola carta, no todo un palo. Quedan $'+t+' - 1$.']]};
+  let preg,ch,q,opts,d2,pistas,control,reso,qT,arbol,arbolNota;
+  if(s==='dosPalo'){ch=prodChain([[pp,t],[pp-1,t-1]]);q=ch.q;arbol=[nd(X,pp,t,[nd(X,pp-1,t-1,null,1),nd('otra',t-pp,t-1)]),nd('otra',t-pp,t)];preg='de que las dos sean de '+X;
+   d2={q:'Si la primera fue de '+X+', ¿cuántas cartas de '+X+' quedan?',o:[[(pp-1)+'.',1,'Sí: había '+pp+' y salió una.'],[pp+'.',0,'Una de las '+pp+' de '+X+' ya salió.'],[(pp-2)+'.',0,'Salió una sola carta de '+X+', no dos.']]};
+   opts=[OQ(q,null,'Bien: $'+fr(pp,t)+' · '+fr(pp-1,t-1)+' = '+qtex(q)+'$.'),OQ(Q(pp*pp,t*t),'P-total','Usaste '+pp+' sobre '+t+' las dos veces, como si la primera carta volviera. ¿Qué cambia después de sacarla?'),OQ(Q(pp*(pp-1),t*t),'P-total','Descontaste la carta de '+X+', pero el mazo sigue en '+t+'. ¿Cuántas cartas quedan?'),OQ(Q(pp*pp,t*(t-1)),'P-total','Descontaste el mazo, pero no las de '+X+'. Si la primera fue de '+X+', ¿cuántas quedan de ese palo?'),OQ(qadd(Q(pp,t),Q(pp-1,t-1)),'P-suma','Sumaste las dos ramas del mismo camino. Las dos cosas tienen que ocurrir: ¿se suma o se multiplica?'),OQ(Q(2*pp,t),'P-suma','Sumaste $'+fr(pp,t)+'$ dos veces. A lo largo de un camino se multiplica, y la segunda fracción cambia.')];
+   pistas=['Es un solo camino del árbol: '+X+' y después '+X+'.','Primera de '+X+': $'+fr(pp,t)+'$. Después quedan '+(t-1)+' cartas y '+(pp-1)+' de '+X+'.','Multiplicá $'+fr(pp,t)+' · '+fr(pp-1,t-1)+'$ y simplificá.'];
+   control={q:'¿Por qué la segunda fracción es $'+fr(pp-1,t-1)+'$?',o:[['Porque salió una carta de '+X+': queda una menos de ese palo y una menos en el mazo.',1,''],['Porque en la segunda extracción siempre se resta 1 arriba y abajo.',0,'Abajo siempre se resta 1 (sin reposición). Arriba se resta solo si la carta que salió era del tipo que estás contando.'],['Porque quedan '+(pp-1)+' palos posibles.',0,'El numerador cuenta cartas de '+X+', no palos: quedan '+(pp-1)+' cartas de '+X+'.'],['Porque se descuenta una carta de cada palo.',0,'Sale una sola carta, y era de '+X+'. Los otros palos siguen completos.']]};
+   reso=[{t:'Nombrar los sucesos',l:[['X_{1}: \\t{«la primera es de '+X+'»}   X_{2}: \\t{«la segunda es de '+X+'»}','un suceso por extracción']]},{t:'Probabilidad de cada rama',l:[['P(X_{1}) = '+fr(pp,t),pp+' de '+X+' sobre '+t],['P(X_{2} | X_{1}) = '+fr(pp+' - 1',t+' - 1')+' = '+fr(pp-1,t-1),'una de '+X+' menos, una carta menos']]},{t:'Multiplicar',l:[['P(X_{1} ∩ X_{2}) = '+ch.tex,'regla del producto'+simp(ch.g)],pctL(q,'P')]}];}
+  else if(s==='paloPalo'){ch=prodChain([[pp,t],[pp,t-1]]);q=ch.q;arbol=[nd(X,pp,t,[nd(Y,pp,t-1,null,1),nd('otra',t-1-pp,t-1)]),nd('otra',t-pp,t)];preg='de que la primera sea de '+X+' y la segunda de '+Y;
+   d2={q:'Si la primera fue de '+X+', ¿cuántas cartas de '+Y+' quedan?',o:[[pp+'.',1,'Sí: no salió ninguna de '+Y+'. Lo que cambió es el total del mazo.'],[(pp-1)+'.',0,'La carta que salió era de '+X+'. ¿Cambió la cantidad de cartas de '+Y+'?'],[(t-1)+'.',0,'Ese es el total de cartas que quedan. ¿Cuántas de ellas son de '+Y+'?']]};
+   opts=[OQ(q,null,'Bien: $'+fr(pp,t)+' · '+fr(pp,t-1)+' = '+qtex(q)+'$.'),OQ(Q(pp*pp,t*t),'P-total','Usaste '+t+' cartas las dos veces. ¿Cuántas quedan en el mazo después de la primera?'),OQ(qmul(Q(2),q),'P-orden','Contaste los dos órdenes. El enunciado fija el orden: primero '+X+', después '+Y+'. ¿Cuántos caminos son?'),OQ(Q(pp*(pp-1),t*(t-1)),'P-total','Descontaste una carta de '+Y+', pero la que salió era de '+X+'. ¿Cuántas de '+Y+' quedan?'),OQ(qadd(Q(pp,t),Q(pp,t-1)),'P-suma','Sumaste las dos ramas del mismo camino. Las dos cosas tienen que ocurrir: ¿se suma o se multiplica?'),OQ(Q(2*pp,t),'P-suma','Sumaste $'+fr(pp,t)+'$ dos veces. A lo largo de un camino se multiplica, y cambia el total del mazo.')];
+   pistas=['Es un solo camino del árbol, con el orden fijado: '+X+' y después '+Y+'.','Primera de '+X+': $'+fr(pp,t)+'$. Después quedan '+(t-1)+' cartas, y las '+pp+' de '+Y+' siguen todas.','Multiplicá $'+fr(pp,t)+' · '+fr(pp,t-1)+'$ y simplificá.'];
+   control={q:'¿Por qué el numerador de la segunda fracción sigue siendo '+pp+'?',o:[['Porque la carta que salió era de '+X+': las '+pp+' de '+Y+' siguen todas en el mazo.',1,''],['Porque el numerador nunca cambia sin reposición.',0,'Cambia cuando la carta que salió es del tipo que estás contando. Acá salió una de '+X+' y contás las de '+Y+'.'],['Porque la primera carta vuelve al mazo.',0,'No vuelve: por eso el denominador pasó a '+(t-1)+'. El numerador queda en '+pp+' porque no salió ninguna de '+Y+'.'],['Porque todos los palos tienen siempre la misma cantidad.',0,'Después de la primera extracción, el palo de '+X+' tiene una carta menos. El de '+Y+' sigue con '+pp+' porque no salió ninguna.']]};
+   reso=[{t:'Nombrar los sucesos',l:[['X_{1}: \\t{«la primera es de '+X+'»}   Y_{2}: \\t{«la segunda es de '+Y+'»}','un suceso por extracción']]},{t:'Probabilidad de cada rama',l:[['P(X_{1}) = '+fr(pp,t),pp+' de '+X+' sobre '+t],['P(Y_{2} | X_{1}) = '+fr(pp,t+' - 1')+' = '+fr(pp,t-1),'las '+pp+' de '+Y+' siguen; hay una carta menos']]},{t:'Multiplicar',l:[['P(X_{1} ∩ Y_{2}) = '+ch.tex,'regla del producto'+simp(ch.g)],pctL(q,'P')]}];}
+  else if(s==='dosFig'){ch=prodChain([[12,t],[11,t-1]]);q=ch.q;arbol=[nd('figura',12,t,[nd('figura',11,t-1,null,1),nd('no fig.',t-12,t-1)]),nd('no fig.',t-12,t)];preg='de que las dos sean figuras';
+   d2={q:'¿Cuántas figuras hay en el mazo, y cuántas quedan si la primera fue figura?',o:[['Hay 12 y quedan 11.',1,'Sí: 3 figuras por palo son 12, y salió una.'],['Hay 3 y quedan 2.',0,'Son 3 figuras en cada palo, y hay 4 palos.'],['Hay 12 y quedan 12.',0,'Una de las 12 figuras ya salió.']]};
+   opts=[OQ(q,null,'Bien: $'+fr(12,t)+' · '+fr(11,t-1)+' = '+qtex(q)+'$.'),OQ(Q(144,t*t),'P-total','Usaste 12 sobre '+t+' las dos veces, como si la primera carta volviera. ¿Qué cambia después de sacarla?'),OQ(Q(132,t*t),'P-total','Descontaste la figura, pero el mazo sigue en '+t+'. ¿Cuántas cartas quedan?'),OQ(Q(144,t*(t-1)),'P-total','Descontaste el mazo, pero no las figuras. Si la primera fue figura, ¿cuántas figuras quedan?'),OQ(qadd(Q(12,t),Q(11,t-1)),'P-suma','Sumaste las dos ramas del mismo camino. Las dos cosas tienen que ocurrir: ¿se suma o se multiplica?'),OQ(qmul(Q(2),q),'P-orden','Multiplicaste por 2, como si hubiera dos órdenes. «Figura y figura» es un solo camino.')];
+   pistas=['Contá primero las figuras: 3 por palo, 4 palos.','Primera figura: $'+fr(12,t)+'$. Después quedan '+(t-1)+' cartas y 11 figuras.','Multiplicá $'+fr(12,t)+' · '+fr(11,t-1)+'$ y simplificá.'];
+   control={q:'¿Por qué la segunda fracción es $'+fr(11,t-1)+'$?',o:[['Porque salió una figura: queda una figura menos y una carta menos en el mazo.',1,''],['Porque en cada palo quedan 11 cartas.',0,'El 11 cuenta figuras: había 12 en todo el mazo y salió una.'],['Porque hay 11 números distintos sin contar el que salió.',0,'El numerador cuenta figuras que quedan, no números: $12 - 1 = 11$.'],['Porque se descuenta una figura de cada palo.',0,'Salió una sola figura. Quedan $12 - 1 = 11$.']]};
+   reso=[{t:'Nombrar los sucesos',l:[['F_{1}: \\t{«la primera es figura»}   F_{2}: \\t{«la segunda es figura»}','un suceso por extracción']]},{t:'Contar las figuras',l:[['3 · 4 = 12','3 figuras por palo, 4 palos']]},{t:'Probabilidad de cada rama',l:[['P(F_{1}) = '+fr(12,t),'12 figuras sobre '+t],['P(F_{2} | F_{1}) = '+fr('12 - 1',t+' - 1')+' = '+fr(11,t-1),'una figura menos, una carta menos']]},{t:'Multiplicar',l:[['P(F_{1} ∩ F_{2}) = '+ch.tex,'regla del producto'+simp(ch.g)],pctL(q,'P')]}];}
+  else {const nf=t-12;ch=prodChain([[nf,t],[nf-1,t-1]]);q=qsub(UNO,ch.q);arbol=arbAlMenos('figura','no fig.',12,t,2);arbolNota='En rojo, el único camino que no cumple: ninguna figura. Todos los demás tienen al menos una.';preg='de que al menos una sea figura';
+   d2={q:'«Al menos una figura» se cumple por varios caminos. ¿Qué conviene calcular primero?',o:[['Que ninguna sea figura.',1,'Sí: es el único caso que no sirve. Lo pedido es 1 menos ese valor.'],['Que exactamente una sea figura.',0,'Eso deja afuera el camino con dos figuras, que también cumple.'],['Que las dos sean figuras.',0,'Ese es solo uno de los caminos que sirven.']]};
+   opts=[OQ(q,null,'Bien: ninguna figura vale $'+qtex(ch.q)+'$, y $1 - '+qtex(ch.q)+' = '+qtex(q)+'$.'),OQ(ch.q,'P-suma','Esa es la probabilidad de que ninguna sea figura. ¿Qué relación tiene con «al menos una»?'),OQ(qsub(UNO,Q(nf*nf,t*t)),'P-total','Usaste '+nf+' sobre '+t+' las dos veces, como si la primera carta volviera. ¿Cómo cambian las cantidades?'),OQ(Q(24,t),'P-suma','Sumaste $'+fr(12,t)+'$ dos veces. Así el caso de dos figuras se cuenta doble. Probá con el complemento.'),OQ(Q(12*nf,t*(t-1)),'P-orden','Calculaste un solo camino: figura y después no figura. ¿Qué otros caminos tienen al menos una figura?'),OQ(Q(132,t*(t-1)),'P-orden','Calculaste que las dos sean figuras. «Al menos una» incluye también los caminos con una sola.')];
+   pistas=['Lo contrario de «al menos una figura» es «ninguna figura».','Hay 12 figuras, así que '+nf+' cartas no lo son. Ninguna figura: $'+fr(nf,t)+' · '+fr(nf-1,t-1)+'$.','Calculá ese producto, simplificalo y restalo de 1.'];
+   control={q:'¿Por qué se resta de 1?',o:[['Porque «ninguna figura» es lo contrario de «al menos una», y las dos probabilidades suman 1.',1,''],['Porque la probabilidad nunca puede pasar de 1.',0,'Es cierto que no pasa de 1, pero esa no es la razón: se resta porque se calculó el suceso contrario.'],['Porque se saca una carta del mazo.',0,'El 1 no es una carta: es la probabilidad total. Se resta porque se calculó el suceso contrario.'],['Porque «al menos una» significa «exactamente una».',0,'«Al menos una» es una o dos. Por eso conviene calcular el caso contrario, que es uno solo.']]};
+   reso=[{t:'Suceso contrario',l:[['P(\\o{al menos una figura}) = 1 - P(\\o{ninguna figura})','complemento'],[t+' - 12 = '+nf,'cartas que no son figura']]},{t:'Ninguna figura',l:[['P(\\o{ninguna figura}) = '+ch.tex,'cada vez queda una carta menos'+simp(ch.g)]]},{t:'Restar de 1',l:[['P = '+compChain(ch.q),'$1 = '+fr(ch.q.d,ch.q.d)+'$'],pctL(q,'P')]}];}
+  return {enun:e,preg:'¿Cuál es la probabilidad '+preg+'?',pregNum:'Calculá la probabilidad '+preg+'.',num:{v:qval(q),q,tol:0.006,label:'P ='},dec:[dMazo,d2],opts,pistas,control,reso,arbol,arbolNota};}};
+
+T.P3t={bloque:'bol',titulo:'Tres cartas',soloPractica:true,
+ all(){const r=[];for(const Tt of[40,48])for(let a=0;a<4;a++)for(let b=0;b<4;b++)for(let c=0;c<4;c++) if(a!==b&&b!==c&&a!==c) r.push({T:Tt,a,b,c}); return r;},
+ make(p){const t=p.T,pp=MAZO[t].pp,X=PALOS[p.a],Y=PALOS[p.b],Z=PALOS[p.c],ch=prodChain([[pp,t],[pp,t-1],[pp,t-2]]),q=ch.q;
+  return {enun:'Se usa '+MAZO[t].txt+'. Se sacan tres cartas, una después de la otra, sin reposición.',preg:'¿Cuál es la probabilidad de que salgan '+X+', '+Y+' y '+Z+', en ese orden?',pregNum:'Calculá la probabilidad de que salgan '+X+', '+Y+' y '+Z+', en ese orden.',num:{v:qval(q),q,tol:0.0006,label:'P ='},
+  opts:[OQ(q,null,'Bien: $'+fr(pp,t)+' · '+fr(pp,t-1)+' · '+fr(pp,t-2)+' = '+qtex(q)+'$.'),OQ(Q(pp**3,t*t*(t-2)),'P-total','En la segunda extracción el mazo sigue en '+t+'. ¿Cuántas cartas quedan después de sacar la primera?'),OQ(Q(pp**3,t**3),'P-total','Usaste '+t+' cartas las tres veces, como si volvieran al mazo. ¿Cuántas quedan cada vez?'),OQ(Q(pp*(pp-1)*(pp-2),t*(t-1)*(t-2)),'P-total','Descontaste cartas de cada palo, pero los tres palos son distintos: de '+Y+' y de '+Z+' no salió ninguna.'),OQ(qmul(Q(6),q),'P-orden','Contaste todos los órdenes posibles. El enunciado fija el orden: es un solo camino.'),OQ(Q(pp**3,t*(t-1)*(t-1)),'P-total','En la tercera extracción quedan '+(t-2)+' cartas, no '+(t-1)+'.')],
+  arbol:[nd(X,pp,t,[nd(Y,pp,t-1,[nd(Z,pp,t-2,null,1),nd('otra',t-2-pp,t-2)]),nd('otra',t-1-pp,t-1)]),nd('otra',t-pp,t)],
+  pistas:['Es un solo camino de tres ramas: '+X+', '+Y+', '+Z+'.','En cada extracción el palo pedido tiene sus '+pp+' cartas completas; lo que baja es el total: '+t+', '+(t-1)+', '+(t-2)+'.','Multiplicá $'+fr(pp,t)+' · '+fr(pp,t-1)+' · '+fr(pp,t-2)+'$ y simplificá.'],
+  reso:[{t:'Nombrar los sucesos',l:[['X_{1}: \\t{«la primera es de '+X+'»}   Y_{2}: \\t{«la segunda es de '+Y+'»}   Z_{3}: \\t{«la tercera es de '+Z+'»}','un suceso por extracción']]},{t:'Probabilidad de cada rama',l:[['P(X_{1}) = '+fr(pp,t),pp+' de '+X+' sobre '+t],['P(Y_{2} | X_{1}) = '+fr(pp,t-1),'las '+pp+' de '+Y+' siguen; quedan '+(t-1)+' cartas'],['P(Z_{3} | X_{1} ∩ Y_{2}) = '+fr(pp,t-2),'las '+pp+' de '+Z+' siguen; quedan '+(t-2)+' cartas']]},{t:'Multiplicar',l:[['P = '+ch.tex,'regla del producto'+simp(ch.g)],pctL(q,'P')]}]};}};
+
+T.P4={bloque:'bol',titulo:'Una moneda elige la bolsa',soloPractica:true,
+ all(){const r=[];for(let R1=1;R1<=6;R1++)for(let V1=1;V1<=6;V1++)for(let R2=1;R2<=6;R2++)for(let V2=1;V2<=6;V2++){ if([4,5,6,8].includes(R1+V1)&&[4,5,6,8].includes(R2+V2)&&!(R1===R2&&V1===V2)) r.push({R1,V1,R2,V2}); } return r.filter(p=>okProb(T.P4.make(p).opts));},
+ make(p){const {R1,V1,R2,V2}=p,t1=R1+V1,t2=R2+V2,c1=prodChain([[1,2],[R1,t1]]),c2=prodChain([[1,2],[R2,t2]]),q=qadd(c1.q,c2.q),L=t1*t2/gcd(t1,t2)*2;
+  return {enun:'Hay dos bolsas. La bolsa I tiene '+cnt(R1,'bolita roja','bolitas rojas')+' y '+cnt(V1,'verde','verdes')+'. La bolsa II tiene '+cnt(R2,'roja','rojas')+' y '+cnt(V2,'verde','verdes')+'. Se tira una moneda equilibrada: si sale cara se saca una bolita de la bolsa I, y si sale ceca, de la bolsa II.<div class="dosb"><div><span class="rot">Bolsa I</span>'+bolsaHTML({R:R1,V:V1,N:0})+'</div><div><span class="rot">Bolsa II</span>'+bolsaHTML({R:R2,V:V2,N:0})+'</div></div>',preg:'¿Cuál es la probabilidad de que la bolita sea roja?',pregNum:'Calculá la probabilidad de que la bolita sea roja.',num:{v:qval(q),q,tol:0.006,label:'P ='},
+  opts:[OQ(q,null,'Bien: $'+qtex(c1.q)+' + '+qtex(c2.q)+' = '+qtex(q)+'$.'),OQ(Q(R1+R2,t1+t2),'P-orden','Juntaste las dos bolsas en una. La moneda elige una bolsa primero: son dos caminos, cada uno con su fracción.'),OQ(qadd(Q(R1,t1),Q(R2,t2)),'P-orden','Sumaste las dos ramas de «roja», pero falta la rama de la moneda en cada camino. ¿Cuál es la probabilidad de llegar a cada bolsa?'),OQ(Q(R1*R2,t1*t2),'P-suma','Multiplicaste las dos fracciones de «roja». Se saca de una sola bolsa: son dos caminos distintos, y los caminos se suman.'),OQ(c1.q,'P-orden','Calculaste solo el camino de la bolsa I. ¿Y si sale ceca?'),OQ(Q(1,2),'P-orden','Esa es la probabilidad de cada cara de la moneda. Falta la rama del color en cada camino.')],
+  arbol:[nd('cara',1,2,[nd('R',R1,t1,null,1),nd('V',V1,t1)]),nd('ceca',1,2,[nd('R',R2,t2,null,1),nd('V',V2,t2)])],
+  pistas:['Armá el árbol: primero la moneda, después el color.','Hay dos caminos que terminan en roja: cara y roja, ceca y roja.','$'+fr(1,2)+' · '+fr(R1,t1)+' + '+fr(1,2)+' · '+fr(R2,t2)+'$. Calculá cada producto y sumá.'],
+  reso:[{t:'Camino de la bolsa I',l:[['P(\\o{cara} ∩ R) = '+c1.tex,'regla del producto'+simp(c1.g)]]},{t:'Camino de la bolsa II',l:[['P(\\o{ceca} ∩ R) = '+c2.tex,'regla del producto'+simp(c2.g)]]},
+   {t:'Sumar los caminos',l:[['P(R) = '+qtex(c1.q)+' + '+qtex(c2.q)+' = '+fr(c1.q.n*L/c1.q.d,L)+' + '+fr(c2.q.n*L/c2.q.d,L)+' = '+fr((c1.q.n*L/c1.q.d)+' + '+(c2.q.n*L/c2.q.d),L)+' = '+fr(c1.q.n*L/c1.q.d+c2.q.n*L/c2.q.d,L)+(L!==q.d?' = '+qtex(q):''),'denominador común '+L],pctL(q,'P(R)')]}]};}};
+
+/* ================= SUCESOS ================= */
+const d2=x=>dec(x,2);
+const OD=(x,err,fb)=>O(d2(x),Math.round(x*1e6)/1e6,err,fb);
+const UCTX=[['En una escuela técnica se elige un alumno al azar.','curse el taller de robótica','curse el taller de impresión 3D','curse al menos uno de los dos talleres','cursa robótica','cursa impresión 3D'],['En un club se elige un socio al azar.','juegue al fútbol','juegue al básquet','practique al menos uno de los dos deportes','juega al fútbol','juega al básquet'],['En una fábrica se elige una pieza al azar.','tenga una falla de pintura','tenga una falla de medida','tenga al menos una de las dos fallas','tiene falla de pintura','tiene falla de medida']];
+T.P5={bloque:'suc',titulo:'Unión de dos sucesos',
+ all(){const r=[];for(let a=2;a<=16;a++)for(let b=2;b<a;b++)for(let i=1;i<=9;i++){ if(i<b&&a+b-i<20&&i*20!==a*b&&(a*b)%4===0) r.push({a,b,i,c:0}); } return r.filter(p=>okProb(T.P5.make(p).opts));},
+ make(p){const a=p.a/20,b=p.b/20,i=p.i/20,u=a+b-i,cx=UCTX[p.c%UCTX.length];
+  return {enun:cx[0]+' La probabilidad de que '+cx[1]+' es '+d2(a)+'; la de que '+cx[2]+' es '+d2(b)+'; y la de que cumpla las dos cosas es '+d2(i)+'.',preg:'¿Cuál es la probabilidad de que '+cx[3]+'?',pregNum:'Calculá la probabilidad de que '+cx[3]+'.',num:{v:u,tol:0.0051,label:'P ='},
+  opts:[OD(u,null,'Bien: $'+d2(a)+' + '+d2(b)+' - '+d2(i)+' = '+d2(u)+'$.'),
+   OD(a+b,'P-inter','Sumaste las dos probabilidades. Los que cumplen las dos cosas quedaron contados dos veces: ¿qué dato del enunciado no usaste?'),
+   OD(a*b,'P-exclu','Multiplicaste las dos probabilidades. Eso daría la intersección si fueran independientes, y acá la intersección es un dato. ¿Qué fórmula da la unión?'),
+   OD(a+b-a*b,'P-exclu','Restaste $'+d2(a)+' · '+d2(b)+'$ como si fuera la intersección. El enunciado ya te da la intersección: '+d2(i)+'.'),
+   OD(1-u,'P-inter','Ese valor es la probabilidad de que no cumpla ninguna de las dos. ¿Qué pide el enunciado?'),
+   OD(a+b-2*i,'P-inter','Restaste la intersección dos veces: ese valor es «exactamente una de las dos». En «al menos una» también entran los que cumplen las dos.')],
+  pistas:['«Al menos una de las dos» es la unión: $A ∪ B$.','Si sumás $P(A) + P(B)$, los que cumplen las dos cosas se cuentan dos veces.','$P(A ∪ B) = P(A) + P(B) - P(A ∩ B) = '+d2(a)+' + '+d2(b)+' - '+d2(i)+'$.'],
+  control:{q:'¿Por qué se resta '+d2(i)+'?',o:[['Porque los que cumplen las dos cosas están contados dentro de '+d2(a)+' y también dentro de '+d2(b)+'.',1,''],['Porque los dos sucesos son excluyentes.',0,'Si fueran excluyentes no habría nada que restar: la intersección sería 0. Acá vale '+d2(i)+'.'],['Porque la intersección no forma parte de la unión.',0,'Sí forma parte: los que cumplen las dos cosas cumplen «al menos una». Se resta una vez porque se contó dos veces.'],['Porque la probabilidad no puede pasar de 1.',0,'La resta no es para acomodar el resultado: corrige que la intersección se sumó dos veces.']]},
+  reso:[{t:'Nombrar los sucesos',l:[['A: \\t{«'+cx[4]+'»}   B: \\t{«'+cx[5]+'»}','un suceso por condición'],['P(A) = '+d2(a)+'   P(B) = '+d2(b)+'   P(A ∩ B) = '+d2(i),'datos del enunciado']]},{t:'Regla de la unión',l:[['P(A ∪ B) = P(A) + P(B) - P(A ∩ B)','la intersección se cuenta una sola vez'],['= '+d2(a)+' + '+d2(b)+' - '+d2(i)+' = '+d2(a+b)+' - '+d2(i)+' = '+d2(u),'reemplazamos'],['P(A ∪ B) = '+dec(100*u,0)+' %','en porcentaje']]}]};}};
+
+const ICTX=[['Una alarma tiene dos sensores que funcionan de manera independiente. Ante un intruso, la','el sensor A lo detecte','el sensor B lo detecte','los dos sensores lo detecten','al menos un sensor lo detecte','el sensor A lo detecta','el sensor B lo detecta'],['Dos máquinas trabajan de manera independiente. En un turno, la','la máquina A falle','la máquina B falle','fallen las dos máquinas','falle al menos una máquina','la máquina A falla','la máquina B falla'],['Dos arqueros tiran una flecha cada uno, de manera independiente. La','el primero dé en el blanco','el segundo dé en el blanco','los dos den en el blanco','al menos uno dé en el blanco','el primero da en el blanco','el segundo da en el blanco']];
+T.P6={bloque:'suc',titulo:'Sucesos independientes',
+ all(){const r=[];for(let a=2;a<=8;a++)for(let b=2;b<=8;b++)for(const s of['ambos','alMenos']) if(a!==b) r.push({a,b,s,c:0}); return r.filter(p=>{const o=T.P6.make(p).opts; return o.every(x=>x.v>=0&&x.v<1)&&o.every((x,i)=>o.findIndex(z=>Math.abs(z.v-x.v)<1e-9)===i);});},
+ make(p){const a=p.a/10,b=p.b/10,cx=ICTX[p.c%ICTX.length],ab=a*b,na=1-a,nb=1-b,e=cx[0]+' probabilidad de que '+cx[1]+' es '+d2(a)+' y la de que '+cx[2]+' es '+d2(b)+'.';
+  const ctl={q:'¿Por qué acá se multiplica?',o:[['Porque son independientes: que ocurra uno no cambia la probabilidad del otro, y entonces $P(A ∩ B) = P(A) · P(B)$.',1,''],['Porque son excluyentes.',0,'Excluyentes significa que no pueden ocurrir juntos: la probabilidad de que ocurran los dos sería 0. Acá son independientes.'],['Porque siempre que hay dos sucesos se multiplica.',0,'Se multiplica directo solo cuando son independientes. Si no, hace falta la condicional: $P(A) · P(B | A)$.'],['Porque si se sumaran daría más de 1.',0,'La razón no es el tamaño del resultado: «los dos a la vez» es una intersección, y para independientes es el producto.']]};
+  if(p.s==='ambos') return {enun:e,preg:'¿Cuál es la probabilidad de que '+cx[3]+'?',pregNum:'Calculá la probabilidad de que '+cx[3]+'.',num:{v:ab,tol:0.0051,label:'P ='},
+   opts:[OD(ab,null,'Bien: $'+d2(a)+' · '+d2(b)+' = '+d2(ab)+'$.'),OD(a+b,'P-exclu','Sumaste, como si los sucesos fueran excluyentes. «Los dos a la vez» es una intersección: ¿cómo se calcula si son independientes?'),OD(a+b-ab,'P-suma','Ese valor es «al menos uno». El enunciado pide que ocurran los dos.'),OD(na*nb,'P-suma','Ese valor es que no ocurra ninguno. El enunciado pide que ocurran los dos.'),OD(a*nb,'P-orden','Ese valor es que ocurra el primero y no el segundo. El enunciado pide los dos.'),OD(0,'P-exclu','Independientes no quiere decir que no puedan ocurrir juntos: eso es excluyentes. ¿Cuánto vale $P(A ∩ B)$ para independientes?')],
+   pistas:['«Los dos» es la intersección $A ∩ B$.','Si son independientes, la probabilidad de la intersección es el producto.','$P(A ∩ B) = '+d2(a)+' · '+d2(b)+'$.'],control:ctl,
+   reso:[{t:'Nombrar los sucesos',l:[['A: \\t{«'+cx[5]+'»}   B: \\t{«'+cx[6]+'»}','$P(A) = '+d2(a)+'$,  $P(B) = '+d2(b)+'$']]},{t:'Intersección de independientes',l:[['P(A ∩ B) = P(A) · P(B)','independientes'],['= '+d2(a)+' · '+d2(b)+' = '+d2(ab),'producto'],['P(A ∩ B) = '+dec(100*ab,0)+' %','en porcentaje']]}]};
+  const v=1-na*nb;
+  return {enun:e,preg:'¿Cuál es la probabilidad de que '+cx[4]+'?',pregNum:'Calculá la probabilidad de que '+cx[4]+'.',num:{v,tol:0.0051,label:'P ='},
+   opts:[OD(v,null,'Bien: ninguno vale $'+d2(na)+' · '+d2(nb)+' = '+d2(na*nb)+'$, y $1 - '+d2(na*nb)+' = '+d2(v)+'$.'),OD(a+b,'P-inter','Sumaste las dos probabilidades. Así el caso en que ocurren los dos se cuenta dos veces. ¿Cuánto vale ese caso?'),OD(ab,'P-suma','Ese valor es que ocurran los dos. «Al menos uno» incluye también los casos en que ocurre uno solo.'),OD(na*nb,'P-suma','Ese valor es que no ocurra ninguno. ¿Qué relación tiene con «al menos uno»?'),OD(a*nb+b*na,'P-orden','Ese valor es «exactamente uno». En «al menos uno» también entra el caso en que ocurren los dos.'),OD(1-ab,'P-suma','Restaste de 1 la probabilidad de que ocurran los dos. Lo contrario de «al menos uno» es «ninguno».')],
+   pistas:['Lo contrario de «al menos uno» es «ninguno».','Que no ocurra el primero: $1 - '+d2(a)+' = '+d2(na)+'$. Que no ocurra el segundo: $1 - '+d2(b)+' = '+d2(nb)+'$. También son independientes.','$P(\\o{ninguno}) = '+d2(na)+' · '+d2(nb)+'$. Calculalo y restalo de 1.'],control:ctl,
+   reso:[{t:'Nombrar los sucesos',l:[['A: \\t{«'+cx[5]+'»}   B: \\t{«'+cx[6]+'»}','$P(A) = '+d2(a)+'$,  $P(B) = '+d2(b)+'$']]},{t:'Suceso contrario',l:[['P(\\o{al menos uno}) = 1 - P(\\o{ninguno})','complemento']]},{t:'Probabilidad de que no ocurra cada uno',l:[['P(A^{c}) = 1 - '+d2(a)+' = '+d2(na),'complemento'],['P(B^{c}) = 1 - '+d2(b)+' = '+d2(nb),'complemento']]},
+    {t:'Ninguno',l:[['P(\\o{ninguno}) = P(A^{c}) · P(B^{c}) = '+d2(na)+' · '+d2(nb)+' = '+d2(na*nb),'independientes: se multiplica']]},{t:'Restar de 1',l:[['P = 1 - '+d2(na*nb)+' = '+d2(v),'complemento'],['P = '+dec(100*v,0)+' %','en porcentaje']]}]};}};
+
+const TCTX=[['alumnos de 5.º año','Turno mañana','Turno tarde','Robótica','Electrónica','del turno mañana','curse Robótica','un alumno','cursa Robótica'],['empleados de una fábrica','Planta','Oficina','Menores de 30','De 30 o más','de la planta','tenga menos de 30 años','un empleado','tiene menos de 30 años'],['piezas de un depósito','Máquina A','Máquina B','Aprobadas','Con fallas','de la máquina A','esté aprobada','una pieza','está aprobada']];
+T.P7={bloque:'suc',titulo:'Condicional con una tabla',
+ all(){const r=[],cs=[10,15,20,25,30,35,40];for(const a of cs)for(const b of cs)for(const c of cs)for(const d of cs){const t=a+b+c+d;if(t>=60&&t<=120)r.push({a,b,c,d,x:0});}return r.filter(p=>okProb(T.P7.make(p).opts));},
+ make(p){const {a,b,c,d}=p,t=a+b+c+d,f1=a+b,f2=c+d,c1=a+c,c2=b+d,cx=TCTX[p.x%TCTX.length],q=Q(a,f1),g=a/q.n;
+  const tab='<div class="tabla-w"><table class="tdoble"><tr><th></th><th>'+cx[3]+'</th><th>'+cx[4]+'</th><th>Total</th></tr><tr><th>'+cx[1]+'</th><td>'+a+'</td><td>'+b+'</td><td>'+f1+'</td></tr><tr><th>'+cx[2]+'</th><td>'+c+'</td><td>'+d+'</td><td>'+f2+'</td></tr><tr><th>Total</th><td>'+c1+'</td><td>'+c2+'</td><td>'+t+'</td></tr></table></div>';
+  return {enun:'La tabla clasifica a '+t+' '+cx[0]+'.'+tab+'Se elige '+cx[7]+' al azar y se sabe que es '+cx[5]+'.',preg:'¿Cuál es la probabilidad de que '+cx[6]+'?',pregNum:'Calculá la probabilidad de que '+cx[6]+'.',num:{v:qval(q),q,tol:0.006,label:'P ='},
+  opts:[OQ(q,null,'Bien: se cuenta solo dentro de los '+f1+' que cumplen la condición, y $'+fr(a,f1)+' = '+qtex(q)+'$.'),
+   OQ(Q(a,t),'P-cond','Dividiste por los '+t+' del total. El enunciado dice que ya se sabe que es '+cx[5]+': ¿entre cuántos se elige entonces?'),
+   OQ(Q(a,c1),'P-cond','Dividiste por el total de la columna. Esa sería la condicional al revés. ¿Cuál es el grupo que ya se conoce?'),
+   OQ(Q(c1,t),'P-cond','Esa es la probabilidad de que '+cx[6]+' sin saber nada más. ¿Qué cambia cuando se sabe que es '+cx[5]+'?'),
+   OQ(Q(f1,t),'P-cond','Esa es la probabilidad de que sea '+cx[5]+'. Eso ya se sabe: es la condición, no lo que se pide.'),
+   OQ(Q(a,f2),'P-cond','Dividiste por el total de la otra fila. ¿Cuál es la fila de los que cumplen la condición?')],
+  pistas:['La frase «se sabe que» achica el grupo: ya no se elige entre los '+t+'.','El grupo que queda es la fila «'+cx[1]+'»: '+f1+' en total.','De esos '+f1+', ¿cuántos cumplen lo pedido? Ese número va arriba y '+f1+' va abajo.'],
+  control:{q:'¿Por qué el denominador es '+f1+'?',o:[['Porque ya se sabe que es '+cx[5]+': solo se cuenta dentro de ese grupo.',1,''],['Porque '+f1+' es el total de la tabla.',0,'El total de la tabla es '+t+'. '+f1+' es el total de la fila «'+cx[1]+'», que es el grupo que cumple la condición.'],['Porque '+f1+' son los que cumplen lo pedido.',0,'Los que cumplen lo pedido dentro del grupo son '+a+'. '+f1+' es el tamaño del grupo que ya se conoce.'],['Porque siempre se divide por el total de la fila.',0,'Se divide por el total del grupo que da la condición. Acá la condición es una fila; si fuera una columna, sería el total de esa columna.']]},
+  reso:[{t:'Qué se sabe y qué se pide',l:[['B: \\t{«es '+cx[5]+'»}   A: \\t{«'+cx[8]+'»}','la condición es $B$']]},{t:'Contar dentro de la condición',l:[['P(A | B) = \\f{\\o{casos de } A ∩ B}{\\o{casos de } B} = '+fr(a,f1)+(g>1?' = '+qtex(q):''),'condicional: se cuenta dentro de $B$'+simp(g)],pctL(q,'P(A | B)')]}]};}};
+
+/* ================= TRIBUNALES ================= */
+T.T1={bloque:'tri',titulo:'Tres cartas sin reposición',tribunal:true,
+ all(){const r=[];for(let a=0;a<4;a++)for(let b=0;b<4;b++)for(let c=0;c<4;c++) if(a!==b&&b!==c&&a!==c) r.push({a,b,c}); return r;},
+ make(p){const X=PALOS[p.a],Y=PALOS[p.b],Z=PALOS[p.c],ok=prodChain([[12,48],[12,47],[12,46]]),bad=prodChain([[12,48],[12,48],[12,46]]);
+  return {tribunal:true,enun:'Se usa '+MAZO[48].txt+'. Se sacan tres cartas, una después de la otra, sin reposición. Se pide la probabilidad de que salgan '+X+', '+Y+' y '+Z+', en ese orden.',
+  pasos:[{h:'La primera tiene que ser de '+X+'. Hay 12 de '+X+' entre 48 cartas: $'+fr(12,48)+'$.',fb:'Ese paso está bien: 12 cartas de '+X+' sobre las 48 del mazo completo.'},
+   {h:'La segunda tiene que ser de '+Y+'. Hay 12 de '+Y+' entre 48 cartas: $'+fr(12,48)+'$.',mal:1,fb:'Ahí nace el error.'},
+   {h:'La tercera tiene que ser de '+Z+'. Hay 12 de '+Z+' y quedan 46 cartas: $'+fr(12,46)+'$.',fb:'Ese paso está bien: después de dos extracciones quedan 46 cartas, y las 12 de '+Z+' siguen todas.'},
+   {h:'Como tienen que pasar las tres cosas, multiplico: $'+bad.tex+'$.',fb:'La cuenta de ese paso está bien hecha con las fracciones que traía. El error viene de antes: buscá dónde nace.'},
+   {h:'Respuesta: la probabilidad es $'+qtex(bad.q)+'$, aproximadamente '+dec(100*qval(bad.q),2)+' %.',fb:'Ese paso arrastra un error anterior. Buscá el primer paso donde algo no coincide con el enunciado.'}],
+  corr:{q:'¿Cómo queda corregido ese paso?',o:[['$'+fr(12,47)+'$',1,'Sí: después de la primera extracción quedan 47 cartas, y las 12 de '+Y+' siguen todas.'],['$'+fr(11,47)+'$',0,'El 47 está bien. Pero la carta que salió era de '+X+': ¿cambió la cantidad de cartas de '+Y+'?'],['$'+fr(11,48)+'$',0,'La carta que salió era de '+X+', así que las de '+Y+' siguen siendo 12. Lo que cambió es el total del mazo.'],['$'+fr(12,46)+'$',0,'46 cartas quedan después de dos extracciones. Antes de la segunda, salió una sola.']]},
+  fin:{q:'Con el paso corregido, ¿cuál es la respuesta correcta?',o:[['$'+qtex(ok.q)+'$',1,'Sí: $'+ok.tex+'$.'],['$'+qtex(bad.q)+'$',0,'Esa es la respuesta original, con el error adentro. Rehacé el producto con la fracción corregida.'],['$'+qtex(Q(12*11*10,48*47*46))+'$',0,'Ese valor descuenta una carta de cada palo. Los tres palos son distintos: cada uno llega completo a su extracción.'],['$'+qtex(Q(1,64))+'$',0,'Ese valor usa 48 cartas en las tres extracciones. Sin reposición, el total baja: 48, 47, 46.']]},
+  arbol:[nd(X,12,48,[nd(Y,12,47,[nd(Z,12,46,null,1),nd('otra',34,46)]),nd('otra',35,47)]),nd('otra',36,48)],
+  pistas:['Leé el enunciado: ¿las cartas vuelven al mazo?','Revisá los denominadores de las tres fracciones: tienen que ir bajando de a uno.','El total del mazo debería ser 48, 47 y 46. ¿Cuál de las tres fracciones no lo respeta?'],err:'P-total',
+  reso:[{t:'Nombrar los sucesos',l:[['X_{1}: \\t{«la primera es de '+X+'»}   Y_{2}: \\t{«la segunda es de '+Y+'»}   Z_{3}: \\t{«la tercera es de '+Z+'»}','un suceso por extracción']]},{t:'Dónde está el error',l:[['P(Y_{2} | X_{1}) = '+fr(12,47),'salió una carta: quedan 47; las 12 de '+Y+' siguen']]},{t:'Resolución corregida',l:[['P = '+ok.tex,'regla del producto'+simp(ok.g)],pctL(ok.q,'P')]}]};}};
+
+T.T2={bloque:'tri',titulo:'Ley de Newton',tribunal:true,
+ all(){return nAll(0).filter(p=>p.rn!==1||p.rd!==2?true:true);},
+ make(p){const d=nDat(p),{r,T0,T1}=d,Ta=p.Ta,D=p.D,t1=p.t1,rA=Q(T1-Ta,T0),Kb=Math.log(qval(rA))/t1,K=Math.log(qval(r))/t1;
+  return {tribunal:true,enun:d.enun+' Se pide hallar $A$ y $K$ en $T(t) = T_{a} + A e^{K t}$.',
+  pasos:[{h:'La temperatura del ambiente es '+Ta+' °C, así que $T(t) = '+Ta+' + A e^{K t}$.',fb:'Ese paso está bien: '+Ta+' °C es la única temperatura que se mantiene constante.'},
+   {h:'En $t = 0$ la temperatura es '+T0+' °C, entonces $A = '+T0+'$.',mal:1,fb:'Ahí nace el error.'},
+   {h:'En $t = '+t1+'$ la temperatura es '+T1+' °C: $'+Ta+' + '+T0+' e^{'+t1+'K} = '+T1+'$, entonces $e^{'+t1+'K} = '+fr(T1-Ta,T0)+(rA.d!==T0?' = '+qtex(rA):'')+'$.',fb:'El despeje de ese paso está bien hecho, pero usa un valor que viene mal de antes. Buscá dónde nace.'},
+   {h:'Aplico logaritmo y divido por '+t1+': $K = '+fr('ln\\p{'+qtex(rA)+'}',t1)+' ≈ '+dec(Kb,2)+'$.',fb:'El procedimiento de ese paso es correcto, pero el número de adentro del logaritmo viene de un error anterior.'},
+   {h:'Respuesta: $A = '+T0+'$ y $K ≈ '+dec(Kb,2)+'$.',fb:'Ese paso arrastra un error anterior. Probá la respuesta en $t = 0$ y buscá el primer paso que falla.'}],
+  corr:{q:'¿Cómo queda corregido ese paso?',o:[['$'+Ta+' + A = '+T0+'$, entonces $A = '+D+'$.',1,'Sí: en $t = 0$ el factor $e^{K · 0}$ vale 1, y $A$ es la diferencia inicial con el ambiente.'],['$A = '+T1+' - '+Ta+' = '+(T1-Ta)+'$.',0,'Usaste la medición de los '+t1+' minutos. $A$ sale del dato de $t = 0$.'],['$A = '+T0+' - '+T1+' = '+(T0-T1)+'$.',0,'Restaste las dos mediciones del cuerpo. En $t = 0$ la fórmula da $'+Ta+' + A$: eso tiene que valer '+T0+'.'],['$A = '+Ta+'$.',0,'Con $A = '+Ta+'$ la fórmula daría $'+Ta+' + '+Ta+' = '+(2*Ta)+'$ en $t = 0$, y la temperatura inicial es '+T0+'.']]},
+  fin:{q:'Con $A$ corregido, ¿cuánto vale $e^{'+t1+'K}$?',o:[['$'+qtex(r)+'$',1,'Sí: $'+D+' e^{'+t1+'K} = '+T1+' - '+Ta+' = '+(T1-Ta)+'$, y $'+fr(T1-Ta,D)+' = '+qtex(r)+'$. Entonces $K = '+fr('ln\\p{'+qtex(r)+'}',t1)+' ≈ '+dec(K,2)+'$.'],['$'+qtex(rA)+'$',0,'Ese es el valor original, calculado con $A = '+T0+'$. Rehacé el despeje con $A = '+D+'$.'],['$'+qtex(Q(T1,T0))+'$',0,'Ese cociente usa las temperaturas. Primero restá '+Ta+' de los dos lados: quedan las diferencias con el ambiente.'],['$'+qtex(Q(r.d,r.n))+'$',0,'Quedó invertido: daría un factor mayor que 1 y la temperatura se alejaría del ambiente.']]},
+  pistas:['Probá la respuesta en $t = 0$: ¿la fórmula devuelve la temperatura inicial?','Con $A = '+T0+'$ da $'+Ta+' + '+T0+' = '+(Ta+T0)+'$ en $t = 0$. No coincide con '+T0+'.','En $t = 0$ queda $'+Ta+' + A = '+T0+'$. ¿En qué paso se decidió el valor de $A$?'],err:'N-A',
+  reso:[{t:'Control que delata el error',l:[['T(0) = '+Ta+' + '+T0+' · e^{0} = '+Ta+' + '+T0+' = '+(Ta+T0)+' ≠ '+T0,'con $A = '+T0+'$ no se recupera el dato']]},nA(p,d),nE(p,d),{t:'Despejar K',l:[[t1+'K = ln\\p{'+qtex(r)+'}','aplicamos $ln$: $ln\\p{e^{u}} = u$'],['K = '+fr('ln\\p{'+qtex(r)+'}',t1)+' ≈ \\f{'+dec(Math.log(qval(r)),4)+'}{'+t1+'} ≈ '+dec(K,2),'dividimos por '+t1]]}]};}};
+
+/* recorrido: 10 ejercicios + 2 tribunales */
+const RECORRIDO=['S1','S2','N1','N2','P1','P2','P3','P5','P6','P7','T1','T2'];
+const BLOQUES={sep:'Ecuaciones de variables separables',new:'Ley de enfriamiento de Newton',bol:'Bolsas y cartas',suc:'Sucesos y tablas',tri:'Encontrá el error'};
+const POOL={};
+function params(id){ if(!POOL[id]) POOL[id]=T[id].all(); const p=Object.assign({},pick(POOL[id])); if(['N1','N2','T2','P5','P6'].includes(id)) p.c=Math.floor(Math.random()*15); if('x' in p) p.x=Math.floor(Math.random()*3); if(id==='N2'&&p.heat) p.c=Math.floor(Math.random()*3); return p; }
+if(typeof module!=='undefined'&&module.exports) module.exports={T,ERR,PRACT,RECORRIDO,BLOQUES,Q,qval,qtex,params,dec,gcd};
+
+/* ===== matemática: minilenguaje → HTML (STIX Two Text, fracciones apiladas) ===== */
+const esc=s=>String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+const PSVG=d=>'<span class="par-w"><svg viewBox="0 0 10 100" preserveAspectRatio="none" aria-hidden="true"><path d="'+d+'" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" vector-effect="non-scaling-stroke"/></svg></span>';
+const PAR_L=PSVG('M8.5 1.5 C2 22 2 78 8.5 98.5'), PAR_R=PSVG('M1.5 1.5 C8 22 8 78 1.5 98.5');
+function M(s,sub){
+  s=s.replace(/-/g,'−').replace(/\*/g,'·');
+  const out=[];let prev='ini',i=0;
+  const arg=()=>{ if(s[i]!=='{') return s[i++]||''; let d=0,j=i; for(;j<s.length;j++){ if(s[j]==='{')d++; else if(s[j]==='}'){d--; if(!d)break;} } const a=s.slice(i+1,j); i=j+1; return a; };
+  const attach=h=>{ let last=out.pop()||''; if(last.indexOf('<span class="at">')===0) last=last.slice(0,-7)+h+'</span>'; else last='<span class="at">'+last+h+'</span>'; out.push(last); };
+  const dropSp=()=>{ while(out.length&&out[out.length-1]===' ') out.pop(); };
+  while(i<s.length){ const ch=s[i];
+    if(ch===' '){ let j=i; while(s[j]===' ')j++; if(j-i>=2){ dropSp(); out.push('<span class="gap"></span>'); prev='ini'; } else if(prev!=='op'&&prev!=='ini') out.push(' '); i=j; continue; }
+    if(ch==='\\'){ let j=i+1; while(j<s.length&&/[a-z]/.test(s[j]))j++; const nm=s.slice(i+1,j); i=j;
+      if(nm==='f'){ const a=arg(),b=arg(); out.push('<span class="fr"><span class="fn">'+M(a,sub)+'</span><span class="fd">'+M(b,sub)+'</span></span>'); }
+      else if(nm==='p'){ const a=arg(); out.push('<span class="par">'+PAR_L+'<span class="par-c">'+M(a,sub)+'</span>'+PAR_R+'</span>'); }
+      else if(nm==='o'){ out.push('<span class="ro">'+esc(arg())+'</span>'); }
+      else if(nm==='t'){ out.push('<span class="tx">'+esc(arg())+'</span>'); }
+      prev='x'; continue; }
+    if(ch==='^'||ch==='_'){ i++; const a=arg(); attach(ch==='^'?'<sup>'+M(a,sub)+'</sup>':'<sub>'+M(a,true)+'</sub>'); prev='x'; continue; }
+    if(ch==="'"){ i++; attach('′'); prev='x'; continue; }
+    if(/[A-Za-zÀ-ÿ]/.test(ch)){ const m=s.slice(i).match(/^(lím|sen|cos|ln)(?![A-Za-z])/), pl=i>0&&/[A-Za-z]/.test(s[i-1]);
+      if(m&&!pl){ out.push('<span class="ro">'+m[1]+'</span>'); i+=m[1].length; prev='x'; continue; }
+      if(!sub&&(ch==='e'||ch==='d')) out.push('<span class="ro">'+ch+'</span>');
+      else if(ch==='P'&&s[i+1]==='(') out.push('<span class="ro">P</span>');
+      else out.push('<i>'+ch+'</i>');
+      i++; prev='x'; continue; }
+    if(/[0-9]/.test(ch)){ const m=s.slice(i).match(/^[0-9]+(,[0-9]+)?/); out.push(m[0]); i+=m[0].length; prev='x'; continue; }
+    if('=≠<>≤≥≈⇒⟺→'.indexOf(ch)>=0){ dropSp(); out.push('<wbr><span class="os">'+esc(ch)+'</span>&#8288;'); prev='op'; i++; continue; }
+    if('+−·×∩∪±'.indexOf(ch)>=0){ if((ch==='+'||ch==='−'||ch==='±')&&(prev==='ini'||prev==='op'||prev==='open')){ out.push('<span class="ou">'+ch+'</span>'); } else { dropSp(); out.push('<wbr><span class="ob">'+ch+'</span>&#8288;'); } prev='op'; i++; continue; }
+    if(ch==='('||ch==='['){ out.push(ch); prev='open'; i++; continue; }
+    if(ch===','){ dropSp(); out.push('<span class="pc">,</span>'); prev='open'; i++; continue; }
+    if(ch===';'){ dropSp(); out.push('<span class="psc">;</span>'); prev='op'; i++; continue; }
+    if(ch==='∫'){ out.push('<span class="int">∫</span>'); prev='open'; i++; continue; }
+    if(ch==='|'){ out.push('<span class="bar">|</span>'); prev='x'; i++; continue; }
+    out.push(esc(ch)); prev='x'; i++; }
+  return out.join('');
+}
+const X=h=>String(h).replace(/\$\$([^$]+)\$\$/g,(_,m)=>'<div class="calc ctr">'+M(m)+'</div>').replace(/\$([^$]+)\$/g,(_,m)=>'<span class="mi">'+(m.length<44?M(m).replace(/<wbr>/g,''):M(m))+'</span>');
+
+const segM=t=>t.split(/ {2,}/).map(x=>{const h=M(x); return x.length<34?'<span class="nw">'+h.replace(/<wbr>/g,'')+'</span>':h;}).join('<span class="gap"></span><wbr>');
+/* ===== árbol de probabilidades en SVG ===== */
+function arbolSVG(kids,nota){ const RH=62, leaves=n=>n.kids?n.kids.reduce((s,k)=>s+leaves(k),0):1, depth=n=>n.kids?1+Math.max.apply(null,n.kids.map(depth)):1;
+  const D=Math.max.apply(null,kids.map(depth)), L=kids.reduce((s,k)=>s+leaves(k),0), W=360, H=L*RH+10, col=(W-78)/D, bw=t=>Math.max(30,t.length*7.4+14);
+  const tiene=(n,v)=>n.ok===v||(n.kids&&n.kids.some(k=>tiene(k,v))); let g='',y0=5;
+  function put(n,lev,px,py){ const h=leaves(n)*RH, cy=y0+h/2, w=bw(n.lab), x=16+lev*col+col-w/2-6, clr=tiene(n,1)?'#45785A':(tiene(n,2)?'#BC5235':'#b9b2a3'), sw=tiene(n,1)||tiene(n,2)?2.2:1.3;
+    const lx=px+(x-px)*0.66, ly=py+(cy-py)*0.66;
+    g+='<line x1="'+px+'" y1="'+py+'" x2="'+x+'" y2="'+cy+'" stroke="'+clr+'" stroke-width="'+sw+'"/>';
+    g+='<rect x="'+(lx-13)+'" y="'+(ly-15)+'" width="26" height="30" rx="4" fill="#fff" fill-opacity=".94"/><text x="'+lx+'" y="'+(ly-3)+'" class="af">'+n.n+'</text><line x1="'+(lx-9)+'" y1="'+ly+'" x2="'+(lx+9)+'" y2="'+ly+'" stroke="#20201c" stroke-width="1.1"/><text x="'+lx+'" y="'+(ly+12)+'" class="af">'+n.d+'</text>';
+    const fin=!n.kids, fill=fin&&n.ok===1?'#edf4ef':(fin&&n.ok===2?'#faeeea':'#fff'), st=fin&&n.ok===1?'#45785A':(fin&&n.ok===2?'#BC5235':'#b9b2a3');
+    g+='<rect x="'+x+'" y="'+(cy-12)+'" width="'+w+'" height="24" rx="12" fill="'+fill+'" stroke="'+st+'" stroke-width="'+(fin&&n.ok?2:1.2)+'"/><text x="'+(x+w/2)+'" y="'+(cy+4.5)+'" class="al">'+esc(n.lab)+'</text>';
+    if(fin&&n.ok===1) g+='<text x="'+(x+w+6)+'" y="'+(cy+5)+'" class="ack">✓</text>'; if(fin&&n.ok===2) g+='<text x="'+(x+w+6)+'" y="'+(cy+5)+'" class="ano">✗</text>';
+    if(n.kids){ const yy=y0; n.kids.forEach(k=>{ put(k,lev+1,x+w,cy); }); y0=yy+h; } else y0+=RH; }
+  kids.forEach(k=>put(k,0,8,H/2)); g='<circle cx="8" cy="'+(H/2)+'" r="3.5" fill="#20201c"/>'+g;
+  return '<div class="arbol"><svg viewBox="0 0 '+W+' '+H+'" role="img" aria-label="Árbol de probabilidades">'+g+'</svg><div class="arb-n">'+(nota||'En verde, los caminos que cumplen lo pedido. Cada rama lleva su probabilidad; a lo largo de un camino se multiplica.')+'</div></div>'; }
+/* ===== estado ===== */
+const $=(s,r)=>(r||document).querySelector(s), $$=(s,r)=>Array.from((r||document).querySelectorAll(s));
+const KEY='ph-ultima-practica-ed-prob-v1', LET='ABCDEF';
+let ST=null; const EX={}; let PR=null;
+const slotNuevo=(id,ver)=>({id,p:params(id),perm:shuffle([0,1,2,3,4,5]),ver:ver||1,decI:0,shown:false,tried:[],ok:false,ctrl:null,ctrlBad:[],ctrlMal:false,pist:0,visto:false,nohay:false,fb:null,last:null,tf:0,tcT:[],tfT:[],tmal:false});
+function nuevo(){ return {v:1,slots:RECORRIDO.map(id=>slotNuevo(id)),errs:{},pr:{hechos:0,bien:0}}; }
+function guardar(){ try{ localStorage.setItem(KEY,JSON.stringify(ST)); }catch(_){} }
+function cargar(){ try{ const o=JSON.parse(localStorage.getItem(KEY)||'null'); if(o&&o.v===1&&Array.isArray(o.slots)&&o.slots.length===RECORRIDO.length&&o.slots.every((s,i)=>s.id===RECORRIDO[i]&&s.p)) return o; }catch(_){} return null; }
+function armar(i){ const s=ST.slots[i], ex=T[s.id].make(s.p); (ex.dec||[]).forEach(d=>d.o=shuffle(d.o)); if(ex.control) ex.control.o=shuffle(ex.control.o); if(ex.corr) ex.corr.o=shuffle(ex.corr.o); if(ex.fin) ex.fin.o=shuffle(ex.fin.o); s.decBad=[]; EX[i]=ex; return ex; }
+const hecho=s=>s.ok&&(T[s.id].tribunal||s.ctrl==='ok');
+const sumarErr=tag=>{ ST.errs[tag]=(ST.errs[tag]||0)+1; };
+function estado(s){ if(s.visto&&!s.ok) return ['Resolución vista','visto']; if(!s.ok) return [s.tried.length||s.tmal||s.pist?'En curso':'Sin resolver','pend']; if(T[s.id].tribunal) return ['Completo','ok']; if(s.ctrl!=='ok') return ['Falta una pregunta','pend']; return s.ctrlMal?['Completo · razonamiento a revisar','rev']:['Completo','ok']; }
+
+/* ===== piezas de tarjeta ===== */
+const marca='<span class="ej-lab"><span class="bullet"></span><span class="lab">laboratorio</span><span class="best">best</span><span class="ia">-IA</span></span>';
+function resoHTML(ex,abierta){ return '<div class="reso'+(abierta?' open':'')+'"><button type="button" data-act="reso"><span class="ttl">Resolución paso a paso</span><span class="chev">▸</span></button><div class="cont">'+(ex.arbol?'<div class="paso-t">Árbol</div>'+arbolSVG(ex.arbol,ex.arbolNota):'')+ex.reso.map((p,k)=>'<div class="paso"><div class="paso-t"><span class="num">Paso '+(k+1)+'</span>'+esc(p.t)+'</div>'+p.l.map(l=>'<div class="calc"><span class="cm">'+segM(l[0])+'</span><span class="regla">'+X(l[1])+'</span></div>').join('')+'</div>').join('')+'</div></div>'; }
+function pistasHTML(ex,n){ if(!n) return ''; return '<div class="pistas">'+ex.pistas.slice(0,n).map((p,k)=>'<div class="pista"><span class="pn">Pista '+(k+1)+'</span>'+X(p)+'</div>').join('')+'</div>'; }
+function opcBtns(o,act,dis,sel){ return '<div class="opts2">'+o.map((x,k)=>'<button type="button" class="opt'+(dis&&dis.includes(k)?' mal':'')+(sel===k?' bien':'')+'" data-act="'+act+'" data-k="'+k+'"'+((dis&&dis.includes(k))||sel!=null?' disabled':'')+'><span class="tex">'+X(x[0])+'</span></button>').join('')+'</div>'; }
+function decHTML(ex,s){ if(!ex.dec) return ''; let h='<div class="antes"><div class="tt">Antes de calcular</div>';
+  ex.dec.forEach((d,k)=>{ if(k<s.decI){ const c=d.o.find(z=>z[1]); h+='<div class="dec hecha"><div class="dq">'+X(d.q)+'</div><div class="dr">✓ '+X(c[0])+' <span class="dfb">'+X(c[2])+'</span></div></div>'; }
+    else if(k===s.decI){ h+='<div class="dec"><div class="dq">'+X(d.q)+'</div>'+opcBtns(d.o,'dec',s.decBad||[],null)+(s.decFb?'<div class="fb bad show">'+X(s.decFb)+'</div>':'')+'</div>'; } });
+  return h+'</div>'; }
+
+function cardHTML(i){ const s=ST.slots[i], ex=EX[i]||armar(i), t=T[s.id], est=estado(s), decOk=!ex.dec||s.decI>=ex.dec.length;
+  let h='<div class="ej-head"><div class="ej-num">'+(t.tribunal?'Encontrá el error '+(i-9):'Ejercicio '+(i+1))+' <span class="chip '+est[1]+'">'+est[0]+'</span></div>'+marca+'</div><div class="ej-body"><div class="titulo">'+esc(t.titulo)+'</div><div class="enun">'+X(ex.enun)+'</div>';
+  if(t.tribunal){ h+='<div class="ia-box"><div class="tt">Una IA lo resolvió así</div>'+ex.pasos.map((p,k)=>{ const cls=s.tf>0&&p.mal?' err':((s.tpT||[]).includes(k)?' visto':''); return '<button type="button" class="ia-paso'+cls+'" data-act="tpaso" data-k="'+k+'"'+(s.tf>0||(s.tpT||[]).includes(k)?' disabled':'')+'><span class="num">'+(k+1)+'</span><span class="tex">'+X(p.h)+'</span></button>'; }).join('')+'</div>';
+    if(s.tf===0) h+='<p class="consigna">Tocá el <b>primer</b> paso donde hay un error.</p>'+(s.fb?'<div class="fb '+s.fb[0]+' show">'+X(s.fb[1])+'</div>':'');
+    if(s.tf>=1){ const c=ex.corr.o.findIndex(z=>z[1]); h+='<div class="fb good show">El error nace en el paso '+(ex.pasos.findIndex(p=>p.mal)+1)+'.</div><div class="ctrl"><div class="dq">'+X(ex.corr.q)+'</div>'+opcBtns(ex.corr.o,'tcorr',s.tcT,s.tf>=2?c:null)+(s.tf===1&&s.fb?'<div class="fb bad show">'+X(s.fb[1])+'</div>':'')+(s.tf>=2?'<div class="fb good show">'+X(ex.corr.o[c][2])+'</div>':'')+'</div>'; }
+    if(s.tf>=2){ const c=ex.fin.o.findIndex(z=>z[1]); h+='<div class="ctrl"><div class="dq">'+X(ex.fin.q)+'</div>'+opcBtns(ex.fin.o,'tfin',s.tfT,s.tf>=3?c:null)+(s.tf===2&&s.fb?'<div class="fb bad show">'+X(s.fb[1])+'</div>':'')+(s.tf>=3?'<div class="fb good show">'+X(ex.fin.o[c][2])+'</div>':'')+'</div>'; }
+  } else {
+    h+=decHTML(ex,s);
+    if(decOk){ h+='<p class="preg">'+X(ex.preg)+'</p>';
+      if(!s.shown) h+='<div class="acciones"><button type="button" class="btn" data-act="mostrar">Ya lo resolví en la hoja</button></div><p class="consigna">Resolvelo primero en la hoja. Las respuestas aparecen cuando tocás el botón.</p>';
+      else { h+='<div class="opts">'+s.perm.map((r,k)=>{ const o=ex.opts[r], tr=s.tried.includes(r), bien=s.ok&&o.ok; return '<button type="button" class="opt'+(tr?' mal':'')+(bien?' bien':'')+'" data-act="resp" data-r="'+r+'"'+(tr||s.ok?' disabled':'')+'><span class="let">'+LET[k]+'</span><span class="tex"><span class="mi">'+M(o.m)+'</span></span></button>'; }).join('')+'</div>';
+        if(!s.ok) h+='<div class="acciones"><button type="button" class="btn ghost small" data-act="nohay">Mi resultado no está acá</button></div>'; }
+      if(s.fb) h+='<div class="fb '+s.fb[0]+' show">'+X(s.fb[1])+'</div>';
+      if(s.ok){ const c=ex.control.o.findIndex(z=>z[1]);
+        h+='<div class="ctrl"><div class="tt">Una pregunta más</div><div class="dq">'+X(ex.control.q)+'</div>'+opcBtns(ex.control.o,'ctrl',s.ctrlBad||[],s.ctrl==='ok'?c:null)+(s.ctrl==='ok'?'<div class="fb good show">Bien: esa es la razón.</div>':'')+(s.ctrl!=='ok'&&s.ctrlBad&&s.ctrlBad.length?'<div class="fb mid show"><b>El resultado está bien; revisá el razonamiento.</b> '+X(ex.control.o[s.ctrlBad[s.ctrlBad.length-1]][2])+'</div>':'')+'</div>'; }
+    }
+  }
+  h+=pistasHTML(ex,s.pist);
+  if(hecho(s)||s.visto) h+=resoHTML(ex,s.resoOpen);
+  h+='<div class="acciones pie">';
+  if(!s.ok&&s.pist<3) h+='<button type="button" class="btn sec small" data-act="pista">Pedir una pista ('+(s.pist+1)+' de 3)</button>';
+  if(!s.ok&&s.pist>=3&&!s.visto) h+='<button type="button" class="btn sec small" data-act="ver">Ver la resolución</button>';
+  if(s.last||hecho(s)||s.visto) h+='<button type="button" class="btn green small" data-act="mas">Quiero practicar más esto</button>';
+  h+='<button type="button" class="btn ghost small" data-act="otra">Otra versión</button></div></div>';
+  return h; }
+function pintar(i){ const a=$('.ej[data-i="'+i+'"]'); if(!a) return; const s=ST.slots[i]; a.className='ej b-'+T[s.id].bloque+(hecho(s)?' done':''); a.innerHTML=cardHTML(i); barra(); mapa(); guardar(); }
+function lista(){ let h='',b=null; RECORRIDO.forEach((id,i)=>{ const t=T[id]; if(t.bloque!==b){ b=t.bloque; h+='<h2 class="bloque" id="b-'+b+'">'+BLOQUES[b]+'</h2>'+(b==='tri'?'<p class="lead">Dos resoluciones hechas por una inteligencia artificial. Cada una tiene un error: encontralo, corregilo y llegá a la respuesta correcta.</p>':''); } h+='<article class="ej" data-i="'+i+'" id="ej'+i+'"></article>'; }); $('#lista').innerHTML=h; RECORRIDO.forEach((_,i)=>{ armar(i); const a=$('.ej[data-i="'+i+'"]'), s=ST.slots[i]; a.className='ej b-'+T[s.id].bloque+(hecho(s)?' done':''); a.innerHTML=cardHTML(i); }); barra(); mapa(); }
+function barra(){ const n=ST.slots.filter(hecho).length; $('#bFill').style.width=(100*n/12)+'%'; $('#bProg').textContent=n+' de 12 resueltos'; }
+const pistasTot=()=>ST.slots.reduce((a,s)=>a+s.pist,0)+(ST.pistAnt||0);
+function mapa(){ const n=ST.slots.filter(hecho).length, rev=ST.slots.filter(s=>s.ctrlMal).length, es=Object.keys(ST.errs).filter(k=>ST.errs[k]>0).sort((a,b)=>ST.errs[b]-ST.errs[a]);
+  let h='<div class="kpis"><div><b>'+n+'</b><span>de 12 resueltos</span></div><div><b>'+pistasTot()+'</b><span>pistas pedidas</span></div><div><b>'+rev+'</b><span>con razonamiento a revisar</span></div><div><b>'+ST.pr.bien+'</b><span>de práctica extra bien</span></div></div>';
+  h+='<div class="chips">'+ST.slots.map((s,i)=>{const e=estado(s);return '<a class="chip '+e[1]+'" href="#ej'+i+'" data-act="ir" data-i="'+i+'">'+(T[s.id].tribunal?'Error '+(i-9):i+1)+'</a>';}).join('')+'</div>';
+  if(!es.length) h+='<p class="lead">Todavía no hay errores registrados. A medida que resuelvas, acá aparece qué te conviene repasar.</p>';
+  else h+='<h3>Qué te conviene repasar</h3>'+es.map(k=>'<div class="err-row"><div class="err-h"><span class="err-n">'+X(ERR[k].n)+'</span><span class="veces">'+ST.errs[k]+(ST.errs[k]===1?' vez':' veces')+'</span></div><div class="err-b">'+ERR[k].b+'</div><div class="err-r">'+X(ERR[k].rep)+'</div><div class="acciones"><button type="button" class="btn green small" data-act="masTag" data-tag="'+k+'">Practicar esto</button></div></div>').join('');
+  $('#mapaCont').innerHTML=h; }
+
+/* ===== práctica extra ===== */
+function parseNum(t){ t=String(t||'').trim().replace(/\s/g,'').replace('−','-'); if(!t) return null; let pc=false; if(/%$/.test(t)){ pc=true; t=t.slice(0,-1); } t=t.replace(',','.'); const m=t.match(/^(-?\d+(?:\.\d+)?)\/(\d+(?:\.\d+)?)$/); let v; if(m){ if(+m[2]===0) return null; v=+m[1]/+m[2]; return {v:pc?v/100:v,ex:true,k:99}; } if(!/^-?\d*\.?\d+$/.test(t)) return null; v=parseFloat(t); const k=(t.split('.')[1]||'').length+(pc?2:0); return {v:pc?v/100:v,ex:false,k}; }
+/* una respuesta escrita coincide con un valor si es ese valor redondeado o truncado a los decimales que se escribieron */
+function juzgar(ex,inp){ const n=ex.num, kmin=n.tol>=0.05?1:2, u=Math.pow(10,-inp.k), hit=V=>{ const d=Math.abs(inp.v-V); if(d<1e-9) return true; if(inp.ex) return false; const t=Math.abs(V)-Math.abs(inp.v); return d<=u/2+1e-9||(V*inp.v>=0&&t>=0&&t<u-1e-9); }, exacta=V=>Math.abs(inp.v-V)<1e-9;
+  const okk=hit(n.v), cand=ex.opts.filter(o=>!o.ok&&o.v!==null&&hit(o.v)); if(!okk&&!cand.length) return {r:'no'};
+  if(exacta(n.v)) return {r:'ok'}; const ce=cand.find(o=>exacta(o.v)); if(ce) return (okk&&!inp.ex&&inp.k>=kmin)?{r:'amb'}:{r:'err',o:ce};
+  if(!inp.ex&&inp.k<kmin) return {r:'dec',k:kmin}; if(okk&&cand.length) return {r:'amb'}; if(okk) return {r:'ok'};
+  if(cand.length>1&&new Set(cand.map(o=>o.err)).size>1) return {r:'amb'}; return {r:'err',o:cand[0]}; }
+function practicar(origen){ const ids=origen.tag?PRACT[origen.tag]:[origen.id==='T1'?'P3t':origen.id==='T2'?'N1':origen.id]; const id=pick(ids), p=params(id), ex=T[id].make(p);
+  PR={origen,id,p,ex,perm:shuffle(ex.opts.map((_,k)=>k)),fallos:0,pist:0,ok:false,tried:[],fb:null,mc:!ex.num}; pintarPR(); ver('vPractica'); }
+function pintarPR(){ const ex=PR.ex, t=T[PR.id]; let h='<div class="ej-head"><div class="ej-num">Práctica extra</div>'+marca+'</div><div class="ej-body"><div class="titulo">'+esc(t.titulo)+'</div><div class="enun">'+X(ex.enun)+'</div><p class="preg">'+X(PR.mc?ex.preg:ex.pregNum)+'</p>';
+  if(PR.mc){ h+='<div class="opts">'+PR.perm.map((r,k)=>{ const o=ex.opts[r], tr=PR.tried.includes(r); return '<button type="button" class="opt'+(tr?' mal':'')+(PR.ok&&o.ok?' bien':'')+'" data-act="prResp" data-r="'+r+'"'+(tr||PR.ok?' disabled':'')+'><span class="let">'+LET[k]+'</span><span class="tex"><span class="mi">'+M(o.m)+'</span></span></button>'; }).join('')+'</div>'; }
+  else if(!PR.ok){ h+='<div class="escr"><span class="mi lab">'+M(ex.num.label)+'</span>'+(ex.num.q?'<span class="frin"><input type="text" inputmode="numeric" id="prN" aria-label="numerador" autocomplete="off"><span class="frbar"></span><input type="text" inputmode="numeric" id="prD" aria-label="denominador" autocomplete="off"></span><span class="o">o</span>':'')+'<input type="text" inputmode="decimal" id="prX" class="decin" placeholder="'+(ex.num.q?'decimal o %':'número')+'" aria-label="respuesta en decimal" autocomplete="off"><button type="button" class="btn" data-act="prComp">Comprobar</button></div><p class="consigna">'+(ex.num.q?'Escribila como fracción (numerador arriba, denominador abajo), como decimal o como porcentaje.':'Con coma o con punto.')+'</p>'; }
+  if(PR.fb) h+='<div class="fb '+PR.fb[0]+' show">'+X(PR.fb[1])+'</div>';
+  h+=pistasHTML(ex,PR.pist); if(PR.ok||PR.visto) h+=resoHTML(ex,true);
+  h+='<div class="acciones pie">'; if(!PR.ok&&PR.pist<3) h+='<button type="button" class="btn sec small" data-act="prPista">Pedir una pista ('+(PR.pist+1)+' de 3)</button>'; if(!PR.ok&&PR.pist>=3&&!PR.visto) h+='<button type="button" class="btn sec small" data-act="prVer">Ver la resolución</button>';
+  h+='<button type="button" class="btn green small" data-act="prOtro">Otro ejercicio de este tipo</button><button type="button" class="btn ghost small" data-act="volver">Volver al recorrido</button></div></div>';
+  $('#prCard').className='ej b-'+t.bloque+(PR.ok?' done':''); $('#prCard').innerHTML=h; $('#prTema').innerHTML=PR.origen.tag?X(ERR[PR.origen.tag].n):BLOQUES[t.bloque]; }
+function prFallo(o){ PR.fallos++; if(o){ sumarErr(o.err); PR.fb=['bad',o.fb]; } else PR.fb=['info','Ese resultado no es correcto y no coincide con ninguno de los errores más comunes. Revisá la cuenta desde el principio'+(PR.pist<3?', o pedí una pista.':'.')]; if(!PR.mc&&PR.fallos>=2){ PR.mc=true; PR.fb[1]+=' Te dejo las opciones para que compares.'; } }
+function prBien(o){ PR.ok=true; PR.fb=['good',o.fb]; ST.pr.hechos++; if(!PR.fallos) ST.pr.bien++; }
+
+/* ===== navegación ===== */
+let volverA=0;
+function ver(v){ if(v==='vPractica') volverA=window.scrollY||0; $$('.vista').forEach(x=>x.classList.toggle('on',x.id===v)); if(v==='vPractica') $('#vPractica').scrollIntoView({block:'start'}); else window.scrollTo(0,volverA); }
+function irA(el){ if(el) el.scrollIntoView({behavior:'smooth',block:'start'}); }
+
+document.addEventListener('click',e=>{ const b=e.target.closest('[data-act]'); if(!b) return; const act=b.dataset.act, art=b.closest('.ej[data-i]'), i=art?+art.dataset.i:-1, s=i>=0?ST.slots[i]:null, ex=i>=0?EX[i]:null;
+  switch(act){
+    case 'dec':{ const d=ex.dec[s.decI], o=d.o[+b.dataset.k]; if(o[1]){ s.decI++; s.decBad=[]; s.decFb=null; } else { s.decBad.push(+b.dataset.k); s.decFb=o[2]; } pintar(i); break; }
+    case 'mostrar': s.shown=true; pintar(i); break;
+    case 'resp':{ const r=+b.dataset.r, o=ex.opts[r]; if(o.ok){ s.ok=true; s.fb=['good',o.fb]; } else { s.tried.push(r); s.last=o.err; sumarErr(o.err); s.fb=['bad',o.fb]; } pintar(i); break; }
+    case 'nohay': s.nohay=true; if(s.pist<1) s.pist=1; s.fb=['info','Puede ser un error de cuenta o de planteo. Revisá tu desarrollo con la pista de abajo y volvé a mirar las opciones.']; pintar(i); break;
+    case 'ctrl':{ const k=+b.dataset.k, o=ex.control.o[k]; if(o[1]) s.ctrl='ok'; else { s.ctrlBad=(s.ctrlBad||[]).concat([k]); s.ctrlMal=true; } pintar(i); break; }
+    case 'pista': if(s.pist<3) s.pist++; pintar(i); break;
+    case 'ver': s.visto=true; s.resoOpen=true; pintar(i); break;
+    case 'reso':{ const r=b.parentElement; r.classList.toggle('open'); if(s) s.resoOpen=r.classList.contains('open'); break; }
+    case 'otra':{ ST.pistAnt=(ST.pistAnt||0)+s.pist; ST.slots[i]=slotNuevo(s.id,s.ver+1); armar(i); pintar(i); irA(art); break; }
+    case 'tpaso':{ const k=+b.dataset.k, p=ex.pasos[k]; if(p.mal){ s.tf=1; s.fb=null; } else { s.tpT=(s.tpT||[]).concat([k]); s.fb=['bad',p.fb]; if(!s.tmal){ s.tmal=true; s.last=ex.err; sumarErr(ex.err); } } pintar(i); break; }
+    case 'tcorr': case 'tfin':{ const q=act==='tcorr'?ex.corr:ex.fin, lst=act==='tcorr'?s.tcT:s.tfT, k=+b.dataset.k, o=q.o[k]; if(o[1]){ s.tf=act==='tcorr'?2:3; s.fb=null; if(s.tf===3) s.ok=true; } else { lst.push(k); s.fb=['bad',o[2]]; if(!s.tmal){ s.tmal=true; s.last=ex.err; sumarErr(ex.err); } } pintar(i); break; }
+    case 'mas': practicar(s.last?{tag:s.last}:{id:s.id}); break;
+    case 'masTag': practicar({tag:b.dataset.tag}); break;
+    case 'prResp':{ const o=PR.ex.opts[+b.dataset.r]; if(o.ok) prBien(o); else { PR.tried.push(+b.dataset.r); prFallo(o); } pintarPR(); mapa(); guardar(); break; }
+    case 'prComp':{ let inp=null; const N=$('#prN'), D=$('#prD'), Xx=$('#prX'); if(N&&N.value.trim()&&D.value.trim()) inp=parseNum(N.value.trim()+'/'+D.value.trim()); else if(Xx.value.trim()) inp=parseNum(Xx.value);
+      if(!inp){ PR.fb=['info','Escribí un número: por ejemplo 0,35, o una fracción con numerador y denominador.']; pintarPR(); break; }
+      const j=juzgar(PR.ex,inp); if(j.r==='ok') prBien(PR.ex.opts[0]); else if(j.r==='amb') PR.fb=['info','Con esos decimales no alcanzo a distinguir tu resultado. Escribilo '+(PR.ex.num.q?'como fracción o ':'')+'con más decimales.']; else if(j.r==='dec') PR.fb=['info','Escribilo '+(PR.ex.num.q?'como fracción o ':'')+'con al menos '+(j.k===1?'un decimal':'dos decimales')+'.']; else prFallo(j.r==='err'?j.o:null);
+      pintarPR(); mapa(); guardar(); break; }
+    case 'prPista': if(PR.pist<3) PR.pist++; pintarPR(); break;
+    case 'prVer': PR.visto=true; pintarPR(); break;
+    case 'prOtro': practicar(PR.origen); break;
+    case 'volver': ver('vRecorrido'); break;
+    case 'mapa': ver('vRecorrido'); irA($('#mapa')); break;
+    case 'ir': e.preventDefault(); irA($('#ej'+b.dataset.i)); break;
+    case 'empezar': irA($('#b-sep')); break;
+    case 'reiniciar': $('#modal').classList.add('show'); break;
+    case 'noReset': $('#modal').classList.remove('show'); break;
+    case 'siReset': ST=nuevo(); Object.keys(EX).forEach(k=>delete EX[k]); guardar(); lista(); $('#modal').classList.remove('show'); ver('vRecorrido'); window.scrollTo(0,0); break;
+  } });
+document.addEventListener('keydown',e=>{ if(e.key==='Enter'&&e.target.closest('.escr')){ const b=$('[data-act="prComp"]'); if(b) b.click(); } });
+
+function autotest(){ const R=[], ok=(n,c,d)=>R.push({n,ok:!!c,d}); let mal=0,tot=0;
+  Object.keys(T).forEach(id=>{ const all=T[id].all(); all.forEach(p=>{ tot++; const ex=T[id].make(p); if(ex.tribunal){ if(ex.pasos.filter(x=>x.mal).length!==1) mal++; return; } const o=ex.opts; if(o.filter(x=>x.ok).length!==1||new Set(o.map(x=>x.m)).size!==o.length) mal++; if(ex.num&&Math.abs(ex.num.v-o[0].v)>1e-6) mal++; }); });
+  ok('todas las variantes: una sola correcta y opciones distintas',mal===0,tot+' variantes'); ok('recorrido de 12',RECORRIDO.length===12&&RECORRIDO.filter(id=>T[id].tribunal).length===2);
+  ok('17 errores en el catálogo',Object.keys(ERR).length===17); ok('fracción apilada',M('\\f{2}{15}').indexOf('class="fr"')>0);
+  ok('juzgar: fracción exacta',juzgar({num:{v:2/15,tol:.006},opts:[{ok:true,v:2/15},{ok:false,v:4/25,err:'P-total'}]},parseNum('12/90')).r==='ok'); ok('juzgar: reconoce el error',juzgar({num:{v:2/15,tol:.006},opts:[{ok:true,v:2/15},{ok:false,v:4/25,err:'P-total'}]},parseNum('16 %')).r==='err');
+  ok('parseNum',parseNum('13,3%').v>0.1329&&parseNum('13,3%').v<0.1331&&parseNum('abc')===null);
+  window.__TESTS__=R; const d=document.createElement('div'); d.id='testPanel'; d.innerHTML='<b>Autotest: '+R.filter(x=>x.ok).length+' / '+R.length+'</b>'+R.map(x=>'<div class="'+(x.ok?'ok':'fail')+'">'+(x.ok?'✓':'✗')+' '+x.n+(x.d?' · '+x.d:'')+'</div>').join(''); document.body.appendChild(d); }
+function init(){ $$('[data-x]').forEach(el=>{ el.innerHTML=X(el.innerHTML); }); ST=cargar()||nuevo(); lista(); guardar(); if(/[?&]test\b/.test(location.search)) autotest(); window.__READY=true; }
+window.__LAB={T,ERR,PRACT,RECORRIDO,M,X,juzgar,parseNum,practicar,get ST(){return ST;},get EX(){return EX;},get PR(){return PR;}};
+if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',init); else init();
+
+</script>
+</body>
+</html>
